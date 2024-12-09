@@ -1,0 +1,181 @@
+@import "../mixing/base";
+
+.app_swal.swal2-popup.swal2-modal {
+    position: relative;
+    padding: 40px;
+    background: radial-gradient(115.78% 99.91% at 49.95% 0.02%, rgba(212, 225, 255, 0.3) 0%, rgba(113, 116, 255, 0.05) 100%), #000E59;
+    background-blend-mode: hard-light;
+    border-radius: 16px;
+    color: #fff;
+
+    div:where(.swal2-icon).swal2-success .swal2-success-fix,
+    div:where(.swal2-icon).swal2-success [class^="swal2-success-circular-line"][class$="left"],
+    div:where(.swal2-icon).swal2-success [class^="swal2-success-circular-line"][class$="right"] {
+        background: transparent !important;
+    }
+
+    .swal2-close {
+        z-index: 2;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        transition: color .1s, box-shadow .1s;
+        border: none;
+        border-radius: 5px;
+        background: 0 0;
+        color: #fff;
+        font-family: inherit;
+        font-size: 60px;
+        cursor: pointer;
+        justify-self: unset;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .swal2-title {
+        position: relative;
+        max-width: 100%;
+        margin: 0 0 25px;
+        padding: 0;
+        color: inherit;
+        font-size: 22px;
+        font-weight: 600;
+        text-align: center;
+        text-transform: none;
+        word-wrap: break-word;
+    }
+
+    .swal2-html-container {
+        z-index: 1;
+        justify-content: center;
+        margin: 0 0 15px;
+        padding: 0;
+        overflow: auto;
+        color: inherit;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: normal;
+        text-align: center;
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .swal2-checkbox,
+    .swal2-file,
+    .swal2-input,
+    .swal2-radio,
+    .swal2-select,
+    .swal2-textarea {
+        margin: 0 0 15px;
+        max-width: 100%;
+        font-family: Montserrat;
+        color: #000;
+
+        &:focus {
+            border-color: #fff;
+            outline: unset;
+            box-shadow: unset;
+        }
+
+        &::placeholder {
+            color: #000;
+        }
+    }
+
+    .swal2-actions {
+        display: flex;
+        z-index: 1;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        margin: 15px 0 0;
+        padding: 0;
+    }
+
+    .swal2-validation-message {
+        align-items: center;
+        justify-content: start;
+        margin: -10px 0 15px;
+        padding: 0;
+        overflow: hidden;
+        background: unset;
+        color: #9f243e;
+        font-size: 14px;
+        font-weight: 300;
+
+        &::before {
+            display: none;
+        }
+    }
+
+    .swal2-icon {
+        margin: 0 auto .6em;
+    }
+}
+
+.app_swal.swal2-popup.swal2-toast {
+    box-sizing: border-box;
+    grid-column: 1/4 !important;
+    grid-row: 1/4 !important;
+    padding: 15px 15px 15px 80px;
+    overflow-y: hidden;
+    background: radial-gradient(115.78% 99.91% at 49.95% 0.02%, rgba(212, 225, 255, 0.3) 0%, rgba(113, 116, 255, 0.05) 100%), #000E59;
+    background-blend-mode: hard-light;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.075), 0 1px 2px rgba(0, 0, 0, 0.075),
+        1px 2px 4px rgba(0, 0, 0, 0.075), 1px 3px 8px rgba(0, 0, 0, 0.075),
+        2px 4px 16px rgba(0, 0, 0, 0.075);
+    pointer-events: all;
+    border-radius: 16px;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap;
+    color: #fff;
+
+    .swal2-icon {
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+        margin: 0;
+        position: absolute;
+        left: 20px;
+    }
+
+    .swal2-title {
+        margin: 0 0 5px;
+        padding: 0;
+        font-size: 16px;
+        text-align: initial;
+        width: 100%;
+    }
+
+    .swal2-html-container {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        text-align: initial;
+        width: 100%;
+    }
+}
+
+body {
+    &.swal2-toast-shown {
+
+        .swal2-container.swal2-backdrop-show,
+        .swal2-container.swal2-noanimation {
+            background: none;
+            backdrop-filter: unset;
+        }
+    }
+
+    .swal2-container.swal2-backdrop-show,
+    .swal2-container.swal2-noanimation {
+        background: rgba(#060C38, 0.8);
+    }
+}

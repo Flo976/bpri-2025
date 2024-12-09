@@ -1,0 +1,79 @@
+@import "../../mixing/base";
+@import "./sections/header";
+@import "./sections/section1";
+@import "./sections/section2";
+
+.section0 {
+    position: relative;
+    height: 100vh;
+    display: flex;
+
+    .container {
+        position: relative;
+        height: 100%;
+        padding: 92px 134px;
+    }
+
+    .content {
+        position: relative;
+        height: 100%;
+        display: flex;
+    }
+
+    .content_background {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        margin: 0;
+    }
+
+    #section0BackgroundCanvas {
+        position: relative;
+    }
+
+    .content_middle {
+        position: relative;
+        margin: auto;
+        background: #fff;
+        padding: 125px;
+        border-radius: 50%;
+        box-shadow: 0 0 90px 50px rgb(255, 255, 255);
+    }
+
+    .year {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+        min-width: 830px;
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        svg {
+            position: relative;
+            width: 100%;
+            height: auto;
+
+            text {
+                font-family: "Montserrat", sans-serif;
+                font-weight: 900;
+                text-transform: uppercase;
+                font-size: 100px;
+            }
+
+            >rect {
+                -webkit-mask: url(#year_mask);
+                mask: url(#year_mask);
+            }
+
+            rect {
+                fill: #fff;
+            }
+        }
+    }
+}

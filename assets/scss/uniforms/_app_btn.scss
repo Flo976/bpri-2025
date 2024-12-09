@@ -1,0 +1,15 @@
+@import "../mixing/base";
+
+.swal2-styled.app_btn,
+.app_btn {
+    // To DO
+
+    &:disabled {
+        cursor: default;
+    }
+
+    &:hover:not(:disabled) {
+        border-color: var(--primary-hover-color);
+        background-color: var(--primary-hover-color);
+    }
+}

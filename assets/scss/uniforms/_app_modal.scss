@@ -1,0 +1,35 @@
+@import "../mixing/base";
+
+body {
+    .modal-backdrop.show {
+        background: rgba(#060c38, 0.8);
+    }
+}
+
+.modal.app_modal {
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .modal-dialog {
+        position: relative;
+    }
+
+    .modal-content {
+        position: relative;
+    }
+
+    .modal-body {
+        position: relative;
+    }
+
+    .btn-close {
+        position: absolute;
+        
+    }
+
+    .modal_title {
+        position: relative;
+        
+    }
+}

@@ -1,0 +1,45 @@
+/**
+ * DMSans
+ */
+@font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('DMSans'), url('./DMSans/DMSans-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'DM Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local('DMSans'), url('./DMSans/DMSans-Italic.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    src: local('DMSans'), url('./DMSans/DMSans-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'DM Sans';
+    font-style: italic;
+    font-weight: 500;
+    src: local('DMSans'), url('./DMSans/DMSans-MediumItalic.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('DMSans'), url('./DMSans/DMSans-Bold.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'DM Sans';
+    font-style: italic;
+    font-weight: 700;
+    src: local('DMSans'), url('./DMSans/DMSans-BoldItalic.woff2') format('woff2');
+}
+
+
+html, body {
+    font-family: 'DM Sans' !important;
+    font-weight: 400;
+}

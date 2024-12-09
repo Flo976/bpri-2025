@@ -1,0 +1,171 @@
+@import "../mixing/base";
+@import "./layout_footer";
+// @import "../uniforms/app_btn";
+// @import "../uniforms/app_swal2";
+// @import "../uniforms/app_modal";
+// @import "../uniforms/app_field";
+
+/**
+ * root
+ */
+:root {
+    --100vh: 100vh;
+    --primary-color: #ff5c00;
+    --primary-hover-color: #cc4900;
+    --error-color: #ff5a1a;
+    --iframe-100vh: var(--100vh);
+    --height-by-width: var(--100vh);
+}
+
+@media (max-width: 780px) {
+    :root {
+        --iframe-100vh: var(--100vh);
+    }
+}
+
+/**
+ * html
+ */
+html {
+    position: relative;
+    /*height: var(--iframe-100vh);*/
+
+    body {
+        width: 100%;
+        height: 100%;
+
+        &.modal-open {
+            #modals_wrapper {
+                z-index: initial;
+            }
+        }
+
+        #particlesCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        #absolute {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    }
+}
+
+#x_content_wrapper {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+
+    .x_content {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        min-height: 100vh;
+        align-items: center;
+
+        & > * {
+            width: 100%;
+        }
+    }
+
+    .scroll-content {
+        height: 100%;
+    }
+
+    .scrollbar-track {
+        display: none !important;
+    }
+}
+
+/**
+ * body
+ */
+body {
+    position: relative;
+    background-color: #fff;
+    color: #fff;
+    font-weight: 400;
+    @include propriete_x(
+        font-size,
+        16px,
+        (
+            "1439px": 1.112vw,
+            "991px": 1.615vw,
+            "768px": 1.823vw,
+            /* 14px */ "480px": 2.917vw,
+        )
+    );
+    @include propriete_x(
+        line-height,
+        21px,
+        (
+            "1439px": 1.459vw,
+            "991px": 2.119vw,
+            "768px": 2.604vw,
+            /* 20px */ "480px": 4.167vw,
+        )
+    );
+
+    .container {
+        position: relative;
+        max-width: 1728px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: Koh Santepheap;
+    }
+
+    p {
+        position: relative;
+        @include propriete_x(
+            margin,
+            0 0 10px,
+            (
+                "1439px": 0 0 0.695vw,
+                "991px": 0 0 1.009vw,
+                "768px": 0 0 1.302vw,
+                "480px": 0 0 2.083vw,
+            )
+        );
+    }
+
+    /* Masquer les flèches dans les inputs de type number */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        /* Masque les flèches */
+        margin: 0;
+        /* Supprime les marges */
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+        /* Supprime l'apparence de champ numérique dans Firefox */
+    }
+}
+
+/**
+ * For AppAnimateCss
+ */
+body {
+    .rotateIn,
+    .bounceIn,
+    .fadeIn,
+    .fadeInUp,
+    .fadeInDown,
+    .fadeInRight,
+    .fadeInLeft {
+        //opacity: 0;
+        animation-fill-mode: both;
+    }
+}

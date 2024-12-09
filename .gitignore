@@ -1,0 +1,5 @@
+data/*
+!data/index.php
+/node_modules/
+.vagrant
+vendor

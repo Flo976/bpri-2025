@@ -1,0 +1,16 @@
+@mixin propriete_x($propriete, $first_value, $max_widths_values) {
+
+    @if $first_value {
+        & {
+            #{$propriete}: $first_value;
+        }
+    }
+
+    @each $max_width, $value in $max_widths_values {
+        @if $value {
+            @media (max-width: $max_width) {
+                #{$propriete}: $value;
+            }
+        }
+    }
+}
