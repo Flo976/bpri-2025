@@ -57,7 +57,7 @@ function main() {
 /**
  * Initialiser quand le DOM est chargé
  */
-document.addEventListener("load", () => {
+window.addEventListener("load", () => {
     main()
 });
 

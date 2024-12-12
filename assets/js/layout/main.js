@@ -25,7 +25,7 @@ import customContainerModals from "./functions/customContainerModals.js";
 import mouseAndTouchParticles from "../common/functions/mouseAndTouchParticles.js";
 
 // Initialiser quand le DOM est chargé
-document.addEventListener("load", () => {
+window.addEventListener("load", () => {
     // initialize BodyManager
     new BodyManager();
 
