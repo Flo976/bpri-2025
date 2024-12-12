@@ -50,8 +50,11 @@ function main() {
     window.iFrameResizer?.trigger("resize");
     console.info("window.innerHeight", window.innerHeight);
 
-    section0Particles();
     initMySwiper();
+
+    setTimeout(() => {
+    	section0Particles();
+    }, 500)
 }
 
 /**
