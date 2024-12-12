@@ -1,45 +1,57 @@
 /**
- * DMSans
+ * Inter
  */
 @font-face {
-    font-family: 'DM Sans';
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    src: local('DMSans'), url('./DMSans/DMSans-Regular.woff2') format('woff2');
+    src: local('Inter'), url('./Inter/Inter-Regular.woff2') format('woff2');
 }
 @font-face {
-    font-family: 'DM Sans';
+    font-family: 'Inter';
     font-style: italic;
     font-weight: 400;
-    src: local('DMSans'), url('./DMSans/DMSans-Italic.woff2') format('woff2');
+    src: local('Inter'), url('./Inter/Inter-Italic.woff2') format('woff2');
 }
 @font-face {
-    font-family: 'DM Sans';
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
-    src: local('DMSans'), url('./DMSans/DMSans-Medium.woff2') format('woff2');
+    src: local('Inter'), url('./Inter/Inter-Medium.woff2') format('woff2');
 }
 @font-face {
-    font-family: 'DM Sans';
+    font-family: 'Inter';
     font-style: italic;
     font-weight: 500;
-    src: local('DMSans'), url('./DMSans/DMSans-MediumItalic.woff2') format('woff2');
+    src: local('Inter'), url('./Inter/Inter-MediumItalic.woff2') format('woff2');
 }
 @font-face {
-    font-family: 'DM Sans';
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
-    src: local('DMSans'), url('./DMSans/DMSans-Bold.woff2') format('woff2');
+    src: local('Inter'), url('./Inter/Inter-Bold.woff2') format('woff2');
 }
 @font-face {
-    font-family: 'DM Sans';
+    font-family: 'Inter';
     font-style: italic;
     font-weight: 700;
-    src: local('DMSans'), url('./DMSans/DMSans-BoldItalic.woff2') format('woff2');
+    src: local('Inter'), url('./Inter/Inter-BoldItalic.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    src: local('Inter'), url('./Inter/Inter-Black.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 900;
+    src: local('Inter'), url('./Inter/Inter-BlackItalic.woff2') format('woff2');
 }
 
 
 html, body {
-    font-family: 'DM Sans' !important;
+    font-family: 'Inter' !important;
     font-weight: 400;
 }

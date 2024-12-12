@@ -16,6 +16,9 @@ export default function mouseAndTouchParticles() {
     const particles = [];
     const maxParticles = 100;
 
+    // Possible shapes
+    const shapes = ["circle", "square", "triangle", "rectangle"];
+
     // Create particles
     function createParticle(x, y) {
         particles.push({
@@ -25,6 +28,7 @@ export default function mouseAndTouchParticles() {
             speedX: Math.random() * 3 - 1, // Horizontal movement
             speedY: Math.random() * 3 - 1, // Vertical movement
             opacity: 1, // Initial transparency
+            shape: shapes[Math.floor(Math.random() * shapes.length)], // Random shape
             offset: Math.random() * 1000, // Unique offset for animation
         });
 
@@ -37,7 +41,7 @@ export default function mouseAndTouchParticles() {
         particles.forEach((particle, index) => {
             particle.x += particle.speedX;
             particle.y += particle.speedY;
-            particle.opacity -= 0.008; // Gradually fade out
+            particle.opacity -= 0.01; // Gradually fade out
 
             // Remove invisible particles
             if (particle.opacity <= 0) particles.splice(index, 1);
@@ -50,14 +54,46 @@ export default function mouseAndTouchParticles() {
         const time = Date.now() * 0.002; // Time in seconds
 
         particles.forEach((particle) => {
-            const timeFactor = time + (Math.random() * 5000); // Unique animation per particle
+            const timeFactor = time + particle.offset; // Unique animation per particle
             const red = 212 + Math.sin(timeFactor * 0.1) * 20; // Red oscillation
             const green = 175 + Math.sin(timeFactor * 0.1) * 10; // Green oscillation
             const blue = 55; // Constant blue for golden effect
 
             ctx.fillStyle = `rgba(${red}, ${green}, ${blue}, ${particle.opacity})`;
+
             ctx.beginPath();
-            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            if (particle.shape === "circle") {
+                // Draw a circle
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            } else if (particle.shape === "square") {
+                // Draw a square
+                ctx.rect(
+                    particle.x - particle.size / 2,
+                    particle.y - particle.size / 2,
+                    particle.size,
+                    particle.size
+                );
+            } else if (particle.shape === "triangle") {
+                // Draw a triangle
+                ctx.moveTo(particle.x, particle.y - particle.size); // Top vertex
+                ctx.lineTo(
+                    particle.x - particle.size,
+                    particle.y + particle.size
+                ); // Bottom left vertex
+                ctx.lineTo(
+                    particle.x + particle.size,
+                    particle.y + particle.size
+                ); // Bottom right vertex
+                ctx.closePath();
+            } else if (particle.shape === "rectangle") {
+                // Draw a rectangle
+                ctx.rect(
+                    particle.x - particle.size,
+                    particle.y - particle.size / 2,
+                    particle.size * 2,
+                    particle.size
+                );
+            }
             ctx.fill();
         });
     }

@@ -6,7 +6,7 @@ function section0Particles() {
         canvasId: "section0BackgroundCanvas",
         dotSize: 8,
         spacing: 25,
-        moveType: "linear",
+        moveType: "poetic",
         waveFrequency: 1.5,
         animationType: "twinkle",
         polygonPath: [
@@ -17,7 +17,7 @@ function section0Particles() {
             [0, 100],
             [0, 34]
         ],
-        colors: ["#D7BD64"]
+        colors: ["#D4AF37"]
     })
 
     // initialize les fonds particle
@@ -25,9 +25,9 @@ function section0Particles() {
         canvasId: "yearCanvas",
         dotSize: 4,
         spacing: 8.5,
-        moveType: "linear",
+        moveType: "poetic",
         waveFrequency: 1.5,
-        animationType: "waveHorizontal",
+        animationType: "twinkle",
         polygonPath: [
             [32, 0],
             [100, 0],
@@ -36,7 +36,7 @@ function section0Particles() {
             [0, 100],
             [0, 34]
         ],
-        colors: ["#D7BD64"]
+        colors: ["#D4AF37"]
     })
 }
 

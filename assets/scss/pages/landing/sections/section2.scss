@@ -1,2 +1,93 @@
 @import "../../../mixing/base";
 
+.section2 {
+    position: relative;
+
+    .container {
+        position: relative;
+    }
+
+    .mask_top {
+        position: relative;
+    }
+
+    .badge_logo {
+        position: relative;
+    }
+
+    .section_content {
+        position: relative;
+    }
+
+    .content_top {
+        position: relative;
+
+        .container {
+            position: relative;
+        }
+
+        .title {
+            position: relative;
+        }
+
+        .description {
+            position: relative;
+
+            p {
+                position: relative;
+            }
+        }
+    }
+
+    .content_bottom {
+        position: relative;
+
+        .container {
+            position: relative;
+        }
+    }
+
+    .wish_list {
+        position: relative;
+    }
+
+    .wish_item {
+        position: relative;
+    }
+
+    .wish_block {
+        position: relative;
+
+        .media_wrapper {
+            position: relative;
+        }
+
+        .media {
+            position: relative;
+        }
+
+        .media_player {
+            position: relative;
+        }
+    }
+
+    .user_info {
+        position: relative;
+
+        .username {
+            position: relative;
+        }
+
+        .userjob {
+            position: relative;
+        }
+    }
+
+    .bg_wrapper {
+        position: relative;
+
+        canvas {
+            position: relative;
+        }
+    }
+}

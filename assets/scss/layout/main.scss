@@ -40,10 +40,11 @@ html {
             }
         }
 
-        #particlesCanvas {
+        #mouseAndTouchParticlesCanvas {
             position: fixed;
             top: 0;
             left: 0;
+            z-index: 1000;
         }
 
         #absolute {
@@ -88,28 +89,10 @@ html {
 body {
     position: relative;
     background-color: #fff;
-    color: #fff;
+    color: #928b76;
     font-weight: 400;
-    @include propriete_x(
-        font-size,
-        16px,
-        (
-            "1439px": 1.112vw,
-            "991px": 1.615vw,
-            "768px": 1.823vw,
-            /* 14px */ "480px": 2.917vw,
-        )
-    );
-    @include propriete_x(
-        line-height,
-        21px,
-        (
-            "1439px": 1.459vw,
-            "991px": 2.119vw,
-            "768px": 2.604vw,
-            /* 20px */ "480px": 4.167vw,
-        )
-    );
+    font-size: 18px;
+    line-height: 150%;
 
     .container {
         position: relative;
@@ -122,21 +105,12 @@ body {
     h4,
     h5,
     h6 {
-        font-family: Koh Santepheap;
+        font-family: inherit;
     }
 
     p {
         position: relative;
-        @include propriete_x(
-            margin,
-            0 0 10px,
-            (
-                "1439px": 0 0 0.695vw,
-                "991px": 0 0 1.009vw,
-                "768px": 0 0 1.302vw,
-                "480px": 0 0 2.083vw,
-            )
-        );
+        margin: 0;
     }
 
     /* Masquer les flèches dans les inputs de type number */
