@@ -19,18 +19,18 @@ import "animate.css";
 import "../../scss/layout/main.scss";
 
 import BodyManager from "./classes/BodyManager.js";
-import PageManager from "./classes/PageManager.js";
+// import PageManager from "./classes/PageManager.js";
 
 import customContainerModals from "./functions/customContainerModals.js";
 import mouseAndTouchParticles from "../common/functions/mouseAndTouchParticles.js";
 
 // Initialiser quand le DOM est chargé
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("load", () => {
     // initialize BodyManager
     new BodyManager();
 
     // initialize PageManager
-    window.pageManager = new PageManager();
+    // window.pageManager = new PageManager();
     // Affiche la section landing par défaut
     // window.pageManager.showContent('landing');
     // Pour changer de section

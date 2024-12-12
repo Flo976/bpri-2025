@@ -50,15 +50,15 @@ function main() {
     window.iFrameResizer?.trigger("resize");
     console.info("window.innerHeight", window.innerHeight);
 
-    initMySwiper();
     section0Particles();
+    initMySwiper();
 }
 
 /**
  * Initialiser quand le DOM est chargé
  */
-document.addEventListener("DOMContentLoaded", () => {
-    //main()
+document.addEventListener("load", () => {
+    main()
 });
 
 export { main };
