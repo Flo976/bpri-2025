@@ -51,10 +51,7 @@ function main() {
     console.info("window.innerHeight", window.innerHeight);
 
     initMySwiper();
-
-    setTimeout(() => {
-    	section0Particles();
-    }, 500)
+    section0Particles();
 }
 
 /**

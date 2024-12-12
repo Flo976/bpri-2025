@@ -351,12 +351,12 @@ export default function appParticles(params = {}) {
     let lastRenderTime = 0;
 
     function animate() {
-        const now = performance.now();
+        /*const now = performance.now();
         if (now - lastRenderTime < 16) {
             requestAnimationFrame(animate);
             return;
         }
-        lastRenderTime = now;
+        lastRenderTime = now;*/
 
         updateDots();
         drawDots();
