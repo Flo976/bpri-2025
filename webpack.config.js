@@ -47,6 +47,6 @@ module.exports = {
       filename: '[name].css',
     }),
   ],
-  //mode: 'production',
-  mode: 'development',
+  mode: 'production',
+  //mode: 'development',
 };
