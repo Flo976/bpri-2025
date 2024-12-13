@@ -1,4 +1,352 @@
-.section0{position:relative;height:100vh;display:flex;background:#fff}.section0 .container{position:relative;height:100%;padding:0;display:flex}.section0 .content{position:relative;display:flex;height:auto;width:100%;max-width:1460px;min-height:766px;margin:auto}.section0 .content_background{position:absolute;height:100%;width:100%;top:0;left:0;margin:0}.section0 #section0BackgroundCanvas{position:relative}.section0 .content_middle{position:relative;margin:auto;background:#fff;border-radius:50%;padding:85px 71px 0;box-shadow:0 0 45px 90px #fff;display:flex;flex-wrap:wrap;max-width:1045px;justify-content:center}.section0 .year{position:relative;width:100%;margin:0 auto;min-width:830px;overflow:hidden}.section0 .year canvas{position:absolute;top:0;left:0}.section0 .year svg{position:relative;width:100%;height:auto}.section0 .year svg text{font-family:"Montserrat",sans-serif;font-weight:900;text-transform:uppercase;font-size:100px}.section0 .year svg>rect{-webkit-mask:url(#year_mask);mask:url(#year_mask)}.section0 .year svg rect{fill:#fff}.section0 .description{position:relative;max-width:703px;font-size:29px;line-height:130%;margin:75px auto 0;text-align:center;padding:0 15px;background:linear-gradient(269.88deg, #d7bd64 3.15%, #f3e1a7 50.74%, #d9bd64 98.33%);-webkit-background-clip:text;-webkit-text-fill-color:rgba(0,0,0,0);background-clip:text;text-fill-color:rgba(0,0,0,0)}.section0 .description strong{position:relative;font-weight:900}.section.section1{position:relative}.section.section1 .mask_top{position:relative}.section.section1 .badge_logo{position:relative}.section.section1 .section_content{position:relative;display:flex;align-items:center}.section.section1 .container{position:relative;max-width:1455px}.section.section1 .cols{position:relative;display:flex}.section.section1 .col_left{position:relative;padding:0 48px}.section.section1 .col_left .content{position:relative;min-width:519px;display:flex;justify-content:end;padding:27px 22px 45px 45px}.section.section1 .col_left .canvas_wrapper{position:absolute;margin:0;transform:rotate(4.09deg);width:450px;height:630px;right:42px}.section.section1 .col_left .canvas_wrapper canvas{position:relative;width:100%;height:100%;background:red}.section.section1 .col_left .img_wrapper{position:relative;margin:0;width:425px;height:592px;transform:rotate(4.09deg);overflow:hidden;box-sizing:border-box}.section.section1 .col_left .img_wrapper .img{position:relative;object-fit:cover;object-position:center;width:100%;height:100%}.section.section1 .col_right{position:relative;padding:0 48px}.section.section1 .col_right .content{position:relative}.section.section1 .title{position:relative;font-weight:700;font-size:46px;line-height:140%;background:linear-gradient(269.88deg, #d7bd64 3.15%, #f3e1a7 50.74%, #d9bd64 98.33%);-webkit-background-clip:text;-webkit-text-fill-color:rgba(0,0,0,0);background-clip:text;text-fill-color:rgba(0,0,0,0);margin:0 0 30px}.section.section1 .description{position:relative;margin:0 0 40px}.section.section1 .description p{position:relative}.section.section1 .user_info{position:relative}.section.section1 .user_info .username{position:relative;font-weight:700;font-size:30px;line-height:115%;background:linear-gradient(269.88deg, #bfaa61 3.15%, #dfcc8e 50.74%, #d4b75c 98.33%);-webkit-background-clip:text;-webkit-text-fill-color:rgba(0,0,0,0);background-clip:text;text-fill-color:rgba(0,0,0,0)}.section.section1 .user_info .userjob{position:relative;font-weight:400;font-size:16px;line-height:119%;background:linear-gradient(269.88deg, #bfaa61 3.15%, #dfcc8e 50.74%, #d4b75c 98.33%);-webkit-background-clip:text;-webkit-text-fill-color:rgba(0,0,0,0);background-clip:text;text-fill-color:rgba(0,0,0,0)}.section2{position:relative}.section2 .container{position:relative}.section2 .mask_top{position:relative}.section2 .badge_logo{position:relative}.section2 .section_content{position:relative}.section2 .content_top{position:relative}.section2 .content_top .container{position:relative}.section2 .content_top .title{position:relative}.section2 .content_top .description{position:relative}.section2 .content_top .description p{position:relative}.section2 .content_bottom{position:relative}.section2 .content_bottom .container{position:relative}.section2 .wish_list{position:relative}.section2 .wish_item{position:relative}.section2 .wish_block{position:relative}.section2 .wish_block .media_wrapper{position:relative}.section2 .wish_block .media{position:relative}.section2 .wish_block .media_player{position:relative}.section2 .user_info{position:relative}.section2 .user_info .username{position:relative}.section2 .user_info .userjob{position:relative}.section2 .bg_wrapper{position:relative}.section2 .bg_wrapper canvas{position:relative}.swiper.sections_swiper{position:relative;height:100vh;min-height:800px;width:100%}.swiper.sections_swiper .swiper-wrapper{position:relative}.swiper.sections_swiper .swiper-slide{position:relative;transition:transform .5s linear !important}.swiper.sections_swiper .section{position:relative;width:100%;height:100%;display:flex;justify-content:center;align-items:center}.swiper.sections_swiper .section.red{background:red}.swiper.sections_swiper .section.green{background:lime}.swiper.sections_swiper .section.blue{background:blue}.swiper.sections_swiper .section .mask_top{position:absolute;width:145%;top:-28px;left:-34%;height:auto}.swiper.sections_swiper .section .badge_logo{position:absolute;top:0px;width:125px;height:auto}.swiper.sections_swiper .section .section_content{width:100%;height:100%;z-index:1;position:relative;-webkit-mask-image:url(7e121fe43a8daf7c1adb.svg);mask-image:url(7e121fe43a8daf7c1adb.svg);mask-size:145%;mask-position-x:76%;mask-position-y:-28px;padding:125px 0 0}
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./assets/scss/pages/landing/main.scss ***!
+  \******************************************************************************************************************************/
+.section0 {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  background: #FFF;
+}
+.section0 .container {
+  position: relative;
+  height: 100%;
+  padding: 0;
+  display: flex;
+}
+.section0 .content {
+  position: relative;
+  display: flex;
+  height: auto;
+  width: 100%;
+  max-width: 1460px;
+  min-height: 766px;
+  margin: auto;
+}
+.section0 .content_background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+.section0 #section0BackgroundCanvas {
+  position: relative;
+}
+.section0 .content_middle {
+  position: relative;
+  margin: auto;
+  background: #fff;
+  border-radius: 50%;
+  padding: 85px 71px 0;
+  box-shadow: 0 0 45px 90px rgb(255, 255, 255);
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1045px;
+  justify-content: center;
+}
+.section0 .year {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  min-width: 830px;
+  overflow: hidden;
+}
+.section0 .year canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.section0 .year svg {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.section0 .year svg text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 100px;
+}
+.section0 .year svg > rect {
+  -webkit-mask: url(#year_mask);
+  mask: url(#year_mask);
+}
+.section0 .year svg rect {
+  fill: #fff;
+}
+.section0 .description {
+  position: relative;
+  max-width: 703px;
+  font-size: 29px;
+  line-height: 130%;
+  margin: 75px auto 0;
+  text-align: center;
+  padding: 0 15px;
+  background: linear-gradient(269.88deg, #d7bd64 3.15%, #f3e1a7 50.74%, #d9bd64 98.33%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.section0 .description strong {
+  position: relative;
+  font-weight: 900;
+}
+
+.section.section1 {
+  position: relative;
+}
+.section.section1 .mask_top {
+  position: relative;
+}
+.section.section1 .badge_logo {
+  position: relative;
+}
+.section.section1 .section_content {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.section.section1 .container {
+  position: relative;
+  max-width: 1455px;
+}
+.section.section1 .cols {
+  position: relative;
+  display: flex;
+}
+.section.section1 .col_left {
+  position: relative;
+  padding: 0 48px;
+}
+.section.section1 .col_left .content {
+  position: relative;
+  min-width: 519px;
+  display: flex;
+  justify-content: end;
+  padding: 27px 22px 45px 45px;
+}
+.section.section1 .col_left .canvas_wrapper {
+  position: absolute;
+  margin: 0;
+  transform: rotate(4.09deg);
+  width: 450px;
+  height: 630px;
+  right: 42px;
+}
+.section.section1 .col_left .canvas_wrapper canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: red;
+}
+.section.section1 .col_left .img_wrapper {
+  /*position: relative;
+  margin: 0;
+  width: 425px;
+  height: 592px;
+  border-radius: 12px;
+  transform: rotate(4.09deg);
+  overflow: hidden;
+  box-sizing: border-box;
+  border: #d7bd64 solid 3px;*/
+  position: relative;
+  margin: 0;
+  width: 425px;
+  height: 592px;
+  transform: rotate(4.09deg);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.section.section1 .col_left .img_wrapper .img {
+  position: relative;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+.section.section1 .col_right {
+  position: relative;
+  padding: 0 48px;
+}
+.section.section1 .col_right .content {
+  position: relative;
+}
+.section.section1 .title {
+  position: relative;
+  font-weight: 700;
+  font-size: 46px;
+  line-height: 140%;
+  background: linear-gradient(269.88deg, #d7bd64 3.15%, #f3e1a7 50.74%, #d9bd64 98.33%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin: 0 0 30px;
+}
+.section.section1 .description {
+  position: relative;
+  margin: 0 0 40px;
+}
+.section.section1 .description p {
+  position: relative;
+}
+.section.section1 .user_info {
+  position: relative;
+}
+.section.section1 .user_info .username {
+  position: relative;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 115%;
+  background: linear-gradient(269.88deg, #bfaa61 3.15%, #dfcc8e 50.74%, #d4b75c 98.33%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.section.section1 .user_info .userjob {
+  position: relative;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 119%;
+  background: linear-gradient(269.88deg, #bfaa61 3.15%, #dfcc8e 50.74%, #d4b75c 98.33%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.section2 {
+  position: relative;
+}
+.section2 .container {
+  position: relative;
+}
+.section2 .mask_top {
+  position: relative;
+}
+.section2 .badge_logo {
+  position: relative;
+}
+.section2 .section_content {
+  position: relative;
+}
+.section2 .content_top {
+  position: relative;
+}
+.section2 .content_top .container {
+  position: relative;
+}
+.section2 .content_top .title {
+  position: relative;
+}
+.section2 .content_top .description {
+  position: relative;
+}
+.section2 .content_top .description p {
+  position: relative;
+}
+.section2 .content_bottom {
+  position: relative;
+}
+.section2 .content_bottom .container {
+  position: relative;
+}
+.section2 .wish_list {
+  position: relative;
+}
+.section2 .wish_item {
+  position: relative;
+}
+.section2 .wish_block {
+  position: relative;
+}
+.section2 .wish_block .media_wrapper {
+  position: relative;
+}
+.section2 .wish_block .media {
+  position: relative;
+}
+.section2 .wish_block .media_player {
+  position: relative;
+}
+.section2 .user_info {
+  position: relative;
+}
+.section2 .user_info .username {
+  position: relative;
+}
+.section2 .user_info .userjob {
+  position: relative;
+}
+.section2 .bg_wrapper {
+  position: relative;
+}
+.section2 .bg_wrapper canvas {
+  position: relative;
+}
+
+.swiper.sections_swiper {
+  position: relative;
+  height: 100vh;
+  min-height: 800px;
+  width: 100%;
+}
+.swiper.sections_swiper .swiper-wrapper {
+  position: relative;
+}
+.swiper.sections_swiper .swiper-slide {
+  position: relative;
+  transition: transform 0.5s linear !important;
+}
+.swiper.sections_swiper .section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swiper.sections_swiper .section.red {
+  background: #f00;
+}
+.swiper.sections_swiper .section.green {
+  background: #0f0;
+}
+.swiper.sections_swiper .section.blue {
+  background: #00f;
+}
+.swiper.sections_swiper .section .mask_top {
+  position: absolute;
+  width: 145%;
+  top: -28px;
+  left: -34%;
+  height: auto;
+}
+.swiper.sections_swiper .section .badge_logo {
+  position: absolute;
+  top: 0px;
+  width: 125px;
+  height: auto;
+}
+.swiper.sections_swiper .section .section_content {
+  width: 100%;
+  height: 100%;
+  /*background: red;*/
+  z-index: 1;
+  position: relative;
+  -webkit-mask-image: url(7e121fe43a8daf7c1adb.svg);
+  mask-image: url(7e121fe43a8daf7c1adb.svg);
+  mask-size: 145%;
+  mask-position-x: 76%;
+  mask-position-y: -28px;
+  padding: 125px 0 0;
+}
+/*!*****************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/swiper/swiper-bundle.css ***!
+  \*****************************************************************************************/
 /**
  * Swiper 11.1.15
  * Most modern mobile touch slider and framework with hardware accelerated transitions

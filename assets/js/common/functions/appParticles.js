@@ -206,11 +206,12 @@ export default function appParticles(params = {}) {
                     currentSize: 0, // Taille initiale
                     opacity: 0.001, // Opacité initiale
                     targetOpacity: 1, // Opacité finale
-                    fadeSpeed: 0.09, // Vitesse aléatoire d'apparition
-                    sizeSpeed: 0.09, // Vitesse aléatoire de croissance
+                    fadeSpeed: 0.05, // Vitesse aléatoire d'apparition
+                    sizeSpeed: 0.05, // Vitesse aléatoire de croissance
                     startTime: index * 1.5, // Délai aléatoire pour chaque pastille
                     color, // Couleur de la pastille
                     offset: Math.random() * Math.PI * 2,
+                    baseSize: Math.random() * 5 + 2, // Taille de base
                 });
             }
         })
@@ -281,85 +282,192 @@ export default function appParticles(params = {}) {
     }
 
 
+    let currentStyleIndex = 0; // Index du style actuel
+    let nextStyleIndex = 1; // Index du style suivant
+    let styleTransitionStart = 0; // Moment du début de la transition
+    const transitionDuration = 1000; // Durée de la transition en ms
+
+    const styles = [{
+            name: "sparkle",
+            sizeFunction: (time, dot, amplitude) => {
+                const rowWaveOffset = dot.targetY / (spacing * 3);
+                const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
+                return (dotSize + amplitude) * sparkleFactor;;
+            },
+            colorFunction: (time, dot) => {
+                const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
+                const timeFactor = time + (Math.random() * 5000); // Délai aléatoire pour chaque 
+                return {
+                    r: (212 + sparkleFactor + Math.sin(timeFactor * 0.1) * 20),
+                    g: (175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 15),
+                    b: 55,
+                    a: 1,
+                };
+            },
+        },
+        {
+            name: "TwinkleY",
+            sizeFunction: (time, dot, amplitude) => {
+                const rowWaveOffset = dot.targetY / (spacing * 3);
+                const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
+                return (dotSize + Math.sin(time * waveFrequency + rowWaveOffset) * amplitude) * sparkleFactor;;
+            },
+            colorFunction: (time, dot) => {
+                const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
+                const timeFactor = time + (Math.random() * 5000); // Délai aléatoire pour chaque 
+                return {
+                    r: (212 + sparkleFactor + Math.sin(timeFactor * 0.1) * 20),
+                    g: (175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 15),
+                    b: 55,
+                    a: 1,
+                };
+            },
+        },
+        {
+            name: "TwinkleX",
+            sizeFunction: (time, dot, amplitude) => {
+                const rowWaveOffset = dot.targetX / (spacing * 3);
+                const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
+                return (dotSize + Math.sin(time * waveFrequency + rowWaveOffset) * amplitude) * sparkleFactor;
+            },
+            colorFunction: (time, dot) => {
+                const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
+                const timeFactor = time + (Math.random() * 5000); // Délai aléatoire pour chaque 
+                return {
+                    r: (212 + sparkleFactor + Math.sin(timeFactor * 0.1) * 20),
+                    g: (175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 15),
+                    b: 55,
+                    a: 1,
+                };
+            },
+        },
+        {
+            name: "TwinklexZ",
+            sizeFunction: (time, dot, amplitude) => {
+                const rowWaveOffset = dot.targetX / (spacing * 3);
+                const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
+                return dotSize + Math.sin(time * waveFrequency + rowWaveOffset) * amplitude + Math.cos(sparkleFactor * 0.1) * 2;
+
+            },
+            colorFunction: (time, dot) => {
+                const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
+                const timeFactor = time + (Math.random() * 5000); // Délai aléatoire pour chaque 
+                return {
+                    r: (212 + sparkleFactor + Math.sin(timeFactor * 0.1) * 20),
+                    g: (175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 15),
+                    b: 55,
+                    a: 1,
+                };
+            },
+        },
+    ];
+
+
     function updateDots() {
         const time = Date.now() * 0.002;
         const amplitude = 2;
-        const length = dots.length;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const currentStyle = styles[currentStyleIndex];
+        const nextStyle = styles[nextStyleIndex];
+
+        console.log(currentStyle.name)
+
+        const transitionProgress = Math.min(
+            (performance.now() - styleTransitionStart) / transitionDuration,
+            1
+        );
 
         dots.forEach((dot, index) => {
-            if (moveType === "slide") {
-                updateSlideDots(dot);
-            } else if (moveType === "fade") {
-                updateFadeDots(dot);
-            } else if (moveType === "poetic") {
-                updatePoeticDots(dot);
+            if (!dot.reachedTarget) {
+                if (moveType === "slide") {
+                    updateSlideDots(dot);
+                } else if (moveType === "fade") {
+                    updateFadeDots(dot);
+                } else if (moveType === "poetic") {
+                    updatePoeticDots(dot, time);
+                }
             }
 
             if (dot.reachedTarget) {
-                const rowWaveOffset = dot.targetY / spacing;
-                const colWaveOffset = dot.targetX / spacing;
+                // Interpoler la taille
+                const sizeCurrent = currentStyle.sizeFunction(time, dot, amplitude);
+                const sizeNext = nextStyle.sizeFunction(time, dot, amplitude);
+                dot.currentSize = lerp(sizeCurrent, sizeNext, transitionProgress);
 
-                if (animationType === "waveHorizontal") {
-                    dot.currentSize = dotSize + Math.sin(time * waveFrequency + rowWaveOffset) * amplitude;
-                } else if (animationType === "waveVertical") {
-                    dot.currentSize = dotSize + Math.sin(time * waveFrequency + colWaveOffset) * amplitude;
-                } else if (animationType === "twinkle") {
-                    const timeFactor = time + (Math.random() * 5000); // Délai aléatoire pour chaque 
-                    dot.currentSize = dotSize + Math.sin(time * waveFrequency + (dot.targetY / (spacing * 3))) * amplitude;
-                    dot.fillStyle = `rgba(
-                      ${(212 + Math.sin(timeFactor * 0.1) * 20)}, 
-                      ${(175 + Math.sin(timeFactor * 0.1) * 10)}, 
-                      55, 1)`;
-                }
+                // Interpoler la couleur
+                const colorCurrent = currentStyle.colorFunction(time, dot, amplitude);
+                const colorNext = nextStyle.colorFunction(time, dot, amplitude);
+                const r = Math.floor(lerp(colorCurrent.r, colorNext.r, transitionProgress));
+                const g = Math.floor(lerp(colorCurrent.g, colorNext.g, transitionProgress));
+                const b = Math.floor(lerp(colorCurrent.b, colorNext.b, transitionProgress));
+                const a = lerp(colorCurrent.a, colorNext.a, transitionProgress);
+
+                dot.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
             }
+
+            drawDot(dot, ctx);
         });
     }
 
-    function drawDots() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        dots.forEach((dot) => {
-
-            if (dot.fillStyle) {
-                ctx.fillStyle = dot.fillStyle;
-            } else {
-                ctx.fillStyle = `rgba(${dot.color.r}, ${dot.color.g}, ${dot.color.b}, ${
-                  dot.opacity || 1
-                })`;
-            }
-
-            ctx.beginPath();
-
-            if (polygonPath) {
-                const size = dot.currentSize;
-                polygonPath.forEach(([xPercent, yPercent], index) => {
-                    const x = dot.x + ((xPercent - 50) / 100) * size;
-                    const y = dot.y + ((yPercent - 50) / 100) * size;
-                    if (index === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                });
-                ctx.closePath();
-            } else {
-                const size = dot.currentSize;
-                ctx.fillRect(dot.x - size / 2, dot.y - size / 2, size, size);
-            }
-
-            ctx.fill();
-        });
+    // Lerp function for smooth transitions
+    function lerp(a, b, t) {
+        return a + (b - a) * t;
     }
 
+    function drawDot(dot, ctx) {
+        if (dot.fillStyle) {
+            ctx.fillStyle = dot.fillStyle;
+        } else {
+            ctx.fillStyle = `rgba(${dot.color.r}, ${dot.color.g}, ${dot.color.b}, ${
+              dot.opacity || 1
+            })`;
+        }
+
+        ctx.beginPath();
+
+        if (polygonPath) {
+            const size = dot.currentSize;
+            polygonPath.forEach(([xPercent, yPercent], index) => {
+                const x = dot.x + ((xPercent - 50) / 100) * size;
+                const y = dot.y + ((yPercent - 50) / 100) * size;
+                if (index === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.closePath();
+        } else {
+            const size = dot.currentSize;
+            ctx.fillRect(dot.x - size / 2, dot.y - size / 2, size, size);
+        }
+
+        ctx.fill();
+    }
+
+    // Changer de style toutes les 2 secondes
+    let lastStyleChange = 0;
+
+    function checkStyleChange(now) {
+        if (now - lastStyleChange > 5000) {
+            styleTransitionStart = performance.now();
+            currentStyleIndex = nextStyleIndex;
+            nextStyleIndex = (nextStyleIndex + 1) % styles.length;
+            lastStyleChange = now;
+        }
+    }
+
+    // Animation principale
     let lastRenderTime = 0;
 
     function animate() {
-        /*const now = performance.now();
+        const now = performance.now();
         if (now - lastRenderTime < 16) {
             requestAnimationFrame(animate);
             return;
         }
-        lastRenderTime = now;*/
+        lastRenderTime = now;
 
         updateDots();
-        drawDots();
+        checkStyleChange(now);
         requestAnimationFrame(animate);
     }
 
