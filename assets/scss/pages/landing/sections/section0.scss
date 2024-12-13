@@ -35,7 +35,6 @@
 
 	#section0BackgroundCanvas {
 		position: relative;
-		-webkit-mask-image: url("/assets/images/svg/header_card_mask.svg");
 		mask-image: url("/assets/images/svg/header_card_mask.svg");
 		mask-size: 100%;
 		mask-repeat: no-repeat;
@@ -84,7 +83,6 @@
 			position: absolute;
 			top: 0;
 			left: 0;
-			-webkit-mask-image: url("/assets/images/svg/2025_mask.svg");
 			mask-image: url("/assets/images/svg/2025_mask.svg");
 			mask-size: 100%;
 			mask-repeat: no-repeat;
@@ -112,7 +110,6 @@
 		text-fill-color: transparent;
 
 		strong {
-			position: relative;
 			font-weight: 900;
 		}
 	}

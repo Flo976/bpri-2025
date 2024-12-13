@@ -83,7 +83,6 @@
 
         .media_wrapper {
             position: relative;
-            -webkit-mask-image: url("/assets/images/svg/media_mask_forme.svg");
             mask-image: url("/assets/images/svg/media_mask_forme.svg");
             mask-size: 100%;
             mask-repeat: no-repeat;
@@ -123,7 +122,6 @@
 
             .content {
                 position: relative;
-                -webkit-mask-image: url("/assets/images/svg/media_mask_inner.svg");
                 mask-image: url("/assets/images/svg/media_mask_inner.svg");
                 mask-size: 100%;
                 mask-repeat: no-repeat;

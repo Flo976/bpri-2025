@@ -59,11 +59,9 @@
             /*background: red;*/
             z-index: 1;
             position: relative;
-            -webkit-mask-image: url("/assets/images/svg/section_card_mask_with_bg_white.svg");
             mask-image: url("/assets/images/svg/section_card_mask_with_bg_white.svg");
             mask-size: 145%;
-            mask-position-x: 76%;
-            mask-position-y: -28px;
+            mask-position: 76% -28px;
             padding: 125px 0 0;
         }
     }

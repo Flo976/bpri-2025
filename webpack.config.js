@@ -21,19 +21,40 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env"],
-            plugins: [
-              "@babel/plugin-proposal-optional-chaining",
-            ],
+            plugins: ["@babel/plugin-proposal-optional-chaining"],
           },
         },
       },
       {
-        test: /\.css$/, // Pour gérer les fichiers CSS
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [require("autoprefixer")()],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [require("autoprefixer")()],
+              },
+            },
+          },
+          "sass-loader",
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|eot|ttf|otf)$/i,
@@ -46,6 +67,6 @@ module.exports = {
       filename: "[name].css",
     }),
   ],
-  //mode: 'production',
-  mode: "development",
+  mode: "production",
+  //mode: "development",
 };
