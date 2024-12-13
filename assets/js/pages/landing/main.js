@@ -41,6 +41,31 @@ const initMySwiper = () => {
         },
     });
 
+    // Écouter l'événement de changement de slide
+	swiper.on('slideChange', function () {
+	  checkActiveIndex()
+	});
+
+	const checkActiveIndex = () => {
+		const activeIndex = swiper.activeIndex;
+		if (activeIndex == 0) {
+			if (window.section0BackgroundCanvasParticle) {
+			    window.section0BackgroundCanvasParticle.isCanvasVisible = true;
+			}
+			if (window.yearParticles) {
+			    window.yearParticles.isCanvasVisible = true;
+			}
+		} else {
+			if (window.section0BackgroundCanvasParticle) {
+			    window.section0BackgroundCanvasParticle.isCanvasVisible = false;
+			}
+
+			if (window.yearParticles) {
+			    window.yearParticles.isCanvasVisible = false;
+			}
+		}
+	}
+	checkActiveIndex()
 };
 
 function main() {

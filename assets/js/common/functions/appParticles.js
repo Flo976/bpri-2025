@@ -1,3 +1,15 @@
+window.requestAnimFrame =
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function (callback) {
+        window.setTimeout(callback, 1000 / 60);
+};
+
+let isCanvasVisible = false;
+
 export default function appParticles(params = {}) {
     const canvasId = params.canvasId || "yearCanvas";
     const canvas = document.getElementById(canvasId);
@@ -42,6 +54,21 @@ export default function appParticles(params = {}) {
         const b = parseInt(color.slice(5, 7), 16);
         return { r, g, b };
     });
+
+    let isCanvasVisible = false
+    // Créez l'observer pour surveiller la visibilité
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            isCanvasVisible = entry.isIntersecting; // Met à jour selon la visibilité
+            if (isCanvasVisible) {
+                console.log("Canvas visible. Animation active.");
+            } else {
+                console.log("Canvas caché. Animation en pause.");
+            }
+        });
+    });
+    // Observez le canvas
+    observer.observe(canvas);
 
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -179,21 +206,6 @@ export default function appParticles(params = {}) {
                     reachedTarget: false,
                     offset: Math.random() * Math.PI * 2,
                 });
-            } else if (moveType === "fade") {
-                dots.push({
-                    x: xPos,
-                    y: row * spacing,
-                    targetX: xPos,
-                    targetY: row * spacing,
-                    color,
-                    speed: 5,
-                    currentSize: dotSize,
-                    opacity: 0,
-                    reachedTarget: false,
-                    offset: Math.random() * Math.PI * 2,
-                    fadeDelay: Math.random() * 6000,
-                    fadeSpeed: 0.01 + Math.random() * 0.04,
-                });
             } else if (moveType === "poetic") {
                 dots.push({
                     row,
@@ -290,7 +302,6 @@ export default function appParticles(params = {}) {
     const styles = [{
             name: "sparkle",
             sizeFunction: (time, dot, amplitude) => {
-                const rowWaveOffset = dot.targetY / (spacing * 3);
                 const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
                 return (dotSize + amplitude) * sparkleFactor;;
             },
@@ -306,11 +317,11 @@ export default function appParticles(params = {}) {
             },
         },
         {
-            name: "TwinkleY",
+            name: "sparkleAndWaveY",
             sizeFunction: (time, dot, amplitude) => {
-                const rowWaveOffset = dot.targetY / (spacing * 3);
+                const waveOffset = dot.targetY / (spacing * 3);
                 const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
-                return (dotSize + Math.sin(time * waveFrequency + rowWaveOffset) * amplitude) * sparkleFactor;;
+                return (dotSize + Math.sin(time * waveFrequency + waveOffset) * amplitude) * sparkleFactor;;
             },
             colorFunction: (time, dot) => {
                 const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
@@ -324,11 +335,11 @@ export default function appParticles(params = {}) {
             },
         },
         {
-            name: "TwinkleX",
+            name: "sparkleAndWaveX",
             sizeFunction: (time, dot, amplitude) => {
-                const rowWaveOffset = dot.targetX / (spacing * 3);
+                const waveOffset = dot.targetX / (spacing * 3);
                 const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
-                return (dotSize + Math.sin(time * waveFrequency + rowWaveOffset) * amplitude) * sparkleFactor;
+                return (dotSize + Math.sin(time * waveFrequency + waveOffset) * amplitude) * sparkleFactor;
             },
             colorFunction: (time, dot) => {
                 const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
@@ -342,11 +353,11 @@ export default function appParticles(params = {}) {
             },
         },
         {
-            name: "TwinklexZ",
+            name: "sparkleAndWaveZ",
             sizeFunction: (time, dot, amplitude) => {
-                const rowWaveOffset = dot.targetX / (spacing * 3);
+                const waveOffset = dot.targetX / (spacing * 3);
                 const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
-                return dotSize + Math.sin(time * waveFrequency + rowWaveOffset) * amplitude + Math.cos(sparkleFactor * 0.1) * 2;
+                return dotSize + Math.sin(time * waveFrequency + waveOffset) * amplitude + Math.cos(sparkleFactor * 0.1) * 2;
 
             },
             colorFunction: (time, dot) => {
@@ -371,19 +382,17 @@ export default function appParticles(params = {}) {
         const currentStyle = styles[currentStyleIndex];
         const nextStyle = styles[nextStyleIndex];
 
-        console.log(currentStyle.name)
-
         const transitionProgress = Math.min(
             (performance.now() - styleTransitionStart) / transitionDuration,
             1
         );
 
+        console.log("sss")
+
         dots.forEach((dot, index) => {
             if (!dot.reachedTarget) {
                 if (moveType === "slide") {
                     updateSlideDots(dot);
-                } else if (moveType === "fade") {
-                    updateFadeDots(dot);
                 } else if (moveType === "poetic") {
                     updatePoeticDots(dot, time);
                 }
@@ -460,15 +469,20 @@ export default function appParticles(params = {}) {
 
     function animate() {
         const now = performance.now();
+        if (!isCanvasVisible) {
+            requestAnimationFrame(animate); // Continue à surveiller
+            return; // Ne pas exécuter l'animation si le canvas est hors vue
+        }
+    
         if (now - lastRenderTime < 16) {
-            requestAnimationFrame(animate);
+            requestAnimFrame(animate);
             return;
         }
         lastRenderTime = now;
 
         updateDots();
         checkStyleChange(now);
-        requestAnimationFrame(animate);
+        requestAnimFrame(animate);
     }
 
     createDots();

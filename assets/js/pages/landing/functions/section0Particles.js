@@ -1,14 +1,15 @@
-import appParticles from "../../../common/functions/appParticles.js";
+//import appParticles from "../../../common/functions/appParticles.js";
+import AppParticles from "../classes/AppParticles.js";
 
 function section0Particles() {
 	// initialize les fonds particle
-    appParticles({
+    window.section0BackgroundCanvasParticle = new AppParticles({
         canvasId: "section0BackgroundCanvas",
         dotSize: 8,
         spacing: 25,
         moveType: "poetic",
+        animationType: "sparkleAndWaveY",
         waveFrequency: 1.5,
-        animationType: "twinkle",
         polygonPath: [
             [32, 0],
             [100, 0],
@@ -17,17 +18,19 @@ function section0Particles() {
             [0, 100],
             [0, 34]
         ],
-        colors: ["#D4AF37"]
+        colors: ["#D4AF37"],
+        offsetStartTime: 5,
     })
+    window.section0BackgroundCanvasParticle.animate();
 
     // initialize les fonds particle
-    appParticles({
+    window.yearParticles = new AppParticles({
         canvasId: "yearCanvas",
         dotSize: 4,
         spacing: 8.5,
         moveType: "poetic",
+        animationType: "sparkleAndWaveY",
         waveFrequency: 1.5,
-        animationType: "twinkle",
         polygonPath: [
             [32, 0],
             [100, 0],
@@ -38,6 +41,7 @@ function section0Particles() {
         ],
         colors: ["#D4AF37"]
     })
+    window.yearParticles.animate();
 }
 
 export {

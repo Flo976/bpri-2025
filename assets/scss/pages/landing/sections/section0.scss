@@ -5,6 +5,7 @@
 	height: 100vh;
 	display: flex;
 	background: #FFF;
+	/*background: #000;*/
 
 	.container {
 		position: relative;
@@ -36,13 +37,27 @@
 		position: relative;
 	}
 
+	.content_middle_wrapper {
+		position: relative;
+		margin: auto;
+		background: radial-gradient(79.92% 93.28% at 50% 52.42%, #FFFFFF 44.24%, rgba(255, 255, 255, 0) 100%);
+		/*background: none;*/
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 100%;
+  		height: 100%;
+  		align-items: center;
+  		min-height: inherit;
+	}
+
 	.content_middle {
 		position: relative;
 		margin: auto;
 		background: #fff;
+		/*background: #000;*/
 		border-radius: 50%;
-		padding: 85px 71px 0;
-		box-shadow: 0 0 45px 90px rgb(255, 255, 255);
+		padding: 85px 71px 86px;
 		display: flex;
 		flex-wrap: wrap;
 		max-width: 1045px;
