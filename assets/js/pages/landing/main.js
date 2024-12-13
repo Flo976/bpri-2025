@@ -48,6 +48,19 @@ const initMySwiper = () => {
 
 	const checkActiveIndex = () => {
 		const activeIndex = swiper.activeIndex;
+		
+		if (window.section0BackgroundCanvasParticle) {
+		    window.section0BackgroundCanvasParticle.isCanvasVisible = false;
+		}
+
+		if (window.yearParticles) {
+		    window.yearParticles.isCanvasVisible = false;
+		}
+
+		if (window.dgImgParticles) {
+		    window.dgImgParticles.isCanvasVisible = false;
+		}
+
 		if (activeIndex == 0) {
 			if (window.section0BackgroundCanvasParticle) {
 			    window.section0BackgroundCanvasParticle.isCanvasVisible = true;
@@ -55,14 +68,13 @@ const initMySwiper = () => {
 			if (window.yearParticles) {
 			    window.yearParticles.isCanvasVisible = true;
 			}
+		}
+		else if (activeIndex == 1) {
+			if (window.dgImgParticles) {
+			    window.dgImgParticles.isCanvasVisible = true;
+			}
 		} else {
-			if (window.section0BackgroundCanvasParticle) {
-			    window.section0BackgroundCanvasParticle.isCanvasVisible = false;
-			}
-
-			if (window.yearParticles) {
-			    window.yearParticles.isCanvasVisible = false;
-			}
+			
 		}
 	}
 	checkActiveIndex()
