@@ -26,7 +26,7 @@ function section0Particles() {
     // initialize les fonds particle
     window.yearParticles = new AppParticles({
         canvasId: "yearCanvas",
-        dotSize: 4,
+        dotSize: 4.1,
         spacing: 8.5,
         moveType: "poetic",
         animationType: "sparkleAndWaveY",

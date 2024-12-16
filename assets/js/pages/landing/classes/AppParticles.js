@@ -73,95 +73,16 @@ export default class AppParticles {
     observer.observe(this.canvas);
   }
 
-  shuffleGrouping(indices) {
-    for (let i = indices.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [indices[i], indices[j]] = [indices[j], indices[i]];
-    }
-  }
-
-  zigzagGrouping(indices) {
-    let groupedIndices = [];
-    let direction = 1; // 1 for right, -1 for left
-
-    for (let row = 0; row < this.rows; row++) {
-      if (direction === 1) {
-        for (let col = 0; col < this.cols; col++) {
-          groupedIndices.push({ row, col });
-        }
-      } else {
-        for (let col = this.cols - 1; col >= 0; col--) {
-          groupedIndices.push({ row, col });
-        }
-      }
-      direction *= -1;
-    }
-
-    return groupedIndices;
-  }
-
-  inverseSpiralGrouping(indices) {
-    let groupedIndices = [];
-    let top = this.rows - 1;
-    let bottom = 0;
-    let left = this.cols - 1;
-    let right = 0;
-
-    while (top >= bottom && left >= right) {
-      // Prendre la dernière ligne
-      for (let col = left; col >= right; col--) {
-        groupedIndices.push({ row: top, col });
-      }
-      top--;
-
-      // Prendre la première colonne
-      for (let row = top; row >= bottom; row--) {
-        groupedIndices.push({ row, col: right });
-      }
-      right++;
-
-      // Prendre la première ligne
-      if (top >= bottom) {
-        for (let col = right; col <= left; col++) {
-          groupedIndices.push({ row: bottom, col });
-        }
-        bottom++;
-      }
-
-      // Prendre la dernière colonne
-      if (left >= right) {
-        for (let row = bottom; row <= top; row++) {
-          groupedIndices.push({ row, col: left });
-        }
-        left--;
-      }
-    }
-
-    return groupedIndices;
-  }
-
-  cascadeGrouping(indices) {
-    let groupedIndices = [];
-
-    for (let col = 0; col < this.cols; col++) {
-      for (let row = 0; row < this.rows; row++) {
-        groupedIndices.push({ row, col });
-      }
-    }
-
-    return groupedIndices;
-  }
-
   concentrationGrouping(indices) {
     let groupedIndices = [];
     let centerX = Math.floor(this.cols / 2);
     let centerY = Math.floor(this.rows / 2);
 
     // Tri des indices par proximité du centre
-    let distances = indices.map(({ row, col }) => {
+    let distances = indices.map(({ row, col, realIndex }) => {
       let dx = col - centerX;
       let dy = row - centerY;
-      return { row, col, distance: Math.sqrt(dx * dx + dy * dy) };
+      return { realIndex, row, col, distance: Math.sqrt(dx * dx + dy * dy) };
     });
 
     // Tri par distance croissante
@@ -169,7 +90,7 @@ export default class AppParticles {
 
     // Regrouper les indices triés
     distances.forEach((item) =>
-      groupedIndices.push({ row: item.row, col: item.col }),
+      groupedIndices.push({ row: item.row, col: item.col, realIndex: item.realIndex }),
     );
 
     return groupedIndices;
@@ -177,43 +98,25 @@ export default class AppParticles {
 
   createDots() {
     let indices = [];
+    let realIndex = 0;
     for (let row = 0; row < this.rows; row++) {
       for (let col = 0; col < this.cols; col++) {
-        indices.push({ row, col });
+        indices.push({ row, col, realIndex });
+        realIndex++;
       }
     }
 
-    // Mélanger les indices
-    //this.shuffleArray(indices);
-    //indices = this.zigzagGrouping(indices, cols, rows);
-    //indices = this.inverseSpiralGrouping(indices, cols, rows);
-    //indices = this.cascadeGrouping(indices, cols, rows);
     indices = this.concentrationGrouping(indices);
 
     indices.forEach((pos, index) => {
-      const { row, col } = pos;
+      const { row, col, realIndex } = pos;
       const xPos = col * this.options.spacing + this.options.dotSize / 2;
       const yPos = row * this.options.spacing + this.options.dotSize / 2;
       const color =
         this.parsedColors[Math.floor(Math.random() * this.parsedColors.length)];
       const fromLeft = xPos < this.canvas.width / 2;
 
-      if (this.options.moveType === "slide") {
-        this.dots.push({
-          x: fromLeft
-            ? xPos - this.canvas.width / 2
-            : xPos + this.canvas.width / 2,
-          y: yPos,
-          targetX: xPos,
-          targetY: yPos,
-          color,
-          speed: 5,
-          currentSize: this.options.dotSize,
-          opacity: 0,
-          reachedTarget: false,
-          offset: Math.random() * Math.PI * 2,
-        });
-      } else if (this.options.moveType === "poetic") {
+      if (this.options.moveType === "poetic") {
         this.dots.push({
           row,
           col,
@@ -230,33 +133,10 @@ export default class AppParticles {
           startTime: index * this.options.offsetStartTime, // Délai aléatoire pour chaque pastille
           color,
           offset: Math.random() * Math.PI * 2,
+          realIndex
         });
       }
     });
-  }
-
-  updateSlideDots(dot) {
-    if (!dot.reachedTarget) {
-      if (dot.x < dot.targetX) {
-        dot.x += dot.speed;
-        if (dot.x > dot.targetX) dot.x = dot.targetX;
-      } else if (dot.x > dot.targetX) {
-        dot.x -= dot.speed;
-        if (dot.x < dot.targetX) dot.x = dot.targetX;
-      }
-
-      if (dot.y < dot.targetY) {
-        dot.y += dot.speed;
-        if (dot.y > dot.targetY) dot.y = dot.targetY;
-      } else if (dot.y > dot.targetY) {
-        dot.y -= dot.speed;
-        if (dot.y < dot.targetY) dot.y = dot.targetY;
-      }
-
-      if (dot.x === dot.targetX && dot.y === dot.targetY) {
-        dot.reachedTarget = true;
-      }
-    }
   }
 
   updatePoeticDots(dot) {
@@ -292,21 +172,12 @@ export default class AppParticles {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     let currentStyle = this.styles[0];
-    if (this.options.animationType === "sparkle") {
-      currentStyle = this.styles[0];
-    } else if (this.options.animationType === "sparkleAndWaveY") {
-      currentStyle = this.styles[1];
-    } else if (this.options.animationType === "sparkleAndWaveX") {
-      currentStyle = this.styles[2];
-    }
 
     this.dots.forEach((dot, index) => {
       dot.index = index;
 
       if (!dot.reachedTarget) {
-        if (this.options.moveType === "slide") {
-          this.updateSlideDots(dot);
-        } else if (this.options.moveType === "poetic") {
+        if (this.options.moveType === "poetic") {
           this.updatePoeticDots(dot, time);
         }
         if (index == this.dots.length - 1) {
@@ -340,17 +211,16 @@ export default class AppParticles {
     });
   }
 
-  lerp(a, b, t) {
-    return a + (b - a) * t;
-  }
-
   drawDot(dot) {
     if (dot.fillStyle) {
       this.ctx.fillStyle = dot.fillStyle;
     } else {
-      this.ctx.fillStyle = `rgba(${dot.color.r}, ${dot.color.g}, ${
-        dot.color.b
-      }, ${dot.opacity || 1})`;
+      const gradient = this.ctx.createLinearGradient(0, this.canvas.height / 2, this.canvas.width, 0);
+      gradient.addColorStop(0, "#D7BD64");
+      gradient.addColorStop(0.5, "#F3E1A7");
+      gradient.addColorStop(1, "#D9BD64");
+
+      this.ctx.fillStyle = gradient;
     }
 
     this.ctx.beginPath();
@@ -377,16 +247,6 @@ export default class AppParticles {
     }
 
     this.ctx.fill();
-    //this.ctx.shadowBlur = 0;
-  }
-
-  checkStyleChange(now) {
-    if (now - this.lastStyleChange > 5000) {
-      this.styleTransitionStart = performance.now();
-      this.currentStyleIndex = this.nextStyleIndex;
-      this.nextStyleIndex = (this.nextStyleIndex + 1) % this.styles.length;
-      this.lastStyleChange = now;
-    }
   }
 
   animate() {
@@ -403,28 +263,11 @@ export default class AppParticles {
     this.lastRenderTime = now;
 
     this.updateDots();
-    //this.checkStyleChange(now);
     requestAnimFrame(this.animate.bind(this));
   }
 
   getAnimations() {
     return [
-      {
-        name: "sparkle",
-        sizeFunction: (time, dot, amplitude) => {
-          return this.options.dotSize;
-        },
-        colorFunction: (time, dot) => {
-          const sparkleFactor = Math.random() < 0.0001 ? 1.5 : 1; // Éclat rare
-          const timeFactor = time + Math.random() * 5000; // Délai aléatoire pour chaque
-          return {
-            r: 212 + sparkleFactor + Math.sin(timeFactor * 0.1) * 20,
-            g: 175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 15,
-            b: 55,
-            a: 1,
-          };
-        },
-      },
       {
         name: "sparkleAndWaveY",
         sizeFunction: (time, dot, amplitude) => {
@@ -456,88 +299,63 @@ export default class AppParticles {
             }
             return dot.currentSize;
           } else {
-            // Liste des valeurs possibles
-            //const values = [1.1, 1.2, 1.3, 1.4, 1.5];
-            const values = [1];
-            // Sélection aléatoire
-            const randomValue =
-              values[Math.floor(Math.random() * values.length)];
             const waveOffset = dot.targetX / (this.options.spacing * 3);
-            const sparkleFactor = Math.random() < 0.01 ? randomValue : 1; // Éclat rare
+            const sparkleFactor = Math.random() < 0.01 ? 1.1 : 1; // Éclat rare
             return this.options.dotSize * sparkleFactor;
           }
         },
         colorFunction: (time, dot) => {
-/*          const waveOffset = dot.targetY / (this.options.spacing * 2)
-          if (!dot.color) {
-            dot.color = 1;
+          // Définir les couleurs principales pour le dégradé
+          const colors = [
+            { r: 215, g: 189, b: 100 }, // #D7BD64
+            { r: 243, g: 225, b: 167 }, // #F3E1A7
+            { r: 217, g: 189, b: 100 }, // #D9BD64
+          ];
+
+          // Calcule une position oscillante pour le dégradé
+          const t = 0.5 + 0.1 * Math.sin(time * 0.001); // Oscille entre 0 et 1
+
+          // Interpolation linéaire entre les couleurs du dégradé
+          const startColor = colors[0];
+          const endColor = colors[0];
+
+          const r = Math.round(startColor.r + t * (endColor.r - startColor.r));
+          const g = Math.round(startColor.g + t * (endColor.g - startColor.g));
+          const b = Math.round(startColor.b + t * (endColor.b - startColor.b));
+
+          // Ajouter un effet de scintillement sur l'opacité
+          //const opacity = 0.5 + 0.5 * Math.sin(time * 0.5 + dot.x * 0.02 + dot.y * 0.02);
+          //const opacity = 0.9 + 0.5 * Math.sin(time * 0.5 + dot.y * 0.05);
+          //const opacity = 0.3 + 0.7 * Math.sin(time * 0.005 + dot.x * 0.01 + dot.y * 0.01)
+
+          var opacity = 1;
+          const randomNumber = Math.floor(Math.random() * 7); // 0 à 10 inclus
+          if (dot.realIndex % randomNumber == 0) {
+             opacity = 0.9 + 0.3 * Math.sin(time * Math.random() * 500);
           }
-          if (dot.color<30) {
-            dot.color += Math.sin(time * this.options.waveFrequency + waveOffset) *2 ;
-          } else {
-            dot.color = 1;
-          }*/
-          const sparkleFactor = Math.random() < 0.01 ? 10 : 1; // Éclat rare
-          const timeFactor = time + Math.random() * 5000; // Délai aléatoire pour chaque
+          return { r, g, b, a: opacity };
+        },
+        colorfdsFunction: (time, dot) => {
+          const sparkleFactor = Math.random() < 0 ? 0 : 0; // Éclat rare
+          const timeFactor = time * 5000; // Délai aléatoire pour chaque
           const color = {
-            r: 212 + sparkleFactor + Math.sin(timeFactor * 0.5) * 25,
+            r: 195 + sparkleFactor + Math.sin(timeFactor * 0.5) * 25,
             g: 175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 20,
-            b: 10,
+            b: 100,
             a: 1,
           };
-          /*const color = {
-            r: 212 + dot.color,
-            g: 175 + dot.color,
-            b: 10,
-            a: 1,
-          };*/
           return color;
         },
-      },
-      {
-        name: "sparkleAndWaveX",
-        sizeFunction: (time, dot, amplitude) => {
-          const waveOffset = dot.targetX / (this.options.spacing * 3);
-          const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
-          return (
-            (this.options.dotSize +
-              Math.sin(time * this.options.waveFrequency + waveOffset) *
-                amplitude) *
-            sparkleFactor
-          );
-        },
-        colorFunction: (time, dot) => {
-          const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
+        colorFdunction: (time, dot) => {
+          const sparkleFactor = Math.random() < 0 ? 10 : 0; // Éclat rare
           const timeFactor = time + Math.random() * 5000; // Délai aléatoire pour chaque
-          return {
-            r: 212 + sparkleFactor + Math.sin(timeFactor * 0.1) * 20,
-            g: 175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 15,
-            b: 55,
+          const color = {
+            r: 212 + sparkleFactor + Math.sin(timeFactor * 0.5) * 1,
+            g: 175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 1,
+            b: 100,
             a: 1,
           };
-        },
-      },
-      {
-        name: "sparkleAndWaveZ",
-        sizeFunction: (time, dot, amplitude) => {
-          const waveOffset = dot.targetX / (this.options.spacing * 3);
-          const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
-          return (
-            this.options.dotSize +
-            Math.sin(time * this.options.waveFrequency + waveOffset) *
-              amplitude +
-            Math.cos(sparkleFactor * 0.1) * 2
-          );
-        },
-        colorFunction: (time, dot) => {
-          const sparkleFactor = Math.random() < 0.01 ? 1.5 : 1; // Éclat rare
-          const timeFactor = time + Math.random() * 5000; // Délai aléatoire pour chaque
-          return {
-            r: 212 + sparkleFactor + Math.sin(timeFactor * 0.1) * 20,
-            g: 175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 15,
-            b: 55,
-            a: 1,
-          };
+          return color;
         },
       },
     ];
