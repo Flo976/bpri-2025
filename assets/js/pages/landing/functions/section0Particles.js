@@ -62,6 +62,26 @@ function section0Particles() {
         colors: ["#D4AF37"]
     })
     window.dgImgParticles.animate();
+
+    // initialize les fonds particle
+    window.section2BgParticles = new AppParticles({
+        canvasId: "section2_bg_canvas",
+        dotSize: 8,
+        spacing: 25,
+        moveType: "poetic",
+        animationType: "sparkleAndWaveY",
+        waveFrequency: 1.5,
+        polygonPath: [
+            [32, 0],
+            [100, 0],
+            [100, 69],
+            [70, 100],
+            [0, 100],
+            [0, 34]
+        ],
+        colors: ["#D4AF37"]
+    })
+    window.section2BgParticles.animate();
 }
 
 export {

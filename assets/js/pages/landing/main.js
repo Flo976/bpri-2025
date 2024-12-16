@@ -61,6 +61,10 @@ const initMySwiper = () => {
 		    window.dgImgParticles.isCanvasVisible = false;
 		}
 
+		if (window.section2BgParticles) {
+		    window.section2BgParticles.isCanvasVisible = false;
+		}
+
 		if (activeIndex == 0) {
 			if (window.section0BackgroundCanvasParticle) {
 			    window.section0BackgroundCanvasParticle.isCanvasVisible = true;
@@ -72,6 +76,11 @@ const initMySwiper = () => {
 		else if (activeIndex == 1) {
 			if (window.dgImgParticles) {
 			    window.dgImgParticles.isCanvasVisible = true;
+			}
+		} 
+		else if (activeIndex == 2) {
+			if (window.section2BgParticles) {
+			    window.section2BgParticles.isCanvasVisible = true;
 			}
 		} else {
 			
