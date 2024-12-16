@@ -192,8 +192,8 @@ export default class AppParticles {
 
     indices.forEach((pos, index) => {
       const { row, col } = pos;
-      const xPos = (col * this.options.spacing) + (this.options.dotSize / 2);
-      const yPos = (row * this.options.spacing) + (this.options.dotSize / 2);
+      const xPos = col * this.options.spacing + this.options.dotSize / 2;
+      const yPos = row * this.options.spacing + this.options.dotSize / 2;
       const color =
         this.parsedColors[Math.floor(Math.random() * this.parsedColors.length)];
       const fromLeft = xPos < this.canvas.width / 2;
@@ -301,6 +301,8 @@ export default class AppParticles {
     }
 
     this.dots.forEach((dot, index) => {
+      dot.index = index;
+
       if (!dot.reachedTarget) {
         if (this.options.moveType === "slide") {
           this.updateSlideDots(dot);
@@ -455,23 +457,41 @@ export default class AppParticles {
             return dot.currentSize;
           } else {
             // Liste des valeurs possibles
-          const values = [1.1, 1.2, 1.3, 1.4, 1.5];
-          // Sélection aléatoire
-          const randomValue = values[Math.floor(Math.random() * values.length)];
+            //const values = [1.1, 1.2, 1.3, 1.4, 1.5];
+            const values = [1];
+            // Sélection aléatoire
+            const randomValue =
+              values[Math.floor(Math.random() * values.length)];
             const waveOffset = dot.targetX / (this.options.spacing * 3);
             const sparkleFactor = Math.random() < 0.01 ? randomValue : 1; // Éclat rare
-            return (this.options.dotSize * sparkleFactor);
+            return this.options.dotSize * sparkleFactor;
           }
         },
         colorFunction: (time, dot) => {
+/*          const waveOffset = dot.targetY / (this.options.spacing * 2)
+          if (!dot.color) {
+            dot.color = 1;
+          }
+          if (dot.color<30) {
+            dot.color += Math.sin(time * this.options.waveFrequency + waveOffset) *2 ;
+          } else {
+            dot.color = 1;
+          }*/
           const sparkleFactor = Math.random() < 0.01 ? 10 : 1; // Éclat rare
           const timeFactor = time + Math.random() * 5000; // Délai aléatoire pour chaque
-          return {
+          const color = {
             r: 212 + sparkleFactor + Math.sin(timeFactor * 0.5) * 25,
             g: 175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 20,
             b: 10,
             a: 1,
           };
+          /*const color = {
+            r: 212 + dot.color,
+            g: 175 + dot.color,
+            b: 10,
+            a: 1,
+          };*/
+          return color;
         },
       },
       {

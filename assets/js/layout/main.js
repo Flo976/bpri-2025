@@ -16,6 +16,10 @@ import "animate.css";
 // import '../common/classes/AppAnimateCss.min.js';
 /* ---- AppAnimateCss ----- */
 
+/* ---- AppMagnificPopup ----- */
+import '../common/classes/AppMagnificPopup.min.js';
+/* ---- AppMagnificPopup ----- */
+
 import "../../scss/layout/main.scss";
 
 import BodyManager from "./classes/BodyManager.js";
