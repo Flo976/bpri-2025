@@ -1,5 +1,6 @@
 //import appParticles from "../../../common/functions/appParticles.js";
 import AppParticles from "../classes/AppParticles.js";
+import AppStarParticles from "../classes/AppStarParticles.js";
 
 function section0Particles() {
 	// initialize les fonds particle

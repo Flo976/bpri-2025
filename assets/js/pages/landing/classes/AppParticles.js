@@ -187,7 +187,7 @@ export default class AppParticles {
 
       if (dot.reachedTarget) {
         // Interpoler la taille
-        const sparkleFactor = Math.random() < 0.01 ? 1.05 : 0; // Éclat rare
+        const sparkleFactor = Math.random() < 0.01 ? 0 : 0; // Éclat rare
         const sizeCurrent = currentStyle.sizeFunction(time, dot, amplitude);
         dot.currentSize = sizeCurrent;
         if (dot.shadowBlur) {
@@ -247,6 +247,7 @@ export default class AppParticles {
     }
 
     this.ctx.fill();
+    this.ctx.restore();
   }
 
   animate() {
@@ -256,7 +257,7 @@ export default class AppParticles {
     }
 
     const now = performance.now();
-    if (now - this.lastRenderTime < 16) {
+    if (now - this.lastRenderTime < 32) {
       requestAnimFrame(this.animate.bind(this));
       return;
     }
@@ -323,39 +324,28 @@ export default class AppParticles {
           const g = Math.round(startColor.g + t * (endColor.g - startColor.g));
           const b = Math.round(startColor.b + t * (endColor.b - startColor.b));
 
-          // Ajouter un effet de scintillement sur l'opacité
-          //const opacity = 0.5 + 0.5 * Math.sin(time * 0.5 + dot.x * 0.02 + dot.y * 0.02);
-          //const opacity = 0.9 + 0.5 * Math.sin(time * 0.5 + dot.y * 0.05);
-          //const opacity = 0.3 + 0.7 * Math.sin(time * 0.005 + dot.x * 0.01 + dot.y * 0.01)
-
           var opacity = 1;
           const randomNumber = Math.floor(Math.random() * 7); // 0 à 10 inclus
           if (dot.realIndex % randomNumber == 0) {
-             opacity = 0.9 + 0.3 * Math.sin(time * Math.random() * 500);
+            if (dot.icolor === undefined || dot.dcolor === undefined) {
+                dot.icolor = 0.5;
+                dot.dcolor = 1;
+            }
+             //opacity = 0.5 + 0.3 * Math.sin(time * Math.random() * 500);
+             // Variation douce de la couleur
+            if (dot.dcolor === 1 && dot.icolor < 30) {
+                dot.icolor += 0.1;
+                if (dot.icolor >= 1) {
+                    dot.dcolor = 0;
+                }
+            } else if (dot.dcolor === 0 && dot.icolor > 0) {
+                dot.icolor -= 0.1;
+                if (dot.icolor <= 0.5) {
+                    dot.dcolor = 1;
+                }
+            }
           }
-          return { r, g, b, a: opacity };
-        },
-        colorfdsFunction: (time, dot) => {
-          const sparkleFactor = Math.random() < 0 ? 0 : 0; // Éclat rare
-          const timeFactor = time * 5000; // Délai aléatoire pour chaque
-          const color = {
-            r: 195 + sparkleFactor + Math.sin(timeFactor * 0.5) * 25,
-            g: 175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 20,
-            b: 100,
-            a: 1,
-          };
-          return color;
-        },
-        colorFdunction: (time, dot) => {
-          const sparkleFactor = Math.random() < 0 ? 10 : 0; // Éclat rare
-          const timeFactor = time + Math.random() * 5000; // Délai aléatoire pour chaque
-          const color = {
-            r: 212 + sparkleFactor + Math.sin(timeFactor * 0.5) * 1,
-            g: 175 + sparkleFactor + Math.cos(timeFactor * 0.1) * 1,
-            b: 100,
-            a: 1,
-          };
-          return color;
+          return { r, g, b, a: dot.icolor };
         },
       },
     ];
