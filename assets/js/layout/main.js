@@ -24,6 +24,7 @@ import "../../scss/layout/main.scss";
 
 import BodyManager from "./classes/BodyManager.js";
 // import PageManager from "./classes/PageManager.js";
+import AppMagneticCursor from "./classes/AppMagneticCursor.js";
 
 import customContainerModals from "./functions/customContainerModals.js";
 import mouseAndTouchParticles from "../common/functions/mouseAndTouchParticles.js";
@@ -45,4 +46,11 @@ window.addEventListener("load", () => {
 
     // initialize effet particle
     mouseAndTouchParticles()
+
+    window.appCursors = new AppMagneticCursor({
+        cursorElement: document.getElementById("cursor"),
+        magneticSelector: ".magnetic", // Spécifiez le sélecteur des éléments magnétiques
+        strength: 0.3, // Ajustez la force d'attraction
+        friction: 0.15, // Ajustez la friction
+      });   
 });

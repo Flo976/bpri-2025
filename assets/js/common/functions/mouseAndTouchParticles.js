@@ -73,8 +73,14 @@ export default function mouseAndTouchParticles() {
     // Handle mouse/touch events
     function handleMove(e) {
     	e.stopPropagation();
-        const x = e.touches ? e.touches[0].clientX : e.clientX;
-        const y = e.touches ? e.touches[0].clientY : e.clientY;
+        let x = e.touches ? e.touches[0].clientX : e.clientX;
+        let y = e.touches ? e.touches[0].clientY : e.clientY;
+
+        if (window.appCursor && window.appCursor.cursorPos) {
+            x=window.appCursor.cursorPos.x;
+            y=window.appCursor.cursorPos.y;
+        }
+        
         createParticle(x, y);
     }
 

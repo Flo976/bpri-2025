@@ -29,6 +29,7 @@
 html {
     position: relative;
     /*height: var(--iframe-100vh);*/
+    //cursor: url('/assets/images/webp/cursor_default.png'), auto;
 
     body {
         width: 100%;
@@ -53,6 +54,21 @@ html {
             top: 0;
             left: 0;
         }
+    }
+
+    .magnetic {
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+
+    #cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
 }
 
