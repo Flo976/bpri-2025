@@ -48,6 +48,10 @@ const initMySwiper = () => {
 
 	const checkActiveIndex = () => {
 		const activeIndex = swiper.activeIndex;
+
+		if (window.appAnimateCss) {
+	  		window.appAnimateCss.checkAnimations({swiperActiveIndex: activeIndex});
+	  	}
 		
 		if (window.section0BackgroundCanvasParticle) {
 		    window.section0BackgroundCanvasParticle.isCanvasVisible = false;

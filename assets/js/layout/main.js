@@ -12,8 +12,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 /* ---- Bootstrap ----- */
 
 /* ---- AppAnimateCss ----- */
-import "animate.css";
-//import '../common/classes/AppAnimateCss.min.js';
+//import "animate.css";
+import '../common/classes/AppAnimateCss.min.js';
 /* ---- AppAnimateCss ----- */
 
 /* ---- AppMagnificPopup ----- */
