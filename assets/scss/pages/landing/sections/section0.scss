@@ -37,17 +37,18 @@
 		mask-size: 100%;
 		mask-repeat: no-repeat;
 		mask-position: center;
+		mask-mode: luminance;
 	}
 
 	.content_middle_wrapper {
 		position: relative;
 		margin: auto;
-		background: radial-gradient(
+		/*background: radial-gradient(
 			79.92% 93.28% at 50% 52.42%,
 			#ffffff 44.24%,
 			rgba(255, 255, 255, 0) 100%
-		);
-		/*background: none;*/
+		);*/
+		background: none;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
@@ -60,8 +61,8 @@
 	.content_middle {
 		position: relative;
 		margin: auto;
-		background: #fff;
-		/*background: #000;*/
+		/*background: #fff;*/
+		background: none;
 		border-radius: 50%;
 		padding: 85px 71px 0;
 		display: flex;

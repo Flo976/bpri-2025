@@ -93,7 +93,6 @@
             height: 317px;
             margin: 0;
             padding: 6px;
-            cursor: pointer;
 
             &:hover {
                 &::before {
@@ -202,7 +201,7 @@
             background: linear-gradient(
                 180deg,
                 #ffffff 0%,
-                rgba(255, 255, 255, 0) 81.39%,
+                rgba(255, 255, 255, 0) 100%,
                 #ffffff 100%
             );
             display: block;

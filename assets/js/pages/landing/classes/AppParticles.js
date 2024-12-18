@@ -31,6 +31,9 @@ export default class AppParticles {
       waveFrequency: params.waveFrequency || 0.5,
       polygonPath: params.polygonPath || null,
       offsetStartTime: params.offsetStartTime || 2,
+      offsetStartPositionX: params.offsetStartPositionX || params.dotSize / 2,
+      offsetStartPositionY: params.offsetStartPositionY || params.dotSize / 2,
+      xxx: params.xxx || false,
     };
 
     this.dots = [];
@@ -73,13 +76,6 @@ export default class AppParticles {
     observer.observe(this.canvas);
   }
 
-  shuffleGrouping(indices) {
-    for (let i = indices.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [indices[i], indices[j]] = [indices[j], indices[i]];
-    }
-  }
-
   concentrationGrouping(indices) {
     let groupedIndices = [];
     let centerX = Math.floor(this.cols / 2);
@@ -113,13 +109,12 @@ export default class AppParticles {
       }
     }
 
-    //indices = this.concentrationGrouping(indices);
-    this.shuffleGrouping(indices);
+    indices = this.concentrationGrouping(indices);
 
     indices.forEach((pos, index) => {
       const { row, col, realIndex } = pos;
-      const xPos = col * this.options.spacing + this.options.dotSize / 2;
-      const yPos = row * this.options.spacing + this.options.dotSize / 2;
+      const xPos = col * this.options.spacing + this.options.offsetStartPositionX;
+      const yPos = row * this.options.spacing + this.options.offsetStartPositionY;
       const color =
         this.parsedColors[Math.floor(Math.random() * this.parsedColors.length)];
       const fromLeft = xPos < this.canvas.width / 2;
@@ -134,10 +129,10 @@ export default class AppParticles {
           targetY: yPos,
           targetSize: this.options.dotSize, // Taille finale
           currentSize: 0, // Taille initiale
-          opacity: 0, // Opacité initiale
+          opacity: 0.001, // Opacité initiale
           targetOpacity: 1, // Opacité finale
-          fadeSpeed: 1, // Vitesse aléatoire d'apparition
-          sizeSpeed: 0.5, // Vitesse aléatoire de croissance
+          fadeSpeed: 0.5, // Vitesse aléatoire d'apparition
+          sizeSpeed: 0.1, // Vitesse aléatoire de croissance
           startTime: index * this.options.offsetStartTime, // Délai aléatoire pour chaque pastille
           color,
           offset: Math.random() * Math.PI * 2,
@@ -175,7 +170,7 @@ export default class AppParticles {
   }
 
   updateDots() {
-    const time = Date.now();
+    const time = Date.now() * 0.002;
     const amplitude = 2;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -265,7 +260,7 @@ export default class AppParticles {
     }
 
     const now = performance.now();
-    if (now - this.lastRenderTime < 64) {
+    if (now - this.lastRenderTime < 32) {
       requestAnimFrame(this.animate.bind(this));
       return;
     }
@@ -280,8 +275,45 @@ export default class AppParticles {
       {
         name: "sparkleAndWaveY",
         sizeFunction: (time, dot, amplitude) => {
-          if (!this.dotsReached) {
+          if (this.options.xxx) {
             return this.options.dotSize;
+          } else {
+            amplitude = 8;
+            const waveOffset = dot.targetY / (this.options.spacing * 5);
+            let size =
+              (this.options.dotSize +
+                Math.sin(time * this.options.waveFrequency + waveOffset) * amplitude);
+            if (size < this.options.dotSize) {
+              size = this.options.dotSize;
+            }
+            return size;
+          }
+
+          if (this.options.xxx) {
+          //if (!this.dotsReached) {
+            amplitude = 1.5;
+            const waveOffset = dot.targetY / (this.options.spacing * 3);
+            const size =
+              (this.options.dotSize +
+                Math.sin(time * this.options.waveFrequency + waveOffset) * amplitude);
+            return size;
+          } else if (dot.currentSize !== this.options.dotSize) {
+            // Ajuster progressivement la taille pour converger vers this.options.dotSize
+            const adjustmentSpeed = 0.05; // Vitesse d'ajustement
+            if (dot.currentSize > this.options.dotSize) {
+              // Réduction progressive
+              dot.currentSize = Math.max(
+                dot.currentSize - adjustmentSpeed,
+                this.options.dotSize,
+              );
+            } else {
+              // Augmentation progressive
+              dot.currentSize = Math.min(
+                dot.currentSize + adjustmentSpeed,
+                this.options.dotSize,
+              );
+            }
+            return dot.currentSize;
           } else {
             const waveOffset = dot.targetX / (this.options.spacing * 3);
             const sparkleFactor = Math.random() < 0.01 ? 1.1 : 1; // Éclat rare
@@ -289,45 +321,37 @@ export default class AppParticles {
           }
         },
         colorFunction: (time, dot) => {
-          // Définir les couleurs principales pour le dégradé
-          const colors = [
-            { r: 215, g: 189, b: 100 }, // #D7BD64
-            { r: 243, g: 225, b: 167 }, // #F3E1A7
-            { r: 217, g: 189, b: 100 }, // #D9BD64
-          ];
+          const r = 215;
+          const g = 189;
+          const b = 100;
 
-          // Calcule une position oscillante pour le dégradé
-          const t = 0.5 + 0.1 * Math.sin(time * 0.001); // Oscille entre 0 et 1
-
-          // Interpolation linéaire entre les couleurs du dégradé
-          const startColor = colors[0];
-          const endColor = colors[0];
-
-          const r = Math.round(startColor.r + t * (endColor.r - startColor.r));
-          const g = Math.round(startColor.g + t * (endColor.g - startColor.g));
-          const b = Math.round(startColor.b + t * (endColor.b - startColor.b));
+          if (true) {
+          //if (!this.dotsReached) {
+            return { r, g, b, a: dot.opacityColor };
+          }
 
           var opacity = 1;
           const randomNumber = Math.floor(Math.random() * 7); // 0 à 10 inclus
           if (dot.realIndex % randomNumber == 0) {
-            if (dot.icolor === undefined || dot.dcolor === undefined) {
-                dot.icolor = 0.5;
-                dot.dcolor = 1;
+            if (dot.opacityColor === undefined || dot.modeIncrementation === undefined) {
+                dot.opacityColor = 0.5;
+                dot.modeIncrementation = 1;
             }
+             //opacity = 0.5 + 0.3 * Math.sin(time * Math.random() * 500);
              // Variation douce de la couleur
-            if (dot.dcolor === 1 && dot.icolor < 30) {
-                dot.icolor += 0.1;
-                if (dot.icolor >= 1) {
-                    dot.dcolor = 0;
+            if (dot.modeIncrementation === 1 && dot.opacityColor < 30) {
+                dot.opacityColor += 0.1;
+                if (dot.opacityColor >= 1) {
+                    dot.modeIncrementation = 0;
                 }
-            } else if (dot.dcolor === 0 && dot.icolor > 0) {
-                dot.icolor -= 0.1;
-                if (dot.icolor <= 0.5) {
-                    dot.dcolor = 1;
+            } else if (dot.modeIncrementation === 0 && dot.opacityColor > 0) {
+                dot.opacityColor -= 0.1;
+                if (dot.opacityColor <= 0.5) {
+                    dot.modeIncrementation = 1;
                 }
             }
           }
-          return { r, g, b, a: dot.icolor };
+          return { r, g, b, a: dot.opacityColor };
         },
       },
     ];
