@@ -45,12 +45,5 @@ window.addEventListener("load", () => {
     customContainerModals();
 
     // initialize effet particle
-    mouseAndTouchParticles()
-
-    window.appCursors = new AppMagneticCursor({
-        cursorElement: document.getElementById("cursor"),
-        magneticSelector: ".magnetic", // Spécifiez le sélecteur des éléments magnétiques
-        strength: 0.3, // Ajustez la force d'attraction
-        friction: 0.15, // Ajustez la friction
-      });   
+    mouseAndTouchParticles()  
 });

@@ -24,6 +24,19 @@
     }
 }
 
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.8);
+        /* Retour progressif à la normale */
+    }
+}
+
 /**
  * html
  */
@@ -35,6 +48,11 @@ html {
     body {
         width: 100%;
         height: 100%;
+        cursor: none !important;
+
+        *:hover {
+            cursor: none !important;
+        }
 
         &.modal-open {
             #modals_wrapper {
@@ -58,8 +76,8 @@ html {
     }
 
     .magnetic {
-      transition: transform 0.2s ease;
-      display: inline-block;
+        transition: transform 0.2s ease;
+        display: inline-block;
     }
 
     #cursor {
@@ -69,7 +87,31 @@ html {
         z-index: 1000;
         pointer-events: none;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.1s linear;
+
+        &.hover {
+            .stroke {
+                animation: heartbeat 1.5s ease-in-out infinite;
+                opacity: 1;
+            }
+
+            .round {
+                animation: none;
+            }
+        }
+
+        .stroke {
+            opacity: 0;
+            transition: opacity 0.1s linear;
+            transform-origin: center;
+            transform-box: fill-box;
+        }
+
+        .round {
+            transform-origin: center;
+            transform-box: fill-box;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
     }
 }
 
@@ -87,7 +129,7 @@ html {
         min-height: 100vh;
         align-items: center;
 
-        & > * {
+        &>* {
             width: 100%;
         }
     }
@@ -150,6 +192,7 @@ body {
  * For AppAnimateCss
  */
 body {
+
     .rotateIn,
     .bounceIn,
     .fadeIn,

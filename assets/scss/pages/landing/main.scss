@@ -16,6 +16,14 @@
         align-items: center;
         overflow: hidden;
 
+        &:not(.section0) {
+            margin: -250px 0 0;
+        }
+
+        &:not(.section2) {
+            padding: 0 0 250px;
+        }
+
         &.red {
             background: #f00;
         }
@@ -31,14 +39,14 @@
         .mask_top {
             position: absolute;
             width: 145%;
-            top: -28px;
+            top: 0;
             left: -34%;
             height: auto;
         }
 
         .badge_logo {
             position: absolute;
-            top: 0px;
+            top: 17px;
             width: 125px;
             height: auto;
         }
@@ -51,7 +59,15 @@
             mask-image: url("/assets/images/svg/section_card_mask_with_bg_white.svg");
             mask-size: 145%;
             mask-position: 76% -28px;
-            padding: 125px 0 0;
+            padding: 250px 0 0;
         }
+    }
+
+    .mfp-wrap {
+        position: absolute;
+    }
+
+    .modal.user_info_modal {
+        position: absolute!important;
     }
 }

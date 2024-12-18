@@ -2,14 +2,12 @@
 
 .section0 {
 	position: relative;
-	height: 100vh;
 	display: flex;
 	background: #fff;
 	/*background: #000;*/
 
 	.container {
 		position: relative;
-		height: 100%;
 		padding: 0;
 		display: flex;
 	}
@@ -21,7 +19,7 @@
 		width: 100%;
 		max-width: 1460px;
 		min-height: 766px;
-		margin: auto;
+		margin: 100px auto 80px;
 	}
 
 	.content_background {

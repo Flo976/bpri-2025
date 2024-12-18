@@ -10,8 +10,8 @@ export default class AppMagneticCursor {
 
     this.cursor = this.options.cursorElement || this.createDefaultCursor();
     this.magneticElements = document.querySelectorAll(this.options.magneticSelector);
-    this.cursorPos = { x: 0, y: 0 };
-    this.targetPos = { x: 0, y: 0 };
+    this.cursorPos = { x: -this.cursor.offsetWidth, y: -this.cursor.offsetHeight };
+    this.targetPos = { x: -this.cursor.offsetWidth, y: -this.cursor.offsetHeight };
     this.hoveringMagneticElement = null; // Suivre l'élément magnétique sous le curseur
 
     // Attendre que le curseur soit ajouté au DOM pour initialiser ses dimensions
@@ -49,6 +49,7 @@ export default class AppMagneticCursor {
     document.addEventListener("mousemove", (e) => {
       this.targetPos.x = e.clientX;
       this.targetPos.y = e.clientY;
+      this.updateCursor()
 
       // Détecter si le curseur est au-dessus d'un élément magnétique
       this.hoveringMagneticElement = null; // Réinitialiser
@@ -94,22 +95,19 @@ export default class AppMagneticCursor {
   }
 
   animateCursor() {
-    const updateCursor = () => {
+    this.updateCursor();
+  }
+
+  updateCursor(){
       // Interpolation pour le mouvement fluide vers la position de la souris
       this.cursorPos.x += (this.targetPos.x - this.cursorPos.x) * this.options.friction;
       this.cursorPos.y += (this.targetPos.y - this.cursorPos.y) * this.options.friction;
 
       // Si le curseur est au-dessus d'un élément magnétique, se déplacer au centre de l'élément
       if (this.hoveringMagneticElement) {
-        const rect = this.hoveringMagneticElement.getBoundingClientRect();
-        const elementCenter = {
-          x: rect.left + rect.width / 2,
-          y: rect.top + rect.height / 2,
-        };
-
-        // Interpolation fluide vers le centre de l'élément magnétique
-        this.cursorPos.x += (elementCenter.x - this.cursorPos.x) * 0.4; // Plus de fluidité (ajustez ce facteur)
-        this.cursorPos.y += (elementCenter.y - this.cursorPos.y) * 0.4;
+        this.cursor.classList.add('hover');
+      } else {
+        this.cursor.classList.remove('hover');
       }
 
       // Appliquer la transformation CSS pour déplacer le curseur
@@ -123,9 +121,15 @@ export default class AppMagneticCursor {
         // Réafficher le curseur si dans les limites de l'écran
         this.cursor.style.opacity = "1";
       }
-
-      requestAnimationFrame(updateCursor);
     };
-    updateCursor();
-  }
 }
+
+// Initialiser quand le DOM est chargé
+window.addEventListener("load", () => {
+    window.appCursors = new AppMagneticCursor({
+        cursorElement: document.getElementById("cursor"),
+        magneticSelector: ".magnetic", // Spécifiez le sélecteur des éléments magnétiques
+        strength: 0.3, // Ajustez la force d'attraction
+        friction: 1, // Ajustez la friction
+      });   
+});
