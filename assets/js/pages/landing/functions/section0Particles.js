@@ -1,6 +1,5 @@
 //import appParticles from "../../../common/functions/appParticles.js";
 import AppParticles from "../classes/AppParticles.js";
-import AppStarParticles from "../classes/AppStarParticles.js";
 
 function section0Particles() {
 	// initialize les fonds particle
@@ -20,14 +19,14 @@ function section0Particles() {
             [0, 34]
         ],
         colors: ["#D4AF37"],
-        offsetStartTime: 5,
+        offsetStartTime: 10,
     })
     window.section0BackgroundCanvasParticle.animate();
 
     // initialize les fonds particle
     window.yearParticles = new AppParticles({
         canvasId: "yearCanvas",
-        dotSize: 4.1,
+        dotSize: 4,
         spacing: 8.5,
         moveType: "poetic",
         animationType: "sparkleAndWaveY",
@@ -40,7 +39,8 @@ function section0Particles() {
             [0, 100],
             [0, 34]
         ],
-        colors: ["#D4AF37"]
+        colors: ["#D4AF37"],
+        offsetStartTime: 5,
     })
     window.yearParticles.animate();
 

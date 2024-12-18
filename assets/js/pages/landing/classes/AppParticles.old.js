@@ -134,10 +134,10 @@ export default class AppParticles {
           targetY: yPos,
           targetSize: this.options.dotSize, // Taille finale
           currentSize: 0, // Taille initiale
-          opacity: 0, // Opacité initiale
+          opacity: 0.001, // Opacité initiale
           targetOpacity: 1, // Opacité finale
-          fadeSpeed: 1, // Vitesse aléatoire d'apparition
-          sizeSpeed: 0.5, // Vitesse aléatoire de croissance
+          fadeSpeed: 0.5, // Vitesse aléatoire d'apparition
+          sizeSpeed: 0.09, // Vitesse aléatoire de croissance
           startTime: index * this.options.offsetStartTime, // Délai aléatoire pour chaque pastille
           color,
           offset: Math.random() * Math.PI * 2,
@@ -175,7 +175,7 @@ export default class AppParticles {
   }
 
   updateDots() {
-    const time = Date.now();
+    const time = Date.now() * 0.002;
     const amplitude = 2;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -265,7 +265,7 @@ export default class AppParticles {
     }
 
     const now = performance.now();
-    if (now - this.lastRenderTime < 64) {
+    if (now - this.lastRenderTime < 32) {
       requestAnimFrame(this.animate.bind(this));
       return;
     }
@@ -281,7 +281,32 @@ export default class AppParticles {
         name: "sparkleAndWaveY",
         sizeFunction: (time, dot, amplitude) => {
           if (!this.dotsReached) {
-            return this.options.dotSize;
+            amplitude = 1;
+            const waveOffset = dot.targetY / (this.options.spacing * 2);
+            const sparkleFactor = 1;
+            const size =
+              (this.options.dotSize +
+                Math.sin(time * this.options.waveFrequency + waveOffset) *
+                  amplitude) *
+              sparkleFactor;
+            return size;
+          } else if (dot.currentSize !== this.options.dotSize) {
+            // Ajuster progressivement la taille pour converger vers this.options.dotSize
+            const adjustmentSpeed = 0.05; // Vitesse d'ajustement
+            if (dot.currentSize > this.options.dotSize) {
+              // Réduction progressive
+              dot.currentSize = Math.max(
+                dot.currentSize - adjustmentSpeed,
+                this.options.dotSize,
+              );
+            } else {
+              // Augmentation progressive
+              dot.currentSize = Math.min(
+                dot.currentSize + adjustmentSpeed,
+                this.options.dotSize,
+              );
+            }
+            return dot.currentSize;
           } else {
             const waveOffset = dot.targetX / (this.options.spacing * 3);
             const sparkleFactor = Math.random() < 0.01 ? 1.1 : 1; // Éclat rare
@@ -314,6 +339,7 @@ export default class AppParticles {
                 dot.icolor = 0.5;
                 dot.dcolor = 1;
             }
+             //opacity = 0.5 + 0.3 * Math.sin(time * Math.random() * 500);
              // Variation douce de la couleur
             if (dot.dcolor === 1 && dot.icolor < 30) {
                 dot.icolor += 0.1;
