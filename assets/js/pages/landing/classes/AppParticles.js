@@ -55,7 +55,7 @@ export default class AppParticles {
     this.transitionDuration = 1000; // Durée de la transition en ms
     this.styles = this.getAnimations();
 
-    //this.initVisibilityObserver();
+    this.initVisibilityObserver();
     this.createDots();
   }
 

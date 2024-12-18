@@ -19,7 +19,7 @@ function section0Particles() {
             [0, 34]
         ],
         colors: ["#D4AF37"],
-        offsetStartTime: 10,
+        offsetStartTime: 2,
     })
     window.section0BackgroundCanvasParticle.animate();
 
@@ -40,7 +40,7 @@ function section0Particles() {
             [0, 34]
         ],
         colors: ["#D4AF37"],
-        offsetStartTime: 5,
+        offsetStartTime: 1,
     })
     window.yearParticles.animate();
 

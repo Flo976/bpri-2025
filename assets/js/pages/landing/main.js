@@ -101,7 +101,7 @@ function main() {
     console.info("window.innerHeight", window.innerHeight);
 
     section0Particles();
-    initMySwiper();
+    //initMySwiper();
 }
 
 /**

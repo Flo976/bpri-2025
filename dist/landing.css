@@ -406,52 +406,43 @@
   position: relative;
 }
 
-.swiper.sections_swiper {
-  position: relative;
-  height: 100vh;
-  min-height: 800px;
-  width: 100%;
-}
-.swiper.sections_swiper .swiper-wrapper {
-  position: relative;
-}
-.swiper.sections_swiper .swiper-slide {
-  position: relative;
-  transition: transform 0.5s ease-in-out !important;
-}
-.swiper.sections_swiper .section {
+.sections {
   position: relative;
   width: 100%;
-  height: 100%;
+  overflow-x: hidden;
+}
+.sections .section {
+  position: relative;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
-.swiper.sections_swiper .section.red {
+.sections .section.red {
   background: #f00;
 }
-.swiper.sections_swiper .section.green {
+.sections .section.green {
   background: #0f0;
 }
-.swiper.sections_swiper .section.blue {
+.sections .section.blue {
   background: #00f;
 }
-.swiper.sections_swiper .section .mask_top {
+.sections .section .mask_top {
   position: absolute;
   width: 145%;
   top: -28px;
   left: -34%;
   height: auto;
 }
-.swiper.sections_swiper .section .badge_logo {
+.sections .section .badge_logo {
   position: absolute;
   top: 0px;
   width: 125px;
   height: auto;
 }
-.swiper.sections_swiper .section .section_content {
+.sections .section .section_content {
   width: 100%;
-  height: 100%;
   /*background: red;*/
   z-index: 1;
   position: relative;

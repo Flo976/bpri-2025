@@ -3,28 +3,18 @@
 @import "./sections/section1";
 @import "./sections/section2";
 
-.swiper.sections_swiper {
+.sections {
     position: relative;
-    height: 100vh;
-    min-height: 800px;
     width: 100%;
-
-    .swiper-wrapper {
-        position: relative;
-    }
-
-    .swiper-slide {
-        position: relative;
-        transition: transform 0.5s ease-in-out !important;
-    }
+    overflow-x: hidden;
 
     .section {
         position: relative;
         width: 100%;
-        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
 
         &.red {
             background: #f00;
@@ -55,7 +45,6 @@
 
         .section_content {
             width: 100%;
-            height: 100%;
             /*background: red;*/
             z-index: 1;
             position: relative;
