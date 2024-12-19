@@ -19,33 +19,135 @@
 
     .container {
         position: relative;
-        max-width: 1455px;
+        @include propriete_x(
+            max-width,
+            1455px,
+            (
+                "1728px": 84.201vw,
+                "991px": 100vw,
+                "768px": 100vw,
+                "480px": 100vw,
+            )
+        );
     }
 
     .cols {
         position: relative;
         display: flex;
+        @include propriete_x(
+            flex-wrap,
+            null,
+            (
+                "991px": nowrap,
+                "768px": wrap,
+            )
+        );
+        @include propriete_x(
+            padding,
+            null,
+            (
+                "991px": 0 0 6.054vw,
+                "768px": 0 0 7.813vw,
+                "480px": 0 0 12.5vw,
+            )
+        );
     }
 
     .col_left {
         position: relative;
-        padding: 0 48px 38px;
+        @include propriete_x(
+            padding,
+            0 48px 38px,
+            (
+                "1728px": 0 2.778vw 2.199vw,
+                "991px": 0 1.514vw 1.11vw,
+                "768px": 0 1.953vw 1.432vw,
+                "480px": 0 3.125vw 2.292vw,
+            )
+        );
+        @include propriete_x(
+            min-width,
+            null,
+            (
+                "991px": initial,
+                "768px": 100%,
+            )
+        );
+        @include propriete_x(
+            justify-content,
+            null,
+            (
+                "768px": center,
+            )
+        );
+        @include propriete_x(
+            display,
+            null,
+            (
+                "991px": flex,
+            )
+        );
 
         .content {
             position: relative;
-            min-width: 519px;
             display: flex;
             justify-content: end;
-            padding: 27px 22px 45px 45px;
+            @include propriete_x(
+                min-width,
+                519px,
+                (
+                    "1728px": 30.035vw,
+                    "991px": 34.309vw,
+                    "768px": 44.271vw,
+                    "480px": 70.833vw,
+                )
+            );
+            @include propriete_x(
+                padding,
+                27px 22px 45px 45px,
+                (
+                    "1728px": 1.563vw 1.273vw 2.604vw 2.604vw,
+                    "991px": 2.725vw 2.22vw 4.541vw 4.541vw,
+                    "768px": 3.516vw 2.865vw 5.859vw 5.859vw,
+                    "480px": 5.625vw 4.583vw 9.375vw 9.375vw,
+                )
+            );
         }
 
         .canvas_wrapper {
             position: absolute;
             margin: 0;
             transform: rotate(4.09deg);
-            width: 450px;
-            height: 635px;
-            right: 42px;
+            @include propriete_x(
+                width,
+                450px,
+                (
+                    "1728px": 26.042vw,
+                    "991px": 28.052vw,
+                    "768px": 36.198vw,
+                    "480px": 57.917vw,
+                )
+            );
+            @include propriete_x(
+                height,
+                635px,
+                (
+                    "1728px": 36.748vw,
+                    "991px": 39.354vw,
+                    "768px": 50.781vw,
+                    "480px": 81.25vw,
+                )
+            );
+            @include propriete_x(
+                right,
+                42px,
+                (
+                    "1728px": 2.431vw,
+                    "991px": 3.229vw,
+                    "768px": 4.167vw,
+                    "480px": 6.667vw,
+                )
+            );
 
             &::before {
                 content: "";
@@ -72,8 +174,6 @@
 
         .img_wrapper {
             position: relative;
-            width: 425px;
-            height: 592px;
             transform: rotate(4.09deg);
             position: relative;
             mask-image: url("/assets/images/svg/dg_pdp_mask_forme.svg");
@@ -81,8 +181,37 @@
             mask-repeat: no-repeat;
             mask-position: center;
             margin: 0;
-            padding: 4px;
             cursor: pointer;
+            @include propriete_x(
+                width,
+                425px,
+                (
+                    "1728px": 24.595vw,
+                    "991px": 26.236vw,
+                    "768px": 33.854vw,
+                    "480px": 54.167vw,
+                )
+            );
+            @include propriete_x(
+                height,
+                592px,
+                (
+                    "1728px": 34.259vw,
+                    "991px": 36.529vw,
+                    "768px": 47.135vw,
+                    "480px": 75.417vw,
+                )
+            );
+            @include propriete_x(
+                padding,
+                4px,
+                (
+                    "1728px": 0.231vw,
+                    "991px": 0.404vw,
+                    "768px": 0.521vw,
+                    "480px": 0.833vw,
+                )
+            );
 
             &:hover {
                 &::before {
@@ -142,7 +271,16 @@
 
     .col_right {
         position: relative;
-        padding: 0 48px;
+        @include propriete_x(
+            padding,
+            0 48px,
+            (
+                "1728px": 0 2.778vw,
+                "991px": 0 1.514vw,
+                "768px": 0 1.953vw,
+                "480px": 0 3.125vw,
+            )
+        );
 
         .content {
             position: relative;
@@ -152,7 +290,6 @@
     .title {
         position: relative;
         font-weight: 700;
-        font-size: 46px;
         line-height: 140%;
         background: linear-gradient(
             269.88deg,
@@ -164,12 +301,40 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
         text-fill-color: transparent;
-        margin: 0 0 30px;
+        @include propriete_x(
+            font-size,
+            46px,
+            (
+                "1728px": 2.662vw,
+                "991px": 3.229vw,
+                "768px": 4.167vw,
+                "480px": 6.667vw,
+            )
+        );
+        @include propriete_x(
+            margin,
+            0 0 30px,
+            (
+                "1728px": 0 0 1.736vw,
+                "991px": 0 0 2.018vw,
+                "768px": 0 0 2.604vw,
+                "480px": 0 0 4.167vw,
+            )
+        );
     }
 
     .description {
         position: relative;
-        margin: 0 0 40px;
+        @include propriete_x(
+            margin,
+            0 0 40px,
+            (
+                "1728px": 0 0 2.315vw,
+                "991px": 0 0 2.523vw,
+                "768px": 0 0 3.255vw,
+                "480px": 0 0 5.208vw,
+            )
+        );
 
         p {
             position: relative;
@@ -182,7 +347,6 @@
         .username {
             position: relative;
             font-weight: 700;
-            font-size: 30px;
             line-height: 115%;
             background: linear-gradient(
                 269.88deg,
@@ -194,12 +358,21 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
+            @include propriete_x(
+                font-size,
+                30px,
+                (
+                    "1728px": 1.736vw,
+                    "991px": 2.119vw,
+                    "768px": 2.734vw,
+                    "480px": 4.375vw,
+                )
+            );
         }
 
         .userjob {
             position: relative;
             font-weight: 400;
-            font-size: 16px;
             line-height: 119%;
             background: linear-gradient(
                 269.88deg,
@@ -211,6 +384,16 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
+            @include propriete_x(
+                font-size,
+                16px,
+                (
+                    "1728px": 0.926vw,
+                    "991px": 1.413vw,
+                    "768px": 1.823vw,
+                    "480px": 2.917vw,
+                )
+            );
         }
     }
 }

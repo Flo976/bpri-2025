@@ -17,11 +17,29 @@
         overflow: hidden;
 
         &:not(.section0) {
-            margin: -250px 0 0;
+            @include propriete_x(
+                margin,
+                -250px 0 0,
+                (
+                    "1728px": -14.468vw 0 0,
+                    "991px": -25.227vw 0 0,
+                    "768px": -32.552vw 0 0,
+                    "480px": -52.083vw 0 0,
+                )
+            );
         }
 
         &:not(.section2) {
-            padding: 0 0 250px;
+            @include propriete_x(
+                padding,
+                0 0 250px,
+                (
+                    "1728px": 0 0 14.468vw,
+                    "991px": 0 0 25.227vw,
+                    "768px": 0 0 32.552vw,
+                    "480px": 0 0 52.083vw,
+                )
+            );
         }
 
         &.red {
@@ -42,24 +60,67 @@
             top: 0;
             left: -34%;
             height: auto;
+            @include propriete_x(
+                width,
+                null,
+                (
+                    "768px": 260%,
+                    "480px": 450%,
+                )
+            );
+            @include propriete_x(
+                left,
+                null,
+                (
+                    "768px": -70%,
+                    "480px": -124%,
+                )
+            );
         }
 
         .badge_logo {
             position: absolute;
-            top: 17px;
-            width: 125px;
             height: auto;
+            @include propriete_x(
+                top,
+                0.984vw,
+                (
+                    "1728px": 0.984vw,
+                    "991px": 0.505vw,
+                    "768px": 2.995vw,
+                    "480px": 5.833vw,
+                )
+            );
+            @include propriete_x(
+                width,
+                7.234vw,
+                (
+                    "1728px": 7.234vw,
+                    "991px": 8.577vw,
+                    "768px": 11.068vw,
+                    "480px": 17.708vw,
+                )
+            );
         }
 
         .section_content {
             width: 100%;
-            /*background: red;*/
             z-index: 1;
             position: relative;
-            mask-image: url("/assets/images/svg/section_card_mask_with_bg_white.svg");
-            mask-size: 145%;
-            mask-position: 76% -28px;
-            padding: 250px 0 0;
+            @include propriete_x(
+                padding,
+                /*250px 0 0,*/
+                14.468vw 0 0,
+                (
+                    "1728px": 14.468vw 0 0,
+                    "991px": 15.641vw 0 0,
+                    "768px": 20.182vw 0 0,
+                    "480px": 32.292vw 0 0,
+                )
+            );
+            /*background: red;*/ /*mask-image: url("/assets/images/svg/section_card_mask_with_bg_white.svg");
+             mask-size: 145%;
+             mask-position: 76% -28px;*/
         }
     }
 
@@ -68,6 +129,6 @@
     }
 
     .modal.user_info_modal {
-        position: absolute!important;
+        position: absolute !important;
     }
 }

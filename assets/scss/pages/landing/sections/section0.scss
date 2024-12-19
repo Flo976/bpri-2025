@@ -8,7 +8,7 @@
 
 	.container {
 		position: relative;
-		padding: 0;
+		/*padding: 0;*/
 		display: flex;
 	}
 
@@ -17,9 +17,36 @@
 		display: flex;
 		height: auto;
 		width: 100%;
-		max-width: 1460px;
-		min-height: 766px;
-		margin: 100px auto 80px;
+		@include propriete_x(
+			max-width,
+			1460px,
+			(
+				"1728px": 84.491vw,
+				"991px": 100vw,
+				"768px": 100vw,
+				"480px": 100vw,
+			)
+		);
+		@include propriete_x(
+			min-height,
+			766px,
+			(
+				"1728px": 44.329vw,
+				"991px": 60.545vw,
+				"768px": 68.359vw,
+				"480px": 166vw,
+			)
+		);
+		@include propriete_x(
+			margin,
+			100px auto 80px,
+			(
+				"1728px": 5.787vw auto 4.63vw,
+				"991px": 10.091vw auto 8.073vw,
+				"768px": 13.021vw auto 4.948vw,
+				"480px": 20.833vw auto 7.917vw,
+			)
+		);
 	}
 
 	.content_background {
@@ -33,11 +60,20 @@
 
 	#section0BackgroundCanvas {
 		position: relative;
-		mask-image: url("/assets/images/svg/header_card_mask.svg");
+		mask-image: url("/assets/images/svg/header_card_mask.svg"),
+			url("/assets/images/svg/header_card_mask.svg");
 		mask-size: 100%;
 		mask-repeat: no-repeat;
-		mask-position: center;
+		mask-position: center top, center bottom;
 		mask-mode: luminance;
+		mask-composite: add;
+		@include propriete_x(
+			mask-image,
+			null,
+			(
+				"480px": url("/assets/images/svg/header_card_mask_sm.svg"),
+			)
+		);
 	}
 
 	.content_middle_wrapper {
@@ -48,7 +84,6 @@
 			#ffffff 44.24%,
 			rgba(255, 255, 255, 0) 100%
 		);
-		/*background: none;*/
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
@@ -56,27 +91,76 @@
 		height: 100%;
 		align-items: center;
 		min-height: inherit;
+		/*background: none;*/
+		@include propriete_x(
+			background,
+			null,
+			(
+				"480px":
+					radial-gradient(
+						77.03% 81.97% at 50% 50.04%,
+						#ffffff 44.24%,
+						rgba(255, 255, 255, 0) 100%
+					),
+			)
+		);
 	}
 
 	.content_middle {
 		position: relative;
 		margin: auto;
-		background: #fff;
-		/*background: none;*/
+		/*background: #fff;*/
 		border-radius: 50%;
-		padding: 85px 71px 0;
 		display: flex;
 		flex-wrap: wrap;
-		max-width: 1045px;
 		justify-content: center;
+		@include propriete_x(
+			padding,
+			85px 71px 0,
+			(
+				"1728px": 4.919vw 4.109vw 0,
+				"991px": 8.577vw 7.164vw 0,
+				"768px": 11.068vw 9.245vw 0,
+				"480px": 17.708vw 7.292vw 0,
+			)
+		);
+		@include propriete_x(
+			max-width,
+			1045px,
+			(
+				"1728px": 60.475vw,
+				"991px": 100vw,
+				"768px": 100vw,
+				"480px": 100vw,
+			)
+		);
+		/*background: none;*/
 	}
 
 	.year {
 		position: relative;
-		width: 843px;
-		height: 238px;
 		margin: 0 auto;
 		overflow: hidden;
+		@include propriete_x(
+			height,
+			240px,
+			(
+				"1728px": 13.889vw,
+				"991px": 16.347vw,
+				"768px": 21.094vw,
+				"480px": 70.208vw,
+			)
+		);
+		@include propriete_x(
+			width,
+			830px,
+			(
+				"1728px": 48.032vw,
+				"991px": 56.509vw,
+				"768px": 72.917vw,
+				"480px": 56.25vw,
+			)
+		);
 
 		canvas {
 			position: absolute;
@@ -86,17 +170,20 @@
 			mask-size: 100%;
 			mask-repeat: no-repeat;
 			mask-position: center;
+			@include propriete_x(
+				mask-image,
+				null,
+				(
+					"480px": url("/assets/images/svg/2025_mask_sm.svg"),
+				)
+			);
 		}
 	}
 
 	.description {
 		position: relative;
-		max-width: 703px;
-		font-size: 29px;
 		line-height: 130%;
-		margin: 75px auto 0;
 		text-align: center;
-		padding: 0 15px;
 		background: linear-gradient(
 			269.88deg,
 			#d7bd64 3.15%,
@@ -107,6 +194,46 @@
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
 		text-fill-color: transparent;
+		@include propriete_x(
+			max-width,
+			703px,
+			(
+				"1728px": 40.683vw,
+				"991px": 52.472vw,
+				"768px": 67.708vw,
+				"480px": 100vw,
+			)
+		);
+		@include propriete_x(
+			font-size,
+			29px,
+			(
+				"1728px": 1.678vw,
+				"991px": 1.816vw,
+				"768px": 2.344vw,
+				"480px": 3.75vw,
+			)
+		);
+		@include propriete_x(
+			margin,
+			75px auto 0,
+			(
+				"1728px": 4.34vw auto 0,
+				"991px": 4.541vw auto 0,
+				"768px": 5.859vw auto 0,
+				"480px": 9.375vw auto 0,
+			)
+		);
+		@include propriete_x(
+			padding,
+			0 15px,
+			(
+				"1728px": 0 0.868vw,
+				"991px": 0 1.514vw,
+				"768px": 0 1.953vw,
+				"480px": 0 3.125vw,
+			)
+		);
 
 		strong {
 			font-weight: 900;

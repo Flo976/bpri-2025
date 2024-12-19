@@ -66,7 +66,7 @@ export default class AppMagneticCursor {
       });
 
       // Appliquer l'effet magnétique aux éléments
-      this.magneticElements.forEach((el) => this.applyMagneticEffect(el, e));
+      //this.magneticElements.forEach((el) => this.applyMagneticEffect(el, e));
     });
   }
 

@@ -25,7 +25,6 @@
 }
 
 @keyframes heartbeat {
-
     0%,
     100% {
         transform: scale(1);
@@ -33,7 +32,6 @@
 
     50% {
         transform: scale(0.8);
-        /* Retour progressif à la normale */
     }
 }
 
@@ -42,8 +40,6 @@
  */
 html {
     position: relative;
-    /*height: var(--iframe-100vh);*/
-    //cursor: url('/assets/images/webp/cursor_default.png'), auto;
 
     body {
         width: 100%;
@@ -129,7 +125,7 @@ html {
         min-height: 100vh;
         align-items: center;
 
-        &>* {
+        & > * {
             width: 100%;
         }
     }
@@ -151,12 +147,40 @@ body {
     background-color: #fff;
     color: #928b76;
     font-weight: 400;
-    font-size: 18px;
     line-height: 150%;
+    @include propriete_x(
+        font-size,
+        18px,
+        (
+            "1728px": 1.042vw,
+            "991px": 1.413vw,
+            "768px": 1.823vw,
+            "480px": 2.917vw,
+        )
+    );
 
     .container {
         position: relative;
-        max-width: 1728px;
+        @include propriete_x(
+            max-width,
+            1728px,
+            (
+                "1728px": 100vw,
+                "991px": 100vw,
+                "768px": 100vw,
+                "480px": 100vw,
+            )
+        );
+        @include propriete_x(
+            padding,
+            0 30px,
+            (
+                "1728px": 0 1.736vw,
+                "991px": 0 3.027vw,
+                "768px": 0 3.906vw,
+                "480px": 0 6.25vw,
+            )
+        );
     }
 
     h1,
@@ -192,7 +216,6 @@ body {
  * For AppAnimateCss
  */
 body {
-
     .rotateIn,
     .bounceIn,
     .fadeIn,
