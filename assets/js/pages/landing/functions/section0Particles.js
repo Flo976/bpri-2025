@@ -7,45 +7,18 @@ function section0Particles() {
         canvasId: "section0BackgroundCanvas",
         dotSize: 8,
         spacing: 25,
-        moveType: "poetic",
-        animationType: "sparkleAndWaveY",
-        
-        polygonPath: [
-            [32, 0],
-            [100, 0],
-            [100, 69],
-            [70, 100],
-            [0, 100],
-            [0, 34]
-        ],
-        colors: ["#D4AF37"],
+        colors: ["#D8BD64"],
         offsetStartTime: 2,
-        xxx: true,
-        offsetStartPositionX: 9,
-        offsetStartPositionY: 12,
     })
     window.section0BackgroundCanvasParticle.animate();
 
     // initialize les fonds particle
     window.yearParticles = new AppParticles({
         canvasId: "yearCanvas",
-        dotSize: 8,
-        spacing: 25,
-        moveType: "poetic",
-        animationType: "sparkleAndWaveY",
-        
-        polygonPath: [
-            [32, 0],
-            [100, 0],
-            [100, 69],
-            [70, 100],
-            [0, 100],
-            [0, 34]
-        ],
-        colors: ["#D4AF37"],
+        dotSize: 4,
+        spacing: 8.5,
+        colors: ["#D8BD64"],
         offsetStartTime: 1,
-        offsetStartPositionX: 0.1,
-        offsetStartPositionY: 0.1,
     })
     window.yearParticles.animate();
 
@@ -54,20 +27,9 @@ function section0Particles() {
         canvasId: "dg_img_canvas",
         dotSize: 8,
         spacing: 25,
-        moveType: "poetic",
-        animationType: "sparkleAndWaveY",
-        
-        polygonPath: [
-            [32, 0],
-            [100, 0],
-            [100, 69],
-            [70, 100],
-            [0, 100],
-            [0, 34]
-        ],
-        colors: ["#D4AF37"],
+        colors: ["#D8BD64"],
         offsetStartPositionX: 5,
-        offsetStartPositionY: 1.5,
+        offsetStartPositionY: 3,
     })
     window.dgImgParticles.animate();
 
@@ -76,18 +38,7 @@ function section0Particles() {
         canvasId: "section2_bg_canvas",
         dotSize: 8,
         spacing: 25,
-        moveType: "poetic",
-        animationType: "sparkleAndWaveY",
-        
-        polygonPath: [
-            [32, 0],
-            [100, 0],
-            [100, 69],
-            [70, 100],
-            [0, 100],
-            [0, 34]
-        ],
-        colors: ["#D4AF37"]
+        colors: ["#D8BD64"]
     })
     window.section2BgParticles.animate();
 }
