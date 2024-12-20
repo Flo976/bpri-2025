@@ -5,13 +5,17 @@ import AppVideo from "../../../common/classes/AppMagnificPopup.min.js";
  */
 function initializeMagnificPopup() {
     const screenWidth = window.innerWidth;
+    const contenBottom = document.querySelector(".section2 .content_bottom");
     let prependTo = null;
 
     // Determine the element to prepend the modal based on screen width.
-    if (screenWidth <= 991) {
+    if (
+        screenWidth <= 991 ||
+        contenBottom.clientHeight <= 650
+    ){
         prependTo = document.querySelector(".section2");
     } else {
-        prependTo = document.querySelector(".section2 .content_bottom");
+        prependTo = contenBottom;
     }
 
     // Initialize Magnific Popup for each video gallery in .section2
