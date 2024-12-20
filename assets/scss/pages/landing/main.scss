@@ -19,7 +19,7 @@
         &:not(.section0) {
             @include propriete_x(
                 margin,
-                -250px 0 0,
+                calc(-250px - var(--diff-mask-section)) 0 0,
                 (
                     "1728px": -14.468vw 0 0,
                     "991px": -25.227vw 0 0,
@@ -32,7 +32,7 @@
         &:not(.section2) {
             @include propriete_x(
                 padding,
-                0 0 250px,
+                0 0 calc(250px + var(--diff-mask-section)),
                 (
                     "1728px": 0 0 14.468vw,
                     "991px": 0 0 25.227vw,
@@ -83,7 +83,7 @@
             height: auto;
             @include propriete_x(
                 top,
-                0.984vw,
+                calc(17px + var(--diff-mask-section)),
                 (
                     "1728px": 0.984vw,
                     "991px": 0.505vw,
@@ -93,7 +93,8 @@
             );
             @include propriete_x(
                 width,
-                7.234vw,
+                125px,
+                /*7.234vw,*/
                 (
                     "1728px": 7.234vw,
                     "991px": 8.577vw,
@@ -109,8 +110,7 @@
             position: relative;
             @include propriete_x(
                 padding,
-                /*250px 0 0,*/
-                14.468vw 0 0,
+                calc(250px + var(--diff-mask-section)) 0 0,
                 (
                     "1728px": 14.468vw 0 0,
                     "991px": 15.641vw 0 0,

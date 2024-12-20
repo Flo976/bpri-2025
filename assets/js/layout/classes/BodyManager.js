@@ -42,8 +42,25 @@ export default class BodyManager {
         return `${valPixel}px`;
     }
 
+    calcVwInPx(percent) {
+        const screenWidth = window.innerWidth;
+        const valPixel = (percent * screenWidth) / 100;
+        return `${valPixel}px`;
+    }
+
+    calcDiffMaskSection() {
+        var result = 0;
+        const screenWidth = window.innerWidth;
+        if (screenWidth >= 1728) {
+            result = (screenWidth - 1728) * 0.048;
+        }
+        return `${result}px`;
+    }
+
     setCssVar() {
         $(":root").css("--100vh", this.calcVhInPx(100));
+        $(":root").css("--100vw", this.calcVwInPx(100));
+        //$(":root").css("--diff-mask-section", this.calcDiffMaskSection());
         //$(":root").css("--64vh", calcVhInPx(64));
 
         // height by width

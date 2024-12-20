@@ -454,4 +454,56 @@
             position: relative;
         }
     }
+
+    .wishVideoSwiper {
+        position: relative;
+
+        &.swiper-initialized {
+            .swiper-button-prev,
+            .swiper-button-next {
+                display: flex;
+            }
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            display: none;
+            position: absolute;
+
+            &::after {
+                color: unset;
+                font-weight: 900;
+                background: linear-gradient(
+                    269.88deg,
+                    #d7bd64 3.15%,
+                    #f3e1a7 50.74%,
+                    #d9bd64 98.33%
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-fill-color: transparent;
+                @include propriete_x(
+                    font-size,
+                    40px,
+                    (
+                        "1728px": 2.315vw,
+                        "991px": 4.036vw,
+                        "768px": 5.208vw,
+                        "480px": 8.333vw,
+                    )
+                );
+            }
+        }
+
+        .swiper-button-prev {
+            position: absolute;
+            left: 0;
+        }
+
+        .swiper-button-next {
+            position: absolute;
+            right: 0;
+        }
+    }
 }

@@ -10,12 +10,14 @@
  */
 :root {
     --100vh: 100vh;
+    --100vw: 100vw;
     --primary-color: #ff5c00;
     --primary-hover-color: #cc4900;
     --error-color: #ff5a1a;
     --iframe-100vh: var(--100vh);
     --height-by-width: var(--100vh);
     --animate-delay: 0.5s;
+    --diff-mask-section: calc((100vw - 1728px) * 0.048);
 }
 
 @media (max-width: 780px) {
@@ -155,7 +157,7 @@ body {
             "1728px": 1.042vw,
             "991px": 1.413vw,
             "768px": 1.823vw,
-            "480px": 2.917vw,
+            "480px": 3.750vw,
         )
     );
 
@@ -225,5 +227,33 @@ body {
     .fadeInLeft {
         opacity: 0;
         animation-fill-mode: both;
+    }
+}
+
+/**
+ * For AppAnimateCss
+ */
+body {
+    .mfp-wrap {
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 1043 !important;
+        position: absolute !important;
+        outline: none !important !important;
+        -webkit-backface-visibility: hidden !important;
+    }
+
+    .mfp-bg {
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 1042 !important;
+        overflow: hidden !important;
+        position: fixed !important;
+        background: #0b0b0b !important;
+        opacity: 0.8 !important;
     }
 }
