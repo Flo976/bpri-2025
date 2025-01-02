@@ -121,7 +121,7 @@
 				"1728px": 4.919vw 4.109vw 0,
 				"991px": 8.577vw 7.164vw 0,
 				"768px": 11.068vw 9.245vw 0,
-				"480px": 17.708vw 7.292vw 0,
+				"480px": 9.708vw 7.292vw 0,
 			)
 		);
 		@include propriete_x(
@@ -196,12 +196,12 @@
 		text-fill-color: transparent;
 		@include propriete_x(
 			max-width,
-			703px,
+			100%,
 			(
-				"1728px": 40.683vw,
-				"991px": 52.472vw,
-				"768px": 67.708vw,
-				"480px": 100vw,
+				"1728px": 100%,
+				"991px": 100%,
+				"768px": 100%,
+				"480px": 100%,
 			)
 		);
 		@include propriete_x(
@@ -237,6 +237,16 @@
 
 		strong {
 			font-weight: 900;
+		}
+
+		.sm-only {
+			@include propriete_x(
+				display,
+				none,
+				(
+					"480px": initial,
+				)
+			);
 		}
 	}
 }

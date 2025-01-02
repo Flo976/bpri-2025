@@ -38,7 +38,7 @@ export default class AppParticles {
     };
 
     this.dots = []; // Tableau pour stocker les points animés
-    this.isCanvasVisible = false; // Indique si le canvas est visible dans la fenêtre
+    this.isCanvasVisible = true; // Indique si le canvas est visible dans la fenêtre
 
     // Calcul des dimensions de la grille de points
     this.rows = Math.ceil(this.canvas.height / this.options.spacing);

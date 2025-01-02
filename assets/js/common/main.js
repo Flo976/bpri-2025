@@ -1,4 +1,4 @@
 // Initialiser
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
     // to do
 })
