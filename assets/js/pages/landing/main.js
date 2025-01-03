@@ -9,6 +9,7 @@ function main() {
     window.scrollbarContent?.update();
     window.iFrameResizer?.trigger("resize");
     console.info("window.innerHeight", window.innerHeight);
+    console.info("window.innerWidth", window.innerWidth);
 
     initializeParticles();
     initializeMagnificPopup();

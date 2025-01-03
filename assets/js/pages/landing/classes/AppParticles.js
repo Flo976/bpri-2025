@@ -21,10 +21,9 @@ export default class AppParticles {
     // Préparation du contexte de rendu 2D
     this.ctx = this.canvas.getContext("2d");
     this.parent = this.canvas.parentElement;
-    this.canvas.width = this.parent.offsetWidth;
-    this.canvas.height = this.parent.offsetHeight;
 
     // Initialisation des options avec des valeurs par défaut
+    this.params = params;
     this.options = {
       dotSize: params.dotSize || 4.5, // Taille des points
       spacing: params.spacing || 8, // Espacement entre les points
@@ -40,10 +39,6 @@ export default class AppParticles {
     this.dots = []; // Tableau pour stocker les points animés
     this.isCanvasVisible = true; // Indique si le canvas est visible dans la fenêtre
 
-    // Calcul des dimensions de la grille de points
-    this.rows = Math.ceil(this.canvas.height / this.options.spacing);
-    this.cols = Math.ceil(this.canvas.width / this.options.spacing);
-
     // Conversion des couleurs hexadécimales en format RGB
     this.parsedColors = this.options.colors.map((color) => {
       const r = parseInt(color.slice(1, 3), 16);
@@ -57,8 +52,45 @@ export default class AppParticles {
     this.styles = this.getAnimations(); // Obtenir les styles d'animation
     this.dotPaths = this.getDotCardPaths(); // Obtenir les chemins pour dessiner les points
 
+    // attendre que la dimension du canvas est bien definie
+    this.waitForCanvasSize().then(() => {
+      this.canvas.width = this.parent.offsetWidth;
+      this.canvas.height = this.parent.offsetHeight;
+      this.init(); // Initialisation des autres fonctionnalités
+    }).catch(() => {
+      console.error(`Canvas with ID \"${this.canvasId}\" size error after retries.`);
+    });
+  }
+
+  waitForCanvasSize(maxRetries = 10, interval = 100) {
+    return new Promise((resolve, reject) => {
+      let retries = 0;
+      const checkSize = () => {
+        if (this.parent.offsetWidth > 0 && this.parent.offsetHeight > 0) {
+          resolve();
+        } else if (retries >= maxRetries) {
+          reject();
+        } else {
+          retries++;
+          console.info(`Retrie with ID \"${this.canvasId} ${retries}\"`)
+          setTimeout(checkSize, interval);
+        }
+      };
+      checkSize();
+    });
+  }
+
+  init() {
+    const { onInit = () => {} } = this.params;
+
+    // Calcul des dimensions de la grille de points
+    this.rows = Math.ceil(this.canvas.height / this.options.spacing);
+    this.cols = Math.ceil(this.canvas.width / this.options.spacing);
+
     this.initVisibilityObserver(); // Initialiser l'observateur de visibilité
     this.createDots(); // Créer les points
+
+    onInit();
   }
 
   initVisibilityObserver() {
