@@ -338,6 +338,16 @@
 
         p {
             position: relative;
+             @include propriete_x(
+                margin-bottom,
+                10px,
+                (
+                    "1728px": 0.579vw,
+                    "991px": 1.009vw,
+                    "768px": 1.302vw,
+                    "480px": 2.083vw,
+                )
+            );
         }
     }
 
