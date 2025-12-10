@@ -589,6 +589,7 @@ class AnimationFactory {
 
         chars.forEach((char, index) => {
             const offset = index * perCharOffset;
+            const isLastChar = index === totalChars - 1;
 
             viewportController.add({
                 trigger: triggerEl,
@@ -596,7 +597,15 @@ class AnimationFactory {
                 from: { y: 100, opacity: 0 },
                 to: { y: 0, opacity: 1 },
                 start: start - offset,
-                end: end - offset
+                end: end - offset,
+                // Nettoyer les styles quand le dernier caractère termine
+                onLeave: isLastChar ? () => {
+                    chars.forEach(c => {
+                        c.style.willChange = "auto";
+                        c.style.transform = "none";
+                        c.style.opacity = "1";
+                    });
+                } : null
             });
         });
     }
@@ -627,12 +636,31 @@ class AnimationFactory {
             if (this.mode === "iframe") {
                 this._createIframeTextReveal(triggerEl, chars, { start, end, charOffset });
             } else {
+                // Flag pour tracker si le nettoyage a été fait
+                let cleaned = false;
+
+                const cleanupStyles = () => {
+                    if (cleaned) return;
+                    cleaned = true;
+                    chars.forEach(char => {
+                        // Supprimer willChange pour éviter les problèmes de rendu
+                        char.style.willChange = "auto";
+                        // Forcer transform à none pour éviter les valeurs résiduelles
+                        char.style.transform = "none";
+                        char.style.opacity = "1";
+                    });
+                };
+
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: triggerEl,
                         start: `top ${start}%`,
                         end: `top ${end}%`,
-                        scrub: 0.3
+                        scrub: 0.3,
+                        // Nettoyer quand on sort de la zone (animation terminée)
+                        onLeave: cleanupStyles,
+                        // Réinitialiser le flag si on revient en arrière
+                        onEnterBack: () => { cleaned = false; }
                     }
                 });
 
@@ -641,7 +669,8 @@ class AnimationFactory {
                     opacity: 1,
                     duration: 1,
                     stagger: 0.02,
-                    ease: "none"
+                    ease: "none",
+                    force3D: false // Éviter les matrix3d pour un rendu plus propre
                 });
 
                 this.triggers.push(tl);

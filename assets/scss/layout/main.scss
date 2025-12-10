@@ -163,28 +163,36 @@ body {
 }
 
 /**
- * For AppAnimateCss
+ * For Magnific Popup
+ * Utilise des variables CSS pour supporter les 2 modes (iframe et sans iframe)
+ * En mode iframe : position fixed + transform translateY pour ne pas affecter la hauteur du document
  */
 body {
+    // Valeurs par défaut (mode sans iframe)
+    --mfp-translate-y: 0;
+    --mfp-height: 100vh;
+
     .mfp-wrap {
+        position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        height: 100% !important;
+        height: var(--mfp-height) !important;
+        transform: translateY(var(--mfp-translate-y)) !important;
         z-index: 1043 !important;
-        position: absolute !important;
-        outline: none !important !important;
+        outline: none !important;
         -webkit-backface-visibility: hidden !important;
     }
 
     .mfp-bg {
+        position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        height: 100% !important;
+        height: var(--mfp-height) !important;
+        transform: translateY(var(--mfp-translate-y)) !important;
         z-index: 1042 !important;
         overflow: hidden !important;
-        position: fixed !important;
         background: #0b0b0b !important;
         opacity: 0.8 !important;
     }

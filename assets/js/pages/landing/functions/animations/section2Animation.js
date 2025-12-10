@@ -34,26 +34,28 @@ const SECTION2_CONFIG = {
             type: ANIMATION_TYPES.ARC,
             container: ".media_item",
             target: "[class*='__stroke']",
-            rotate: true
+            rotate: true,
         },
 
         // Media items - Content fade scale (pour chaque .media_item)
         {
             type: ANIMATION_TYPES.FADE_SCALE,
             container: ".media_item",
-            target: ".round_media_content"
+            target: ".round_media_content",
         },
 
         // Media items - Title text reveal (pour chaque .media_item)
         {
             type: ANIMATION_TYPES.TEXT_REVEAL,
             target: ".media_title",
+            end: 85
         },
 
         // Media items - description text reveal (pour chaque .media_item)
         {
             type: ANIMATION_TYPES.TEXT_REVEAL,
             target: ".media_description",
+            end: 85
         },
 
         // Footer - Curved strokes

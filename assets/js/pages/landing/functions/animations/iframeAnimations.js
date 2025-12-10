@@ -8,7 +8,7 @@ import { gsap } from "gsap";
  */
 
 // Compensation pour le mode iframe (le header du parent décale les seuils)
-const IFRAME_START_COMPENSATION = 10;
+const IFRAME_START_COMPENSATION = 0;
 
 class ViewportAnimationController {
     constructor() {
@@ -22,6 +22,22 @@ class ViewportAnimationController {
             windowHeight: window.innerHeight
         };
         this.parentIFrameReady = false;
+        // Callbacks appelés à chaque update
+        this.updateCallbacks = [];
+    }
+
+    /**
+     * Enregistre un callback appelé à chaque update avec parentInfo
+     * @param {Function} callback - Fonction(parentInfo) appelée à chaque scroll
+     * @returns {Function} - Fonction pour se désinscrire
+     */
+    onUpdate(callback) {
+        this.updateCallbacks.push(callback);
+        // Retourner une fonction de désinscription
+        return () => {
+            const index = this.updateCallbacks.indexOf(callback);
+            if (index > -1) this.updateCallbacks.splice(index, 1);
+        };
     }
 
     /**
@@ -120,6 +136,9 @@ class ViewportAnimationController {
             offsetTop: props.offsetTop || 0,
             windowHeight: props.windowHeight || props.clientHeight || window.innerHeight
         };
+
+        // Appeler les callbacks enregistrés
+        this.updateCallbacks.forEach(cb => cb(this.parentInfo));
 
         // Mettre à jour les animations
         this.animations.forEach(anim => {
