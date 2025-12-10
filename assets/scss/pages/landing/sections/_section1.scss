@@ -1,0 +1,258 @@
+@import "../../../mixing/base";
+@import "../../../mixing/anim_hover";
+
+.section1 {
+    position: relative;
+
+    .app_container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .content {
+        position: relative;
+        width: 100%;
+        @include propriete_x(
+            max-width,
+            800px,
+            (
+                "1118px": 71.556vw,
+                "991px": 80.727vw,
+                "768px": 100vw,
+                "480px": 100vw,
+            )
+        );
+    }
+
+    .content_header_line {
+        position: relative;
+        @include propriete_x(
+            margin,
+            0 0 56px,
+            (
+                "1118px": 0 0 5.009vw,
+                "991px": 0 0 5.651vw,
+                "768px": 0 0 7.292vw,
+                "480px": 0 0 13.542vw,
+                // 0,0,65px
+            )
+        );
+
+        svg {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .content_media {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        @include propriete_x(
+            margin,
+            0 0 56px,
+            (
+                "1118px": 0 0 5.009vw,
+                "991px": 0 0 5.651vw,
+                "768px": 0 0 7.292vw,
+                "480px": 0 0 12.5vw,
+                // 0,0,60px
+            )
+        );
+    }
+
+    .round_media_bloc {
+        position: relative;
+    }
+
+    .content_text {
+        position: relative;
+        text-align: center;
+        @include propriete_x(
+            margin,
+            0 0 56px,
+            (
+                "1118px": 0 0 5.009vw,
+                "991px": 0 0 5.651vw,
+                "768px": 0 0 7.292vw,
+                "480px": 0 0 14.167vw,
+                // 0,0,68px
+            )
+        );
+    }
+
+    .title {
+        position: relative;
+        @include propriete_x(
+            margin,
+            0 0 15px,
+            (
+                "1118px": 0 0 1.342vw,
+                "991px": 0 0 1.514vw,
+                "768px": 0 0 1.953vw,
+                "480px": 0 0 5vw,
+                // 0,0,24px
+            )
+        );
+    }
+
+    .description {
+        position: relative;
+        @include propriete_x(
+            margin,
+            0 0 40px,
+            (
+                "1118px": 0 0 3.578vw,
+                "991px": 0 0 4.036vw,
+                "768px": 0 0 5.208vw,
+                "480px": 0 0 10.417vw,
+                // 0,0,50px
+            )
+        );
+        /*@include propriete_x(
+            padding,
+            0 30px,
+            (
+                "1118px": 0 2.683vw,
+                "991px": 0 3.027vw,
+                "768px": 0 3.906vw,
+                "480px": 0 2.083vw,
+                // 0 10px
+            )
+        );*/
+    }
+
+    .user_info {
+        position: relative;
+    }
+
+    .user_name {
+        position: relative;
+        font-family: Ivy-Presto-Text;
+        font-style: normal;
+        line-height: normal;
+        font-weight: 300;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: linear-gradient(
+            90deg,
+            #debb7e 0%,
+            #edd4ac 20.48%,
+            #b79955 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        @include propriete_x(
+            font-size,
+            18px,
+            (
+                "1118px": 1.61vw,
+                "991px": 1.816vw,
+                "768px": 2.344vw,
+                "480px": 4.583vw,
+                // 22px
+            )
+        );
+        @include propriete_x(
+            margin,
+            0 0 7px,
+            (
+                "1118px": 0 0 0.626vw,
+                "991px": 0 0 0.706vw,
+                "768px": 0 0 0.911vw,
+                "480px": 0 0 2.083vw,
+                // 0,0,10px
+            )
+        );
+    }
+
+    .user_job {
+        position: relative;
+        font-family: "Inter";
+        font-style: italic;
+        font-weight: 400;
+        line-height: normal;
+        text-align: center;
+        background: linear-gradient(
+            90deg,
+            #debb7e 0%,
+            #edd4ac 20.48%,
+            #b79955 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        @include propriete_x(
+            font-size,
+            14px,
+            (
+                "1118px": 1.252vw,
+                "991px": 1.413vw,
+                "768px": 1.823vw,
+                "480px": 3.542vw,
+                // 17px
+            )
+        );
+    }
+
+    .content_footer_line {
+        position: relative;
+
+        svg {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    // ============================================
+    // Arc media rotation
+    // ============================================
+    .round_media_arc {
+        svg {
+            transform-origin: center center;
+
+            &.anim-rotate {
+                animation: arcRotate 20s linear infinite;
+            }
+        }
+    }
+
+    // ============================================
+    // Text reveal styles
+    // ============================================
+    .text-reveal-char {
+        display: inline-block;
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+
+    // ============================================
+    // Glow effects on strokes after animation
+    // ============================================
+    .divider-top__stroke,
+    .divider-bottom__stroke {
+        &.glowing {
+            animation: strokeGlow 3s ease-in-out infinite;
+        }
+    }
+
+    .divider-top__dot,
+    .divider-bottom__dot {
+        &.pulsing {
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+    }
+
+    [class*="arc-media__stroke"] {
+        &.glowing {
+            animation: strokeGlow 3s ease-in-out infinite;
+        }
+    }
+}

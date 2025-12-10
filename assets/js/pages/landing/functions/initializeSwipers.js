@@ -4,57 +4,75 @@ import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 
 /**
- * Initialize a specific Swiper instance for the element with the class `wishVideoSwiper`.
+ * Initialize Swipers.
  */
-function initializeSwiperS2() {
-    const swiper = new Swiper(".wishVideoSwiper", {
+function initializeSwipers() {
+    const ggl_review_swiper = new Swiper(".ggl_review_swiper", {
         direction: "horizontal", // Set the slider direction to horizontal.
         slidesPerView: "auto",   // Allow multiple slides to be visible based on their width.
-        centeredSlides: true,    // Center the active slide.
+        centeredSlides: false,    // Center the active slide.
         loop: false,             // Disable infinite loop.
         spaceBetween: 0,         // No space between slides.
         mousewheel: false,       // Disable navigation using the mouse wheel.
         autoplay: false,         // Autoplay is disabled.
-        pagination: {
-            el: ".wishVideoSwiper .swiper-pagination", // Element for pagination indicators.
-            clickable: true,                            // Make pagination indicators clickable.
-        },
+        pagination: false,
+        //freeMode: true,
         navigation: {
-            nextEl: ".wishVideoSwiper .swiper-button-next", // Next button element.
-            prevEl: ".wishVideoSwiper .swiper-button-prev", // Previous button element.
+            nextEl: ".ggl_review_swiper .swiper-button-next", // Next button element.
+            prevEl: ".ggl_review_swiper .swiper-button-prev", // Previous button element.
         },
     });
 
-    /**
-     * Handle the active slide index changes by calling `checkActiveIndex`.
-     */
-    swiper.on('slideChange', function () {
-        checkActiveIndex();
+    const s1_swiper = new Swiper(".s1_swiper", {
+        direction: "horizontal", // Set the slider direction to horizontal.
+        slidesPerView: "auto",   // Allow multiple slides to be visible based on their width.
+        centeredSlides: false,    // Center the active slide.
+        loop: false,             // Disable infinite loop.
+        spaceBetween: 0,         // No space between slides.
+        mousewheel: false,       // Disable navigation using the mouse wheel.
+        autoplay: false,         // Autoplay is disabled.
+        pagination: false,
+        freeMode: true,
+        navigation: false,
+        navigation: {
+            nextEl: ".s1_swiper .swiper-button-next", // Next button element.
+            prevEl: ".s1_swiper .swiper-button-prev", // Previous button element.
+        },
     });
 
-    /**
-     * Function to check the current active slide index.
-     * Additional logic can be implemented based on the active index.
-     */
-    const checkActiveIndex = () => {
-        const activeIndex = swiper.activeIndex;
-        //console.log(`Active slide index: ${activeIndex}`); // Log active index for debugging.
-        // Add custom behavior here if needed.
-    };
+    const s3_swiper = new Swiper(".s3_swiper", {
+        direction: "horizontal", // Set the slider direction to horizontal.
+        slidesPerView: "auto",   // Allow multiple slides to be visible based on their width.
+        centeredSlides: false,    // Center the active slide.
+        loop: false,             // Disable infinite loop.
+        spaceBetween: 0,         // No space between slides.
+        mousewheel: false,       // Disable navigation using the mouse wheel.
+        autoplay: false,         // Autoplay is disabled.
+        pagination: false,
+        freeMode: true,
+        navigation: false,
+        navigation: {
+            nextEl: ".s3_swiper .swiper-button-next", // Next button element.
+            prevEl: ".s3_swiper .swiper-button-prev", // Previous button element.
+        },
+    });
 
-    // Ensure the active index is checked upon initialization.
-    checkActiveIndex();
-}
-
-/**
- * Initialize Swipers based on the screen width.
- * Only initializes `initializeSwiperS2` if the screen width is 991px or less.
- */
-function initializeSwipers() {
-    const screenWidth = window.innerWidth;
-    if (screenWidth <= 991) {
-        initializeSwiperS2();
-    }
+    const s4_swiper = new Swiper(".s4_swiper", {
+        direction: "horizontal", // Set the slider direction to horizontal.
+        slidesPerView: "auto",   // Allow multiple slides to be visible based on their width.
+        centeredSlides: false,    // Center the active slide.
+        loop: false,             // Disable infinite loop.
+        spaceBetween: 0,         // No space between slides.
+        mousewheel: false,       // Disable navigation using the mouse wheel.
+        autoplay: false,         // Autoplay is disabled.
+        pagination: false,
+        freeMode: true,
+        navigation: false,
+        navigation: {
+            nextEl: ".s4_swiper .swiper-button-next", // Next button element.
+            prevEl: ".s4_swiper .swiper-button-prev", // Previous button element.
+        },
+    });
 }
 
 // Export the `initializeSwipers` function for external use.

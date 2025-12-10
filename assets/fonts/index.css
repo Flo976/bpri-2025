@@ -1,57 +1,140 @@
 /**
+ * Ivy-Presto-Text
+ */
+@font-face {
+    font-family: 'Ivy-Presto-Text';
+    src: local('Ivy-Presto-Text-Thin'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text-Thin.woff2') format('woff2'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text-Thin.woff') format('woff'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text-Thin.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ivy-Presto-Text';
+    src: local('Ivy-Presto-Text-Light'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text-Light.woff2') format('woff2'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text-Light.woff') format('woff'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ivy-Presto-Text';
+    src: local('Ivy-Presto-Text'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text.woff2') format('woff2'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text.woff') format('woff'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ivy-Presto-Text';
+    src: local('Ivy-Presto-Text-SemiBold'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text-SemiBold.woff2') format('woff2'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text-SemiBold.woff') format('woff'),
+         url('./Ivy-Presto-Text/Ivy-Presto-Text-SemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/**
+ * Ivy-Presto-Display
+ */
+@font-face {
+    font-family: 'Ivy-Presto-Display';
+    src: local('Ivy-Presto-Display-Thin'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display-Thin.woff2') format('woff2'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display-Thin.woff') format('woff'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display-Thin.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ivy-Presto-Display';
+    src: local('Ivy-Presto-Display-Light'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display-Light.woff2') format('woff2'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display-Light.woff') format('woff'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ivy-Presto-Display';
+    src: local('Ivy-Presto-Display'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display.woff2') format('woff2'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display.woff') format('woff'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ivy-Presto-Display';
+    src: local('Ivy-Presto-Display-SemiBold'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display-SemiBold.woff2') format('woff2'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display-SemiBold.woff') format('woff'),
+         url('./Ivy-Presto-Display/Ivy-Presto-Display-SemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/**
  * Inter
  */
 @font-face {
     font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Inter'), url('./Inter/Inter-Regular.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Inter';
-    font-style: italic;
-    font-weight: 400;
-    src: local('Inter'), url('./Inter/Inter-Italic.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
+    src: url('Inter-MediumItalic.eot');
+    src: local('Inter Medium Italic'), local('Inter-MediumItalic'),
+        url('Inter-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('Inter-MediumItalic.woff2') format('woff2'),
+        url('Inter-MediumItalic.woff') format('woff'),
+        url('Inter-MediumItalic.ttf') format('truetype');
     font-weight: 500;
-    src: local('Inter'), url('./Inter/Inter-Medium.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Inter';
     font-style: italic;
-    font-weight: 500;
-    src: local('Inter'), url('./Inter/Inter-MediumItalic.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Inter'), url('./Inter/Inter-Bold.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Inter';
-    font-style: italic;
-    font-weight: 700;
-    src: local('Inter'), url('./Inter/Inter-BoldItalic.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 900;
-    src: local('Inter'), url('./Inter/Inter-Black.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Inter';
-    font-style: italic;
-    font-weight: 900;
-    src: local('Inter'), url('./Inter/Inter-BlackItalic.woff2') format('woff2');
 }
 
+@font-face {
+    font-family: 'Inter';
+    src: url('Inter-Regular.eot');
+    src: local('Inter Regular'), local('Inter-Regular'),
+        url('Inter-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Inter-Regular.woff2') format('woff2'),
+        url('Inter-Regular.woff') format('woff'),
+        url('Inter-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: 'Inter';
+    src: url('Inter-Italic.eot');
+    src: local('Inter Italic'), local('Inter-Italic'),
+        url('Inter-Italic.eot?#iefix') format('embedded-opentype'),
+        url('Inter-Italic.woff2') format('woff2'),
+        url('Inter-Italic.woff') format('woff'),
+        url('Inter-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+/**
+ * Global Font Setup
+ */
 html, body {
-    font-family: 'Inter' !important;
+    font-family: Ivy-Presto-Text, Ivy-Presto-Display, Inter, 'Instrument Serif', sans-serif;
     font-weight: 400;
 }

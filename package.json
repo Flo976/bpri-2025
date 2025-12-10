@@ -30,6 +30,7 @@
     "@popperjs/core": "^2.11.8",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
+    "gsap": "^3.13.0",
     "jquery": "^3.7.1",
     "magnific-popup": "^1.2.0",
     "smooth-scrollbar": "^8.8.4",

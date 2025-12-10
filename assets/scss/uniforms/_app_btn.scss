@@ -2,14 +2,66 @@
 
 .swal2-styled.app_btn,
 .app_btn {
-    // To DO
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: #062499;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    text-decoration: unset;
+    transition: all 0.3s ease;
+    @include f_16;
+    @include propriete_x(
+        padding,
+        16px,
+        (
+            "1180px": 1.356vw,
+            "991px": 1.615vw,
+            "768px": 2.083vw,
+            "480px": 3.333vw,
+        )
+    );
+    @include propriete_x(
+        height,
+        53px,
+        (
+            "1180px": 4.492vw,
+            "991px": 5.348vw,
+            "768px": 6.901vw,
+            "480px": 11.042vw,
+        )
+    );
+    @include propriete_x(
+        border-radius,
+        8px,
+        (
+            "1180px": 0.678vw,
+            "991px": 0.807vw,
+            "768px": 1.042vw,
+            "480px": 1.667vw,
+        )
+    );
+
+    &.btn_primary {
+        position: relative;
+        background-color: #062499;
+        color: #fff;
+    }
+
+    &.btn_white {
+        position: relative;
+        background: #ffffff;
+        color: #252e53;
+    }
 
     &:disabled {
         cursor: default;
     }
 
     &:hover:not(:disabled) {
-        border-color: var(--primary-hover-color);
-        background-color: var(--primary-hover-color);
+        border-color: #051d7a;
+        background-color: #051d7a;
     }
 }

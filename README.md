@@ -1,4 +1,4 @@
-# BPRI Carte voeux 2025
+# BPRI Landing Eté
 
 # Installation
 ```

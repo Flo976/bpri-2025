@@ -1,0 +1,49 @@
+/// Mixin pour créer deux lignes animées en croix au centre de l’élément
+/// $color         : couleur des lignes (défaut : #fff)
+/// $thickness     : épaisseur initiale des lignes (défaut : 1px)
+/// $hover-length  : longueur des lignes au survol (défaut : 20px)
+/// $transition    : propriété + durée + timing de la transition (défaut : all 0.4s linear)
+@mixin axis-cross-animation($color: #fff,
+$thickness: 1px,
+$hover-length: 20px,
+$transition: all 0.4s linear) {
+    position: relative;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: $color;
+        opacity: 0;
+        transition: $transition;
+        z-index: 1;
+    }
+
+    // Ligne horizontale de base
+    &::after {
+        width: 100%;
+        height: $thickness;
+    }
+
+    // Ligne verticale de base
+    &::before {
+        width: $thickness;
+        height: 100%;
+    }
+
+    // Au survol : on étend les lignes vers le centre
+    &:hover {
+        &::after {
+            width: $hover-length;
+            opacity: 1;
+        }
+
+        &::before {
+            height: $hover-length;
+            opacity: 1;
+        }
+    }
+}

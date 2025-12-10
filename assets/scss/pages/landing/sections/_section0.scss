@@ -1,0 +1,313 @@
+@import "../../../mixing/base";
+@import "../../../mixing/anim_hover";
+
+.section0 {
+    position: relative;
+
+    .app_container {
+        position: relative;
+    }
+
+    .content {
+        position: relative;
+    }
+
+    .content_logo {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 2s ease;
+        @include propriete_x(
+            padding,
+            42px 0,
+            (
+                "1118px": 3.757vw 0,
+                "991px": 4.238vw 0,
+                "768px": 5.469vw 0,
+                "480px": 8.75vw 0 15vw,
+            )
+        );
+
+        &.displayin {
+            opacity: 1;
+        }
+    }
+
+    .logo_wrapper {
+        position: relative;
+        width: 100%;
+        @include propriete_x(
+            max-width,
+            24px,
+            (
+                "1118px": 2.147vw,
+                "991px": 2.422vw,
+                "768px": 3.125vw,
+                // 30px
+                "480px": 6.25vw,
+            )
+        );
+
+        svg {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .content_caption {
+        position: relative;
+        opacity: 0;
+        transition: opacity 2s ease;
+        @include propriete_x(
+            margin,
+            0 0 60px,
+            (
+                "1118px": 0 0 5.367vw,
+                "991px": 0 0 6.054vw,
+                "768px": 0 0 7.813vw,
+                "480px": 0 0 12.5vw,
+            )
+        );
+
+        &.displayin {
+            opacity: 1;
+        }
+    }
+
+    .subcaption {
+        position: relative;
+        font-family: Ivy-Presto-Display;
+        font-weight: 100;
+        line-height: normal;
+        text-align: center;
+        letter-spacing: 0.1em;
+        background: linear-gradient(
+            90deg,
+            #debb7e 0%,
+            #edd4ac 20.48%,
+            #b79955 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        @include propriete_x(
+            font-size,
+            32px,
+            (
+                "1118px": 2.862vw,
+                "991px": 3.229vw,
+                "768px": 4.167vw,
+                // 30px
+                "480px": 6.25vw,
+            )
+        );
+        @include propriete_x(
+            margin,
+            0 0 -10px,
+            (
+                "1118px": 0 0 -0.894vw,
+                "991px": 0 0 -1.009vw,
+                "768px": 0 0 -1.302vw,
+                "480px": 0 0 -1.25vw,
+            )
+        );
+    }
+
+    .caption {
+        position: relative;
+        font-family: Ivy-Presto-Text;
+        font-style: normal;
+        line-height: normal;
+        font-weight: 300;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: linear-gradient(
+            90deg,
+            #debb7e 0%,
+            #edd4ac 20.48%,
+            #b79955 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        margin: 0;
+        @include propriete_x(
+            font-size,
+            66px,
+            (
+                "1118px": 5.903vw,
+                "991px": 6.66vw,
+                "768px": 8.594vw,
+                // 52px
+                "480px": 10.833vw,
+            )
+        );
+    }
+
+    .content_illustration {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 1s ease;
+        @include propriete_x(
+            margin,
+            0 0 110px,
+            (
+                "1118px": 0 0 9.839vw,
+                "991px": 0 0 11.1vw,
+                "768px": 0 0 14.323vw,
+                "480px": 0 0 10.833vw,
+            )
+        );
+
+        &.displayin {
+            opacity: 1;
+        }
+    }
+
+    .illustration_wrapper {
+        position: relative;
+        width: 100%;
+        @include propriete_x(
+            max-width,
+            905px,
+            (
+                "1118px": 80.948vw,
+                "991px": 91.322vw,
+                "768px": 100vw,
+                "480px": 112vw,
+            )
+        );
+        @include propriete_x(
+            min-width,
+            null,
+            (
+                "480px": 112vw,
+            )
+        );
+
+        svg {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    // ============================================
+    // Hero Illustration - SVG Rotations (CSS)
+    // ============================================
+    .hero-illustration__middle_outer {
+        transform-origin: center center;
+        transform-box: fill-box;
+    }
+
+    .hero-illustration__middle_inner {
+        transform-origin: center center;
+        transform-box: fill-box;
+    }
+
+    // Rotations déclenchées quand SVG a .anim-rotate
+    svg.anim-rotate {
+        .hero-illustration__middle_outer {
+            animation: rotateClockwise 30s linear infinite;
+        }
+
+        .hero-illustration__middle_inner {
+            animation: rotateCounterClockwise 25s linear infinite;
+        }
+    }
+
+    // ============================================
+    // Middle circles glow/shimmer
+    // ============================================
+    .hero-illustration__middle_outer,
+    .hero-illustration__middle_inner {
+        path.hero-illustration__stroke {
+            &.glowing {
+                animation: lineShimmer 3.5s ease-in-out infinite;
+            }
+        }
+    }
+
+    .hero-illustration__middle_outer path.hero-illustration__stroke.glowing {
+        animation-delay: 0s;
+    }
+
+    .hero-illustration__middle_inner path.hero-illustration__stroke.glowing {
+        animation-delay: 0.8s;
+    }
+
+    // ============================================
+    // Dots pulsation/scintillement
+    // ============================================
+    .hero-illustration__dot {
+        transform-origin: center center !important;
+        transform-box: fill-box;
+
+        &.pulsing {
+            animation: dotPulse 2s ease-in-out infinite;
+
+            // Délais aléatoires pour chaque dot (via nth-child)
+            @for $i from 1 through 30 {
+                &:nth-of-type(#{$i}) {
+                    animation-delay: #{random(20) * 0.1}s;
+                    animation-duration: #{1.5 + random(10) * 0.1}s;
+                }
+            }
+        }
+    }
+
+    // ============================================
+    // Lignes glow/shimmer
+    // ============================================
+    [class^="hero-illustration__line"] {
+        > path.hero-illustration__stroke {
+            &.glowing {
+                animation: lineShimmer 3s ease-in-out infinite;
+
+                // Délais différents pour chaque ligne
+                @for $i from 1 through 20 {
+                    .hero-illustration__line#{if($i < 10, "0#{$i}", "#{$i}")}
+                        & {
+                        animation-delay: #{$i * 0.2}s;
+                        animation-duration: #{2.5 + random(15) * 0.1}s;
+                    }
+                }
+            }
+        }
+    }
+
+    // ============================================
+    // Chiffres 2026 glow/shimmer
+    // ============================================
+    .hero-illustration__2026 {
+        path {
+            &.glowing {
+                animation: numberGlow 4s ease-in-out infinite;
+
+                // Délais différents pour chaque chiffre (2, 0, 2, 6)
+                &:nth-child(1) {
+                    animation-delay: 0s;
+                }
+
+                &:nth-child(2) {
+                    animation-delay: 0.5s;
+                }
+
+                &:nth-child(3) {
+                    animation-delay: 1s;
+                }
+
+                &:nth-child(4) {
+                    animation-delay: 1.5s;
+                }
+            }
+        }
+    }
+}

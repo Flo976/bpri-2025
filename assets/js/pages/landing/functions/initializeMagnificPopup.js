@@ -5,7 +5,7 @@ import AppVideo from "../../../common/classes/AppMagnificPopup.min.js";
  */
 function initializeMagnificPopup() {
     const screenWidth = window.innerWidth;
-    const contenBottom = document.querySelector(".section2 .content_bottom");
+    const contenBottom = document.querySelector(".section2 .content_medias");
     let prependTo = null;
 
     // Determine the element to prepend the modal based on screen width.

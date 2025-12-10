@@ -23,10 +23,8 @@ import "../../scss/layout/main.scss";
 
 import BodyManager from "./classes/BodyManager.js";
 // import PageManager from "./classes/PageManager.js";
-import AppMagneticCursor from "./classes/AppMagneticCursor.js";
 
 import customContainerModals from "./functions/customContainerModals.js";
-import mouseAndTouchParticles from "../common/functions/mouseAndTouchParticles.js";
 
 // Initialiser quand le DOM est chargé
 window.addEventListener("load", () => {
@@ -42,7 +40,4 @@ window.addEventListener("load", () => {
 
     // initialize the customer container modals
     customContainerModals();
-
-    // initialize effet particle
-    mouseAndTouchParticles()  
 });

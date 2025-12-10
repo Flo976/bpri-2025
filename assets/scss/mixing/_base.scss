@@ -1,5 +1,4 @@
 @mixin propriete_x($propriete, $first_value, $max_widths_values) {
-
     @if $first_value {
         & {
             #{$propriete}: $first_value;
@@ -13,4 +12,30 @@
             }
         }
     }
+}
+
+@mixin f_13 {
+    @include propriete_x(
+        font-size,
+        13px,
+        (
+            "1180px": 1.102vw, /* 13px */
+            "991px": 1.312vw, /* 13px */
+            "768px": 2.083vw, /* 16px */
+            "480px": 3.333vw, /* 16px */
+        )
+    );
+}
+
+@mixin f_16 {
+    @include propriete_x(
+        font-size,
+        16px,
+        (
+            "1180px": 1.356vw, /* 16px */
+            "991px": 1.615vw, /* 16px */
+            "768px": 2.344vw, /* 18px */
+            "480px": 3.75vw, /* 18px */
+        )
+    );
 }
