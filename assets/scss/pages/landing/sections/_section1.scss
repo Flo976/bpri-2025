@@ -90,11 +90,11 @@
         position: relative;
         @include propriete_x(
             min-width,
-            1080px,
+            1140px,
             (
-                "1118px": 96.601vw,
-                "991px": 100vw,
-                "768px": 100vw,
+                "1118px": 100vw,
+                "991px": 100%,
+                "768px": 100%,
                 "480px": 100%,
             )
         );
@@ -124,7 +124,7 @@
                 // 0,0,50px
             )
         );
-        @include propriete_x(
+        /*@include propriete_x(
             padding,
             0 30px,
             (
@@ -134,7 +134,7 @@
                 "480px": 0 0,
                 // 0 10px
             )
-        );
+        );*/
     }
 
     .user_info {
