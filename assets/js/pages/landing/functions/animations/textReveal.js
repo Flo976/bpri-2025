@@ -307,13 +307,13 @@ export function splitTextIntoChars(element) {
     });
 
     // Après le rendu, calculer et ajuster la position du gradient pour chaque caractère
+    // OPTIMISATION: parentRect calculé UNE SEULE FOIS hors de la boucle
     requestAnimationFrame(() => {
+        const parentRect = element.getBoundingClientRect();
         chars.forEach((charEl) => {
             if (charEl.textContent.trim() !== "") {
                 const rect = charEl.getBoundingClientRect();
-                const parentRect = element.getBoundingClientRect();
-                const offsetX = rect.left - parentRect.left;
-                charEl.style.backgroundPosition = `-${offsetX}px 0`;
+                charEl.style.backgroundPosition = `-${rect.left - parentRect.left}px 0`;
             }
         });
     });
