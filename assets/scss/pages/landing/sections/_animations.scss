@@ -216,13 +216,11 @@
     0%,
     100% {
         opacity: 1;
-        transform: scale(1);
         filter: var(--dot-shadow-normal);
     }
 
     50% {
         opacity: 0.8;
-        transform: scale(1.15);
         filter: var(--dot-shadow-glow);
     }
 }
@@ -232,13 +230,11 @@
     0%,
     100% {
         opacity: 1;
-        transform: scale(1);
         filter: var(--dot-pulse-normal);
     }
 
     50% {
         opacity: 0.9;
-        transform: scale(1.1);
         filter: var(--dot-pulse-glow);
     }
 }
