@@ -43,12 +43,11 @@
         text-fill-color: transparent;
         @include propriete_x(
             font-size,
-            40px,
+            36px,
             (
-                "1118px": 3.578vw,
-                "991px": 4.036vw,
-                "768px": 5.208vw,
-                //36px
+                "1118px": 3.22vw,
+                "991px": 3.229vw,
+                "768px": 4.167vw,
                 "480px": 7.5vw,
             )
         );

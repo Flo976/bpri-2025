@@ -173,12 +173,12 @@
         transition: opacity 1s ease;
         @include propriete_x(
             margin,
-            0 0 110px,
+            0 0 80px,
             (
-                "1118px": 0 0 9.839vw,
-                "991px": 0 0 11.1vw,
-                "768px": 0 0 14.323vw,
-                "480px": 0 0 10.833vw,
+                "1118px": 0 0 7.156vw,
+                "991px": 0 0 8.073vw,
+                "768px": 0 0 10.417vw,
+                "480px": 0 0 16.667vw,
             )
         );
 
@@ -346,12 +346,14 @@
         }
 
         // Désactiver lineShimmer sur mobile
-        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glowing {
+        [class^="hero-illustration__line"]
+            > path.hero-illustration__stroke.glowing {
             animation: none;
         }
 
         .hero-illustration__middle_outer path.hero-illustration__stroke.glowing,
-        .hero-illustration__middle_inner path.hero-illustration__stroke.glowing {
+        .hero-illustration__middle_inner
+            path.hero-illustration__stroke.glowing {
             animation: none;
         }
 
@@ -374,12 +376,14 @@
             animation: none;
         }
 
-        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glowing {
+        [class^="hero-illustration__line"]
+            > path.hero-illustration__stroke.glowing {
             animation: none;
         }
 
         .hero-illustration__middle_outer path.hero-illustration__stroke.glowing,
-        .hero-illustration__middle_inner path.hero-illustration__stroke.glowing {
+        .hero-illustration__middle_inner
+            path.hero-illustration__stroke.glowing {
             animation: none;
         }
 
