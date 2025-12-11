@@ -70,6 +70,9 @@
     .content_text {
         position: relative;
         text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         @include propriete_x(
             margin,
             0 0 56px,
@@ -85,6 +88,16 @@
 
     .title {
         position: relative;
+        @include propriete_x(
+            min-width,
+            1080px,
+            (
+                "1118px": 96.601vw,
+                "991px": 100vw,
+                "768px": 100vw,
+                "480px": 100%,
+            )
+        );
         @include propriete_x(
             margin,
             0 0 15px,
@@ -117,8 +130,8 @@
             (
                 "1118px": 0 2.683vw,
                 "991px": 0 3.027vw,
-                "768px": 0 3.906vw,
-                "480px": 0 2.083vw,
+                "768px": 0 0,
+                "480px": 0 0,
                 // 0 10px
             )
         );
