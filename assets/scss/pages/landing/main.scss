@@ -10,7 +10,7 @@
     overflow-x: hidden;
 
     .text-reveal-char {
-        -moz-background: unset !important;
+        //background: unset !important;
     }
 
     .section {
@@ -29,7 +29,7 @@
         font-style: normal;
         font-weight: 300;
         text-align: center;
-        letter-spacing: 10%;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         background: linear-gradient(
             90deg,
