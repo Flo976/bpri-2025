@@ -149,8 +149,8 @@ Optimiser les performances graphiques et navigateur sans modifier le style et le
 ### Priorité 2 (Impact Moyen)
 | # | Optimisation | Statut |
 |---|--------------|--------|
-| 3 | Réduire wrappers text-reveal | [ ] |
-| 4 | Consolider timelines GSAP | [ ] |
+| 3 | Réduire wrappers text-reveal | [x] |
+| 4 | Consolider timelines GSAP | N/A (déjà fait) |
 | 5 | Ajouter `pathLength="1"` aux SVG | [ ] |
 | 6 | Ajouter `contain: layout paint` | [x] |
 | 7 | Optimiser calcul backgroundPosition | [ ] |
@@ -253,6 +253,41 @@ Utilisation de `IntersectionObserver` pour détecter quand les sections entrent/
 
 ---
 
+### Optimisation 3 : Réduction des wrappers text-reveal
+
+**Problème initial :**
+La structure DOM pour l'animation de texte lettre par lettre utilisait 4 niveaux de wrappers :
+```
+line-container > word-container > char-wrapper > char
+```
+
+**Solution - Réduction à 3 niveaux :**
+Élimination du `line-container` en utilisant des `<br>` natifs pour les sauts de ligne :
+```
+word-container > char-wrapper > char (+ <br> entre les lignes)
+```
+
+**Fichiers modifiés :**
+- `textReveal.js` : Fonctions `splitTextIntoChars()` et `splitTextIntoWords()` optimisées
+
+**Changements dans `splitTextIntoChars()` :**
+- Suppression de la création de `text-reveal-line-container`
+- Ajout de `<br>` entre les lignes (si `lineIndex > 0`)
+- Les `word-container`, `char-wrapper` et `char` sont conservés pour maintenir le même effet visuel
+
+**Changements dans `splitTextIntoWords()` :**
+- Suppression de la création de `text-reveal-line-container`
+- Ajout de `<br>` entre les lignes
+- Structure réduite de 3 à 2 niveaux
+
+**Gains de performance :**
+- Moins de nodes DOM créés = moins de mémoire utilisée
+- Moins de calculs de cascade de styles
+- Moins de recalculs de layout
+- Rendu visuel IDENTIQUE à l'original
+
+---
+
 ## Historique des modifications
 
 | Date | Optimisation | Résultat | Notes |
@@ -262,3 +297,4 @@ Utilisation de `IntersectionObserver` pour détecter quand les sections entrent/
 | 2025-12-11 | Système Dual-Layer pour Glow | OK | Clone SVG + filtre statique + animation opacity, rendu identique |
 | 2025-12-11 | Suppression glow sections 1/2 | OK | Nettoyage CSS (-10%) et JS, animations glow uniquement sur section0 |
 | 2025-12-11 | Ajouter contain: layout paint | OK | Sections 0/1/2 + illustration_wrapper isolés |
+| 2025-12-11 | Réduire wrappers text-reveal | OK | Structure DOM réduite, moins de nodes à calculer |

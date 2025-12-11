@@ -66,6 +66,11 @@ export function splitTextIntoLines(element) {
 /**
  * Prépare un élément texte pour l'animation mot par mot
  * Compatible avec background-clip: text
+ *
+ * OPTIMISATION: Structure réduite de 3 à 2 niveaux DOM:
+ * - Avant: line-container > word-wrapper > word
+ * - Après: word-wrapper > word (+ <br> pour les lignes)
+ *
  * @param {HTMLElement} element - L'élément contenant le texte
  * @returns {HTMLElement[]} - Array des éléments de mot créés
  */
@@ -89,10 +94,10 @@ export function splitTextIntoWords(element) {
         const trimmedPart = part.trim();
         if (trimmedPart === "") return;
 
-        // Créer un conteneur de ligne
-        const lineContainer = document.createElement("span");
-        lineContainer.className = "text-reveal-line-container";
-        lineContainer.style.display = "block";
+        // OPTIMISATION: Ajouter <br> entre les lignes au lieu de créer un conteneur
+        if (lineIndex > 0) {
+            element.appendChild(document.createElement("br"));
+        }
 
         // Séparer en mots (en gardant les espaces)
         const wordParts = trimmedPart.split(/(\s+)/);
@@ -128,14 +133,12 @@ export function splitTextIntoWords(element) {
             }
 
             wordWrapper.appendChild(wordContent);
-            lineContainer.appendChild(wordWrapper);
+            element.appendChild(wordWrapper);
 
             if (!/^\s+$/.test(wordText)) {
                 words.push(wordContent);
             }
         });
-
-        element.appendChild(lineContainer);
     });
 
     return words;
@@ -198,6 +201,11 @@ export function revealTextByWords(element, options = {}) {
  * Prépare un élément texte pour l'animation lettre par lettre
  * Compatible avec background-clip: text (gradient aligné)
  * Les caractères sont groupés par mot pour éviter les sauts de ligne au milieu des mots
+ *
+ * OPTIMISATION: Structure réduite de 4 à 3 niveaux DOM:
+ * - Avant: line-container > word-container > char-wrapper > char
+ * - Après: word-container > char-wrapper > char (+ <br> pour les lignes)
+ *
  * @param {HTMLElement} element - L'élément contenant le texte
  * @returns {HTMLElement[]} - Array des éléments de lettre créés
  */
@@ -225,10 +233,10 @@ export function splitTextIntoChars(element) {
         const trimmedPart = part.trim();
         if (trimmedPart === "") return;
 
-        // Créer un conteneur de ligne
-        const lineContainer = document.createElement("span");
-        lineContainer.className = "text-reveal-line-container";
-        lineContainer.style.display = "block";
+        // OPTIMISATION: Ajouter <br> entre les lignes au lieu de créer un conteneur de ligne
+        if (lineIndex > 0) {
+            element.appendChild(document.createElement("br"));
+        }
 
         // Retirer les tags HTML pour obtenir le texte pur
         const tempDiv = document.createElement("div");
@@ -248,7 +256,7 @@ export function splitTextIntoChars(element) {
                 spaceWrapper.innerHTML = "&nbsp;";
                 spaceWrapper.style.display = "inline-block";
                 spaceWrapper.style.width = "0.3em";
-                lineContainer.appendChild(spaceWrapper);
+                element.appendChild(spaceWrapper);
                 return;
             }
 
@@ -263,7 +271,7 @@ export function splitTextIntoChars(element) {
             for (let i = 0; i < word.length; i++) {
                 const char = word[i];
 
-                // Créer le wrapper avec overflow hidden
+                // Créer le wrapper avec overflow hidden (nécessaire pour l'effet reveal)
                 const charWrapper = document.createElement("span");
                 charWrapper.className = "text-reveal-char-wrapper";
                 charWrapper.style.display = "inline-block";
@@ -294,10 +302,8 @@ export function splitTextIntoChars(element) {
                 chars.push(charContent);
             }
 
-            lineContainer.appendChild(wordContainer);
+            element.appendChild(wordContainer);
         });
-
-        element.appendChild(lineContainer);
     });
 
     // Après le rendu, calculer et ajuster la position du gradient pour chaque caractère
