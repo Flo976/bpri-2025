@@ -246,26 +246,4 @@
         transform: translate3d(0, 20px, 0);
     }
 
-    // ============================================
-    // Glow effects on strokes after animation
-    // ============================================
-    .divider-top__stroke,
-    .divider-bottom__stroke {
-        &.glowing {
-            animation: strokeGlow 3s ease-in-out infinite;
-        }
-    }
-
-    .divider-top__dot,
-    .divider-bottom__dot {
-        &.pulsing {
-            animation: dotPulse 2s ease-in-out infinite;
-        }
-    }
-
-    [class*="arc-media__stroke"] {
-        &.glowing {
-            animation: strokeGlow 3s ease-in-out infinite;
-        }
-    }
 }

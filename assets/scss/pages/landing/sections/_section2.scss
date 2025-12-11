@@ -290,18 +290,4 @@
         transform: translate3d(0, 20px, 0);
     }
 
-    // ============================================
-    // Glow effects on strokes after animation
-    // ============================================
-    [class*="arc-media"][class*="__stroke"] {
-        &.glowing {
-            animation: strokeGlow 3s ease-in-out infinite;
-        }
-    }
-
-    .curved-divider__stroke {
-        &.glowing {
-            animation: strokeGlow 3s ease-in-out infinite;
-        }
-    }
 }

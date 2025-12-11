@@ -143,8 +143,8 @@ Optimiser les performances graphiques et navigateur sans modifier le style et le
 ### Priorité 1 (Impact Élevé)
 | # | Optimisation | Statut |
 |---|--------------|--------|
-| 1 | Remplacer `filter: drop-shadow` par SVG filters | [ ] |
-| 2 | Pauser animations CSS hors viewport | [ ] |
+| 1 | Remplacer `filter: drop-shadow` par animation opacity | [x] |
+| 2 | Pauser animations CSS hors viewport | [x] |
 
 ### Priorité 2 (Impact Moyen)
 | # | Optimisation | Statut |
@@ -188,7 +188,68 @@ Avant/Après chaque optimisation, mesurer via Chrome DevTools :
 
 ## Notes d'implémentation
 
-> Ajouter ici les notes au fur et à mesure de l'implémentation
+### Optimisation 1 : Système Dual-Layer pour Glow (MISE À JOUR)
+
+**Problème initial :**
+L'approche simple (filtre statique + animation opacity seule) changeait le rendu visuel.
+
+**Solution finale - Système Dual-Layer :**
+Duplication des éléments SVG via JavaScript pour reproduire EXACTEMENT le rendu original :
+
+```
+[Élément original] → PAS de filtre, opacity: 1 → 0.8 → 1
+[Élément clone]    → Filtre glow STATIQUE, opacity: 0 → 1 → 0
+                     ↑ superposé sur l'original
+```
+
+**Fonctionnement :**
+1. `MutationObserver` détecte quand `.glowing` ou `.pulsing` sont ajoutés
+2. Clone l'élément et applique le filtre glow statique sur le clone
+3. Anime les deux layers avec des keyframes synchronisés (Base + Glow)
+4. Résultat visuel IDENTIQUE à l'original
+
+**Fichiers créés/modifiés :**
+- `glowLayerSystem.js` (nouveau) : Système de duplication et animation dual-layer
+- `_animations.scss` : Nouveaux keyframes (Base + Glow pour chaque animation)
+  - `dotPulseBase` / `dotPulseGlow`
+  - `lineShimmerBase` / `lineShimmerGlow`
+  - `strokeGlowBase` / `strokeGlowGlow`
+  - `numberGlowBase` / `numberGlowGlow`
+- `_section0.scss`, `_section1.scss`, `_section2.scss` : Suppression filtres statiques CSS
+- `main.js` : Import et initialisation du système
+
+**Gains de performance :**
+- Filtre calculé UNE SEULE FOIS (sur le clone)
+- Animation opacity = composite-only (GPU-accélérée)
+- Rendu IDENTIQUE à l'original
+
+---
+
+### Optimisation 2 : Pauser animations hors viewport
+
+**Approche utilisée :**
+Utilisation de `IntersectionObserver` pour détecter quand les sections entrent/sortent du viewport et pauser/reprendre les animations CSS infinies.
+
+**Fichiers créés/modifiés :**
+- `animationVisibilityController.js` (nouveau) : Contrôleur avec IntersectionObserver
+- `_animations.scss` : Ajout classe `.anim-visibility-paused` avec `animation-play-state: paused`
+- `main.js` : Import et initialisation du contrôleur
+
+**Fonctionnement :**
+1. Observer les sections `.section0`, `.section1`, `.section2`
+2. Quand une section sort du viewport, ajouter `.anim-visibility-paused` aux éléments animés
+3. Quand elle revient, supprimer la classe
+4. Marge de 50px pour anticiper l'entrée/sortie
+
+**Éléments surveillés :**
+- Rotations SVG (middle circles, arcs)
+- Dots pulsing
+- Strokes glowing
+- Numbers glowing
+
+**Gains de performance :**
+- Économie CPU/GPU quand les animations ne sont pas visibles
+- Pas d'impact sur l'UX (animations reprennent instantanément)
 
 ---
 
@@ -196,4 +257,7 @@ Avant/Après chaque optimisation, mesurer via Chrome DevTools :
 
 | Date | Optimisation | Résultat | Notes |
 |------|--------------|----------|-------|
-| | | | |
+| 2025-12-11 | Animation opacity au lieu de filter | Rendu modifié | Approche simple, rendu différent |
+| 2025-12-11 | Pauser animations hors viewport | OK | IntersectionObserver + classe .anim-visibility-paused |
+| 2025-12-11 | Système Dual-Layer pour Glow | OK | Clone SVG + filtre statique + animation opacity, rendu identique |
+| 2025-12-11 | Suppression glow sections 1/2 | OK | Nettoyage CSS (-10%) et JS, animations glow uniquement sur section0 |

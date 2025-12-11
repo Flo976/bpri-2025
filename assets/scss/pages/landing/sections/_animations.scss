@@ -1,8 +1,11 @@
+@import "../../../mixing/base";
+
 // ============================================
 // Variables CSS pour les animations (responsive)
+// Section 0 uniquement
 // ============================================
 :root {
-    // Dots
+    // Dots (Section 0)
     @include propriete_x(
         --dot-shadow-normal,
         drop-shadow(0 0 2px rgba(222, 187, 126, 0.3)),
@@ -29,34 +32,7 @@
         )
     );
 
-    // LineGlow
-    @include propriete_x(
-        --line-glow-normal,
-        drop-shadow(0 0 2px rgba(222, 187, 126, 0.3)),
-        (
-            "1118px": drop-shadow(0 0 0.179vw rgba(222, 187, 126, 0.3)),
-            "991px": drop-shadow(0 0 0.202vw rgba(222, 187, 126, 0.3)),
-            "768px": drop-shadow(0 0 0.26vw rgba(222, 187, 126, 0.3)),
-            "480px": drop-shadow(0 0 0.417vw rgba(222, 187, 126, 0.3)),
-        )
-    );
-    @include propriete_x(
-        --line-glow-intense,
-        drop-shadow(0 0 8px rgba(222, 187, 126, 0.8))
-            drop-shadow(0 0 15px rgba(237, 212, 172, 0.5)),
-        (
-            "1118px": drop-shadow(0 0 0.716vw rgba(222, 187, 126, 0.8))
-                drop-shadow(0 0 1.342vw rgba(237, 212, 172, 0.5)),
-            "991px": drop-shadow(0 0 0.807vw rgba(222, 187, 126, 0.8))
-                drop-shadow(0 0 1.514vw rgba(237, 212, 172, 0.5)),
-            "768px": drop-shadow(0 0 1.042vw rgba(222, 187, 126, 0.8))
-                drop-shadow(0 0 1.953vw rgba(237, 212, 172, 0.5)),
-            "480px": drop-shadow(0 0 1.667vw rgba(222, 187, 126, 0.8))
-                drop-shadow(0 0 3.125vw rgba(237, 212, 172, 0.5)),
-        )
-    );
-
-    // LineShimmer
+    // LineShimmer (Section 0)
     @include propriete_x(
         --line-shimmer-0,
         drop-shadow(0 0 2px rgba(222, 187, 126, 0.2)),
@@ -93,7 +69,7 @@
         )
     );
 
-    // NumberGlow
+    // NumberGlow (Section 0)
     @include propriete_x(
         --number-glow-normal,
         drop-shadow(0 0 3px rgba(222, 187, 126, 0.4)),
@@ -124,55 +100,20 @@
                 drop-shadow(0 0 4.167vw rgba(183, 153, 85, 0.3)),
         )
     );
+}
 
-    // StrokeGlow (section1, section2)
-    @include propriete_x(
-        --stroke-glow-normal,
-        drop-shadow(0 0 2px rgba(222, 187, 126, 0.3)),
-        (
-            "1118px": drop-shadow(0 0 0.179vw rgba(222, 187, 126, 0.3)),
-            "991px": drop-shadow(0 0 0.202vw rgba(222, 187, 126, 0.3)),
-            "768px": drop-shadow(0 0 0.26vw rgba(222, 187, 126, 0.3)),
-            "480px": drop-shadow(0 0 0.417vw rgba(222, 187, 126, 0.3)),
-        )
-    );
-    @include propriete_x(
-        --stroke-glow-intense,
-        drop-shadow(0 0 6px rgba(237, 212, 172, 0.8))
-            drop-shadow(0 0 12px rgba(222, 187, 126, 0.5)),
-        (
-            "1118px": drop-shadow(0 0 0.537vw rgba(237, 212, 172, 0.8))
-                drop-shadow(0 0 1.073vw rgba(222, 187, 126, 0.5)),
-            "991px": drop-shadow(0 0 0.605vw rgba(237, 212, 172, 0.8))
-                drop-shadow(0 0 1.211vw rgba(222, 187, 126, 0.5)),
-            "768px": drop-shadow(0 0 0.781vw rgba(237, 212, 172, 0.8))
-                drop-shadow(0 0 1.563vw rgba(222, 187, 126, 0.5)),
-            "480px": drop-shadow(0 0 1.25vw rgba(237, 212, 172, 0.8))
-                drop-shadow(0 0 2.5vw rgba(222, 187, 126, 0.5)),
-        )
-    );
+// ============================================
+// Classe de pause pour les animations hors viewport
+// ============================================
+.anim-visibility-paused {
+    animation-play-state: paused !important;
+}
 
-    // DotPulse (section1, section2) - valeurs légèrement différentes
-    @include propriete_x(
-        --dot-pulse-normal,
-        drop-shadow(0 0 2px rgba(222, 187, 126, 0.3)),
-        (
-            "1118px": drop-shadow(0 0 0.179vw rgba(222, 187, 126, 0.3)),
-            "991px": drop-shadow(0 0 0.202vw rgba(222, 187, 126, 0.3)),
-            "768px": drop-shadow(0 0 0.26vw rgba(222, 187, 126, 0.3)),
-            "480px": drop-shadow(0 0 0.417vw rgba(222, 187, 126, 0.3)),
-        )
-    );
-    @include propriete_x(
-        --dot-pulse-glow,
-        drop-shadow(0 0 5px rgba(237, 212, 172, 0.8)),
-        (
-            "1118px": drop-shadow(0 0 0.447vw rgba(237, 212, 172, 0.8)),
-            "991px": drop-shadow(0 0 0.505vw rgba(237, 212, 172, 0.8)),
-            "768px": drop-shadow(0 0 0.651vw rgba(237, 212, 172, 0.8)),
-            "480px": drop-shadow(0 0 1.042vw rgba(237, 212, 172, 0.8)),
-        )
-    );
+// ============================================
+// Classe pour les clones glow (système dual-layer)
+// ============================================
+.glow-layer {
+    pointer-events: none !important;
 }
 
 // ============================================
@@ -182,7 +123,6 @@
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
@@ -192,99 +132,113 @@
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(-360deg);
     }
 }
 
-// Alias pour compatibilité section1/section2
 @keyframes arcRotate {
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
 }
 
 // ============================================
-// Keyframes pour pulsation des dots
+// Keyframes pour pulsation des dots (Section 0)
+// Système dual-layer: Base + Glow
 // ============================================
+
+// Layer Base (original sans filtre)
+@keyframes dotPulseBase {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+// Layer Glow (clone avec filtre statique)
+@keyframes dotPulseGlow {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+// Fallback
 @keyframes dotPulse {
     0%,
     100% {
         opacity: 1;
         filter: var(--dot-shadow-normal);
     }
-
     50% {
         opacity: 0.8;
         filter: var(--dot-shadow-glow);
     }
 }
 
-// Version section1/section2 (légèrement différente)
-@keyframes dotPulseAlt {
+// ============================================
+// Keyframes pour shimmer des lignes (Section 0)
+// Système dual-layer: Base + Glow
+// ============================================
+
+// Layer Base (original sans filtre)
+@keyframes lineShimmerBase {
     0%,
     100% {
-        opacity: 1;
-        filter: var(--dot-pulse-normal);
+        opacity: 0.8;
     }
-
-    50% {
-        opacity: 0.9;
-        filter: var(--dot-pulse-glow);
+    25%,
+    50%,
+    75% {
+        opacity: 1;
     }
 }
 
-@keyframes dotTwinkle {
+// Layer Glow (clone avec filtre statique)
+@keyframes lineShimmerGlow {
     0%,
     100% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.4;
+    }
+    50% {
         opacity: 1;
     }
-
-    50% {
+    75% {
         opacity: 0.4;
     }
 }
 
-// ============================================
-// Keyframes pour glow/shimmer des lignes
-// ============================================
-@keyframes lineGlow {
-    0%,
-    100% {
-        filter: var(--line-glow-normal);
-    }
-
-    50% {
-        filter: var(--line-glow-intense);
-    }
-}
-
+// Fallback
 @keyframes lineShimmer {
     0% {
         filter: var(--line-shimmer-0);
         opacity: 0.8;
     }
-
     25% {
         filter: var(--line-shimmer-25);
         opacity: 1;
     }
-
     50% {
         filter: var(--line-shimmer-50);
         opacity: 1;
     }
-
     75% {
         filter: var(--line-shimmer-25);
         opacity: 1;
     }
-
     100% {
         filter: var(--line-shimmer-0);
         opacity: 0.8;
@@ -292,28 +246,38 @@
 }
 
 // ============================================
-// Keyframes pour glow des strokes (section1, section2)
+// Keyframes pour glow des chiffres 2026 (Section 0)
+// Système dual-layer: Base + Glow
 // ============================================
-@keyframes strokeGlow {
+
+// Layer Base (original sans filtre)
+@keyframes numberGlowBase {
     0%,
     100% {
-        filter: var(--stroke-glow-normal);
+        opacity: 1;
     }
-
     50% {
-        filter: var(--stroke-glow-intense);
+        opacity: 0.9;
     }
 }
 
-// ============================================
-// Keyframes pour glow des chiffres 2026
-// ============================================
+// Layer Glow (clone avec filtre statique)
+@keyframes numberGlowGlow {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+// Fallback
 @keyframes numberGlow {
     0%,
     100% {
         filter: var(--number-glow-normal);
     }
-
     50% {
         filter: var(--number-glow-intense);
     }

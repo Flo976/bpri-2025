@@ -243,11 +243,15 @@
 
     // ============================================
     // Middle circles glow/shimmer
+    // OPTIMISÉ: Système dual-layer (original + clone glow via JS)
     // ============================================
     .hero-illustration__middle_outer,
     .hero-illustration__middle_inner {
         path.hero-illustration__stroke {
+            will-change: opacity;
+
             &.glowing {
+                // Animation gérée par glowLayerSystem.js (dual-layer)
                 animation: lineShimmer 3.5s ease-in-out infinite;
             }
         }
@@ -263,13 +267,15 @@
 
     // ============================================
     // Dots pulsation/scintillement
+    // OPTIMISÉ: Système dual-layer (original + clone glow via JS)
     // ============================================
     .hero-illustration__dot {
         transform-origin: center center !important;
         transform-box: fill-box;
-        will-change: transform, opacity;
+        will-change: opacity;
 
         &.pulsing {
+            // Animation gérée par glowLayerSystem.js (dual-layer)
             animation: dotPulse 2s ease-in-out infinite;
 
             // Délais aléatoires pour chaque dot (via nth-child)
@@ -284,12 +290,14 @@
 
     // ============================================
     // Lignes glow/shimmer
+    // OPTIMISÉ: Système dual-layer (original + clone glow via JS)
     // ============================================
     [class^="hero-illustration__line"] {
         > path.hero-illustration__stroke {
             will-change: opacity;
 
             &.glowing {
+                // Animation gérée par glowLayerSystem.js (dual-layer)
                 animation: lineShimmer 3s ease-in-out infinite;
 
                 // Délais différents pour chaque ligne
@@ -306,12 +314,14 @@
 
     // ============================================
     // Chiffres 2026 glow/shimmer
+    // OPTIMISÉ: Système dual-layer (original + clone glow via JS)
     // ============================================
     .hero-illustration__2026 {
         path {
             will-change: opacity;
 
             &.glowing {
+                // Animation gérée par glowLayerSystem.js (dual-layer)
                 animation: numberGlow 4s ease-in-out infinite;
 
                 // Délais différents pour chaque chiffre (2, 0, 2, 6)
