@@ -154,7 +154,7 @@ Optimiser les performances graphiques et navigateur sans modifier le style et le
 | 5 | Ajouter `pathLength="1"` aux SVG | [ ] |
 | 6 | Ajouter `contain: layout paint` | [x] |
 | 7 | Optimiser calcul backgroundPosition | [x] |
-| 8 | Appliquer `will-change` dynamiquement | [ ] |
+| 8 | Appliquer `will-change` dynamiquement | [x] |
 | 9 | Augmenter seuil mobile à 992px | [ ] |
 | 10 | Limiter promotions de couches | [ ] |
 
@@ -299,3 +299,4 @@ word-container > char-wrapper > char (+ <br> entre les lignes)
 | 2025-12-11 | Ajouter contain: layout paint | OK | Sections 0/1/2 + illustration_wrapper isolés |
 | 2025-12-11 | Réduire wrappers text-reveal | OK | Structure DOM réduite, moins de nodes à calculer |
 | 2025-12-11 | Optimiser calcul backgroundPosition | OK | Cache parentRect hors boucle, -N appels DOM |
+| 2025-12-11 | Appliquer will-change dynamiquement | OK | Supprimé will-change statiques des animations infinies |

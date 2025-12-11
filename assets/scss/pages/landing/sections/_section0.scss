@@ -225,13 +225,13 @@
     .hero-illustration__middle_outer {
         transform-origin: center center;
         transform-box: fill-box;
-        will-change: transform;
+        // OPTIMISATION: will-change supprimé - le navigateur optimise automatiquement les animations infinies
     }
 
     .hero-illustration__middle_inner {
         transform-origin: center center;
         transform-box: fill-box;
-        will-change: transform;
+        // OPTIMISATION: will-change supprimé - le navigateur optimise automatiquement les animations infinies
     }
 
     // Rotations déclenchées quand SVG a .anim-rotate
@@ -252,7 +252,7 @@
     .hero-illustration__middle_outer,
     .hero-illustration__middle_inner {
         path.hero-illustration__stroke {
-            will-change: opacity;
+            // OPTIMISATION: will-change supprimé - animations infinies optimisées par le navigateur
 
             &.glowing {
                 // Animation gérée par glowLayerSystem.js (dual-layer)
@@ -276,7 +276,7 @@
     .hero-illustration__dot {
         transform-origin: center center !important;
         transform-box: fill-box;
-        will-change: opacity;
+        // OPTIMISATION: will-change supprimé - animations infinies optimisées par le navigateur
 
         &.pulsing {
             // Animation gérée par glowLayerSystem.js (dual-layer)
@@ -298,7 +298,7 @@
     // ============================================
     [class^="hero-illustration__line"] {
         > path.hero-illustration__stroke {
-            will-change: opacity;
+            // OPTIMISATION: will-change supprimé - animations infinies optimisées par le navigateur
 
             &.glowing {
                 // Animation gérée par glowLayerSystem.js (dual-layer)
@@ -322,7 +322,7 @@
     // ============================================
     .hero-illustration__2026 {
         path {
-            will-change: opacity;
+            // OPTIMISATION: will-change supprimé - animations infinies optimisées par le navigateur
 
             &.glowing {
                 // Animation gérée par glowLayerSystem.js (dual-layer)
