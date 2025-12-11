@@ -152,7 +152,7 @@ Optimiser les performances graphiques et navigateur sans modifier le style et le
 | 3 | Réduire wrappers text-reveal | [ ] |
 | 4 | Consolider timelines GSAP | [ ] |
 | 5 | Ajouter `pathLength="1"` aux SVG | [ ] |
-| 6 | Ajouter `contain: layout paint` | [ ] |
+| 6 | Ajouter `contain: layout paint` | [x] |
 | 7 | Optimiser calcul backgroundPosition | [ ] |
 | 8 | Appliquer `will-change` dynamiquement | [ ] |
 | 9 | Augmenter seuil mobile à 992px | [ ] |
@@ -261,3 +261,4 @@ Utilisation de `IntersectionObserver` pour détecter quand les sections entrent/
 | 2025-12-11 | Pauser animations hors viewport | OK | IntersectionObserver + classe .anim-visibility-paused |
 | 2025-12-11 | Système Dual-Layer pour Glow | OK | Clone SVG + filtre statique + animation opacity, rendu identique |
 | 2025-12-11 | Suppression glow sections 1/2 | OK | Nettoyage CSS (-10%) et JS, animations glow uniquement sur section0 |
+| 2025-12-11 | Ajouter contain: layout paint | OK | Sections 0/1/2 + illustration_wrapper isolés |

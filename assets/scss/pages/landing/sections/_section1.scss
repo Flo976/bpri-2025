@@ -3,6 +3,8 @@
 
 .section1 {
     position: relative;
+    // OPTIMISATION: Isoler les repaints de cette section
+    contain: layout paint;
 
     .app_container {
         position: relative;
