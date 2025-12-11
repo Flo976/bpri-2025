@@ -221,11 +221,13 @@
     .hero-illustration__middle_outer {
         transform-origin: center center;
         transform-box: fill-box;
+        will-change: transform;
     }
 
     .hero-illustration__middle_inner {
         transform-origin: center center;
         transform-box: fill-box;
+        will-change: transform;
     }
 
     // Rotations déclenchées quand SVG a .anim-rotate
@@ -265,6 +267,7 @@
     .hero-illustration__dot {
         transform-origin: center center !important;
         transform-box: fill-box;
+        will-change: transform, opacity;
 
         &.pulsing {
             animation: dotPulse 2s ease-in-out infinite;
@@ -284,6 +287,8 @@
     // ============================================
     [class^="hero-illustration__line"] {
         > path.hero-illustration__stroke {
+            will-change: opacity;
+
             &.glowing {
                 animation: lineShimmer 3s ease-in-out infinite;
 
@@ -304,6 +309,8 @@
     // ============================================
     .hero-illustration__2026 {
         path {
+            will-change: opacity;
+
             &.glowing {
                 animation: numberGlow 4s ease-in-out infinite;
 
@@ -324,6 +331,71 @@
                     animation-delay: 1.5s;
                 }
             }
+        }
+    }
+
+    // ============================================
+    // OPTIMISATIONS PERFORMANCES MOBILE
+    // ============================================
+
+    // Réduire les animations sur mobile (< 768px)
+    @media (max-width: 768px) {
+        // Désactiver dotPulse sur mobile
+        .hero-illustration__dot.pulsing {
+            animation: none;
+        }
+
+        // Désactiver lineShimmer sur mobile
+        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glowing {
+            animation: none;
+        }
+
+        .hero-illustration__middle_outer path.hero-illustration__stroke.glowing,
+        .hero-illustration__middle_inner path.hero-illustration__stroke.glowing {
+            animation: none;
+        }
+
+        // Désactiver numberGlow sur mobile
+        .hero-illustration__2026 path.glowing {
+            animation: none;
+        }
+    }
+
+    // Désactiver toutes les animations si l'utilisateur préfère moins de mouvement
+    @media (prefers-reduced-motion: reduce) {
+        svg.anim-rotate {
+            .hero-illustration__middle_outer,
+            .hero-illustration__middle_inner {
+                animation: none;
+            }
+        }
+
+        .hero-illustration__dot.pulsing {
+            animation: none;
+        }
+
+        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glowing {
+            animation: none;
+        }
+
+        .hero-illustration__middle_outer path.hero-illustration__stroke.glowing,
+        .hero-illustration__middle_inner path.hero-illustration__stroke.glowing {
+            animation: none;
+        }
+
+        .hero-illustration__2026 path.glowing {
+            animation: none;
+        }
+
+        // Réduire les transitions d'apparition
+        .content_logo .logo_wrapper,
+        .content_caption .subcaption,
+        .content_caption .caption {
+            transition-duration: 0.5s;
+        }
+
+        .content_illustration {
+            transition-duration: 0.3s;
         }
     }
 }
