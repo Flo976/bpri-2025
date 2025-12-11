@@ -3,6 +3,8 @@
 
 .section2 {
     position: relative;
+    // OPTIMISATION: Isoler les repaints de cette section
+    contain: layout paint;
     @include propriete_x(
         padding,
         75px 0 114px,
@@ -290,18 +292,4 @@
         transform: translate3d(0, 20px, 0);
     }
 
-    // ============================================
-    // Glow effects on strokes after animation
-    // ============================================
-    [class*="arc-media"][class*="__stroke"] {
-        &.glowing {
-            animation: strokeGlow 3s ease-in-out infinite;
-        }
-    }
-
-    .curved-divider__stroke {
-        &.glowing {
-            animation: strokeGlow 3s ease-in-out infinite;
-        }
-    }
 }

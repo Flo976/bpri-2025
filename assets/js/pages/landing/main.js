@@ -5,10 +5,16 @@ import { initializeMagnificPopup } from "./functions/initializeMagnificPopup.js"
 import { initSection0Animation } from "./functions/animations/section0Animation.js";
 import { initSection1Animation } from "./functions/animations/section1Animation.js";
 import { initSection2Animation } from "./functions/animations/section2Animation.js";
+import { initAnimationVisibilityController } from "./functions/animations/animationVisibilityController.js";
+import { initGlowLayerSystem } from "./functions/animations/glowLayerSystem.js";
 
 function main() {
     initializeMagnificPopup();
     //initializeSwipers();
+
+    // OPTIMISATION: Initialiser le système dual-layer pour les glow AVANT les animations
+    // Crée des clones avec filtre statique, anime uniquement opacity (GPU-accélérée)
+    initGlowLayerSystem();
 
     // Lancer les animations de la section0 (hero)
     initSection0Animation();
@@ -18,6 +24,9 @@ function main() {
 
     // Lancer les animations de la section2 (scroll-triggered)
     initSection2Animation();
+
+    // OPTIMISATION: Pauser les animations CSS infinies hors viewport
+    initAnimationVisibilityController();
 }
 
 /**

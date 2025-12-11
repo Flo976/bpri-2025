@@ -3,6 +3,8 @@
 
 .section0 {
     position: relative;
+    // OPTIMISATION: Isoler les repaints de cette section
+    contain: layout paint;
 
     .app_container {
         position: relative;
@@ -190,6 +192,8 @@
     .illustration_wrapper {
         position: relative;
         width: 100%;
+        // OPTIMISATION: Isoler les repaints des animations SVG
+        contain: layout paint style;
         @include propriete_x(
             max-width,
             905px,
@@ -221,13 +225,13 @@
     .hero-illustration__middle_outer {
         transform-origin: center center;
         transform-box: fill-box;
-        will-change: transform;
+        // OPTIMISATION: will-change supprimé - le navigateur optimise automatiquement les animations infinies
     }
 
     .hero-illustration__middle_inner {
         transform-origin: center center;
         transform-box: fill-box;
-        will-change: transform;
+        // OPTIMISATION: will-change supprimé - le navigateur optimise automatiquement les animations infinies
     }
 
     // Rotations déclenchées quand SVG a .anim-rotate
@@ -243,11 +247,15 @@
 
     // ============================================
     // Middle circles glow/shimmer
+    // OPTIMISÉ: Système dual-layer (original + clone glow via JS)
     // ============================================
     .hero-illustration__middle_outer,
     .hero-illustration__middle_inner {
         path.hero-illustration__stroke {
+            // OPTIMISATION: will-change supprimé - animations infinies optimisées par le navigateur
+
             &.glowing {
+                // Animation gérée par glowLayerSystem.js (dual-layer)
                 animation: lineShimmer 3.5s ease-in-out infinite;
             }
         }
@@ -263,13 +271,15 @@
 
     // ============================================
     // Dots pulsation/scintillement
+    // OPTIMISÉ: Système dual-layer (original + clone glow via JS)
     // ============================================
     .hero-illustration__dot {
         transform-origin: center center !important;
         transform-box: fill-box;
-        will-change: transform, opacity;
+        // OPTIMISATION: will-change supprimé - animations infinies optimisées par le navigateur
 
         &.pulsing {
+            // Animation gérée par glowLayerSystem.js (dual-layer)
             animation: dotPulse 2s ease-in-out infinite;
 
             // Délais aléatoires pour chaque dot (via nth-child)
@@ -284,12 +294,14 @@
 
     // ============================================
     // Lignes glow/shimmer
+    // OPTIMISÉ: Système dual-layer (original + clone glow via JS)
     // ============================================
     [class^="hero-illustration__line"] {
         > path.hero-illustration__stroke {
-            will-change: opacity;
+            // OPTIMISATION: will-change supprimé - animations infinies optimisées par le navigateur
 
             &.glowing {
+                // Animation gérée par glowLayerSystem.js (dual-layer)
                 animation: lineShimmer 3s ease-in-out infinite;
 
                 // Délais différents pour chaque ligne
@@ -306,12 +318,14 @@
 
     // ============================================
     // Chiffres 2026 glow/shimmer
+    // OPTIMISÉ: Système dual-layer (original + clone glow via JS)
     // ============================================
     .hero-illustration__2026 {
         path {
-            will-change: opacity;
+            // OPTIMISATION: will-change supprimé - animations infinies optimisées par le navigateur
 
             &.glowing {
+                // Animation gérée par glowLayerSystem.js (dual-layer)
                 animation: numberGlow 4s ease-in-out infinite;
 
                 // Délais différents pour chaque chiffre (2, 0, 2, 6)
@@ -339,7 +353,7 @@
     // ============================================
 
     // Réduire les animations sur mobile (< 768px)
-    @media (max-width: 768px) {
+    /*@media (max-width: 768px) {
         // Désactiver dotPulse sur mobile
         .hero-illustration__dot.pulsing {
             animation: none;
@@ -361,7 +375,7 @@
         .hero-illustration__2026 path.glowing {
             animation: none;
         }
-    }
+    }*/
 
     // Désactiver toutes les animations si l'utilisateur préfère moins de mouvement
     @media (prefers-reduced-motion: reduce) {
