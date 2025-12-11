@@ -111,7 +111,7 @@
                 // 0,0,50px
             )
         );
-        /*@include propriete_x(
+        @include propriete_x(
             padding,
             0 30px,
             (
@@ -121,7 +121,7 @@
                 "480px": 0 2.083vw,
                 // 0 10px
             )
-        );*/
+        );
     }
 
     .user_info {

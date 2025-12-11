@@ -55,13 +55,13 @@
                 // 0,0,100px
             )
         );
-        @include propriete_x(
+         @include propriete_x(
             padding,
-            0 25px,
+            0 80px,
             (
-                "1118px": 0 2.236vw,
-                "991px": 0 2.523vw,
-                "768px": 0 3.255vw,
+                "1118px": 0 7.156vw,
+                "991px": 0 8.073vw,
+                "768px": 0 10.417vw,
                 "480px": 0 1.042vw,
                 // 0,5px
             )

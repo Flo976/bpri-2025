@@ -16,8 +16,6 @@
         position: relative;
         display: flex;
         justify-content: center;
-        opacity: 0;
-        transition: opacity 2s ease;
         @include propriete_x(
             padding,
             42px 0,
@@ -29,8 +27,15 @@
             )
         );
 
+        .logo_wrapper {
+            opacity: 0;
+            transition: 3s ease opacity;
+        }
+
         &.displayin {
-            opacity: 1;
+            .logo_wrapper {
+                opacity: 1;
+            }
         }
     }
 
@@ -71,8 +76,19 @@
             )
         );
 
+        .subcaption,
+        .caption {
+            opacity: 0;
+            transition: 2s ease opacity;
+        }
+
         &.displayin {
             opacity: 1;
+
+            .subcaption,
+            .caption {
+                opacity: 1;
+            }
         }
     }
 

@@ -48,14 +48,14 @@ const SECTION2_CONFIG = {
         {
             type: ANIMATION_TYPES.TEXT_REVEAL,
             target: ".media_title",
-            end: 85
+            end: 90
         },
 
         // Media items - description text reveal (pour chaque .media_item)
         {
             type: ANIMATION_TYPES.TEXT_REVEAL,
             target: ".media_description",
-            end: 85
+            end: 90
         },
 
         // Footer - Curved strokes

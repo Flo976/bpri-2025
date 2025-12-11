@@ -116,12 +116,12 @@ export function initSection0Animation() {
     // 3. Illustration fade-in (CSS) - après le titre
     tl.call(() => {
         contentIllustration.classList.add("displayin");
-    }, null, 2);
+    }, null, 3);
 
     // 3b. Rotations (CSS) - après que l'illustration soit visible (3s + 1s transition)
     tl.call(() => {
         illustration.classList.add("anim-rotate");
-    }, null, 2);
+    }, null, 3.5);
 
     // 4. Cercles du middle - stroke drawing (après illustration visible à 4s)
     // 4a. Middle inner: sens anti-horaire (dessine en premier)
@@ -136,7 +136,7 @@ export function initSection0Animation() {
         },
         opacity: 1,
         ease: "linear"
-    }, 2.5);
+    }, 4);
 
     // 4b. Middle outer: sens horaire (dessine après)
     tl.to(middleOuterStrokes, {
@@ -150,12 +150,12 @@ export function initSection0Animation() {
         },
         opacity: 1,
         ease: "linear"
-    }, 3);
+    }, 4);
 
     // 5. Lignes extérieures - drawing avec ordre aléatoire
     //const shuffledLines = [...linesData].sort(() => Math.random() - 0.5);
     const shuffledLines = [...linesData];
-    const linesStartTime = 3.5; // Après les cercles du middle
+    const linesStartTime = 4.5; // Après les cercles du middle
 
     shuffledLines.forEach((data, i) => {
         const { linePath, dots } = data;
