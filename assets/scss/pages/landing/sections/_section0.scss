@@ -353,7 +353,7 @@
     // ============================================
 
     // Réduire les animations sur mobile (< 768px)
-    /*@media (max-width: 768px) {
+    @media (max-width: 768px) {
         // Désactiver dotPulse sur mobile
         .hero-illustration__dot.pulsing {
             animation: none;
@@ -375,7 +375,7 @@
         .hero-illustration__2026 path.glowing {
             animation: none;
         }
-    }*/
+    }
 
     // Désactiver toutes les animations si l'utilisateur préfère moins de mouvement
     @media (prefers-reduced-motion: reduce) {
