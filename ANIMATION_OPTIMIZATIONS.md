@@ -151,25 +151,25 @@ Optimiser les performances graphiques et navigateur sans modifier le style et le
 |---|--------------|--------|
 | 3 | Réduire wrappers text-reveal | [x] |
 | 4 | Consolider timelines GSAP | N/A (déjà fait) |
-| 5 | Ajouter `pathLength="1"` aux SVG | [ ] |
+| 5 | Ajouter `pathLength="1"` aux SVG | [N/A] |
 | 6 | Ajouter `contain: layout paint` | [x] |
 | 7 | Optimiser calcul backgroundPosition | [x] |
 | 8 | Appliquer `will-change` dynamiquement | [x] |
 | 9 | Augmenter seuil mobile à 992px | [ ] |
-| 10 | Limiter promotions de couches | [ ] |
+| 10 | Limiter promotions de couches | N/A (déjà optimisé) |
 
 ### Priorité 3 (Impact Faible)
 | # | Optimisation | Statut |
 |---|--------------|--------|
 | 11 | Augmenter `scrub` value | [ ] |
-| 12 | Throttler iframe scroll | [ ] |
+| 12 | Throttler iframe scroll | N/A (déjà optimisé) |
 | 13 | Regrouper dots similaires | [ ] |
 | 14 | Ajouter `vector-effect: non-scaling-stroke` | [ ] |
 | 15 | Optimiser transform-origin SVG | [ ] |
-| 16 | Ajouter `isolation: isolate` | [ ] |
+| 16 | Ajouter `isolation: isolate` | N/A (couvert par contain) |
 | 17 | Réduire dots animés mobile | [ ] |
 | 18 | Désactiver rotations SVG mobile | [ ] |
-| 19 | Debounce callbacks scroll iframe | [ ] |
+| 19 | Debounce callbacks scroll iframe | N/A (déjà optimisé) |
 | 20 | Réduire étapes keyframes glow | [ ] |
 
 ---
