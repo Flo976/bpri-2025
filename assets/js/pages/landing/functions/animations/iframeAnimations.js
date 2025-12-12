@@ -207,6 +207,8 @@ class ViewportAnimationController {
         this.isRunning = true;
 
         const self = this;
+        let attempts = 0;
+        const maxAttempts = 5; // 5 tentatives x 100ms = 500ms max
 
         // Attendre que parentIFrame soit disponible
         const initWhenReady = () => {
@@ -232,8 +234,15 @@ class ViewportAnimationController {
                     self.startFallback();
                 }
             } else {
-                // Réessayer après un court délai
-                setTimeout(initWhenReady, 100);
+                attempts++;
+                if (attempts >= maxAttempts) {
+                    // Pas dans un iframe, utiliser le fallback
+                    console.log("ViewportController: parentIFrame non trouvé, utilisation du mode standalone");
+                    self.startFallback();
+                } else {
+                    // Réessayer après un court délai
+                    setTimeout(initWhenReady, 100);
+                }
             }
         };
 
@@ -243,6 +252,10 @@ class ViewportAnimationController {
     /**
      * Fallback si parentIFrame n'est pas disponible
      * (mode standalone ou autre contexte)
+     *
+     * Note: En mode standalone, getBoundingClientRect().top est DÉJÀ relatif
+     * au viewport, donc on passe scrollTop: 0 et offsetTop: 0 pour que
+     * le calcul topInParent = offsetTop + rect.top - scrollTop = rect.top
      */
     startFallback() {
         console.log("ViewportController: Mode fallback (sans parentIFrame)");
@@ -250,9 +263,10 @@ class ViewportAnimationController {
         const self = this;
 
         const loop = () => {
-            // Simuler les props avec les valeurs locales
+            // En standalone, rect.top est déjà relatif au viewport
+            // donc on ne soustrait pas scrollTop (contrairement au mode iframe)
             self.updateWithParentInfo({
-                scrollTop: window.scrollY || window.pageYOffset || 0,
+                scrollTop: 0,  // rect.top est déjà viewport-relative
                 offsetTop: 0,
                 windowHeight: window.innerHeight
             });
