@@ -10,6 +10,13 @@ import { gsap } from "gsap";
 // Compensation pour le mode iframe (le header du parent décale les seuils)
 const IFRAME_START_COMPENSATION = 0;
 
+// Détection mobile (< 768px ou touch device)
+const isMobile = () => {
+    return window.innerWidth < 768 ||
+           ('ontouchstart' in window) ||
+           (navigator.maxTouchPoints > 0);
+};
+
 class ViewportAnimationController {
     constructor() {
         this.animations = [];
@@ -24,6 +31,11 @@ class ViewportAnimationController {
         this.parentIFrameReady = false;
         // Callbacks appelés à chaque update
         this.updateCallbacks = [];
+
+        // OPTIMISATION: Throttle sur mobile
+        this.frameCount = 0;
+        this.isMobile = isMobile();
+        this.throttleFrames = this.isMobile ? 2 : 1; // 30fps sur mobile, 60fps sur desktop
     }
 
     /**
@@ -160,8 +172,10 @@ class ViewportAnimationController {
                 if (anim.onEnterBack) anim.onEnterBack();
             }
 
-            // Ne mettre à jour que si le progrès a changé significativement
-            if (Math.abs(progress - anim.lastProgress) > 0.001) {
+            // OPTIMISATION: Seuil plus élevé sur mobile pour réduire les updates
+            // Mobile: 1% de changement, Desktop: 0.1%
+            const threshold = this.isMobile ? 0.01 : 0.001;
+            if (Math.abs(progress - anim.lastProgress) > threshold) {
                 anim.lastProgress = progress;
 
                 // Interpoler les valeurs
@@ -220,11 +234,16 @@ class ViewportAnimationController {
                 const getProps = window.parentIFrame.getPageInfo || window.parentIFrame.getParentProps;
 
                 if (getProps) {
-                    // Boucle d'animation
+                    console.log(`ViewportController: iframe mode (${self.isMobile ? 'mobile 30fps' : 'desktop 60fps'})`);
+                    // Boucle d'animation avec throttle
                     const tick = () => {
-                        getProps((props) => {
-                            self.updateWithParentInfo(props);
-                        });
+                        // OPTIMISATION: Throttle sur mobile (30fps au lieu de 60fps)
+                        self.frameCount++;
+                        if (self.frameCount % self.throttleFrames === 0) {
+                            getProps((props) => {
+                                self.updateWithParentInfo(props);
+                            });
+                        }
                         self.rafId = requestAnimationFrame(tick);
                     };
                     tick();
@@ -258,18 +277,22 @@ class ViewportAnimationController {
      * le calcul topInParent = offsetTop + rect.top - scrollTop = rect.top
      */
     startFallback() {
-        console.log("ViewportController: Mode fallback (sans parentIFrame)");
+        console.log(`ViewportController: Mode fallback (${this.isMobile ? 'mobile 30fps' : 'desktop 60fps'})`);
 
         const self = this;
 
         const loop = () => {
-            // En standalone, rect.top est déjà relatif au viewport
-            // donc on ne soustrait pas scrollTop (contrairement au mode iframe)
-            self.updateWithParentInfo({
-                scrollTop: 0,  // rect.top est déjà viewport-relative
-                offsetTop: 0,
-                windowHeight: window.innerHeight
-            });
+            // OPTIMISATION: Throttle sur mobile (30fps au lieu de 60fps)
+            self.frameCount++;
+            if (self.frameCount % self.throttleFrames === 0) {
+                // En standalone, rect.top est déjà relatif au viewport
+                // donc on ne soustrait pas scrollTop (contrairement au mode iframe)
+                self.updateWithParentInfo({
+                    scrollTop: 0,  // rect.top est déjà viewport-relative
+                    offsetTop: 0,
+                    windowHeight: window.innerHeight
+                });
+            }
             self.rafId = requestAnimationFrame(loop);
         };
 

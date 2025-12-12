@@ -223,7 +223,7 @@
 
 // Fallback
 @keyframes lineShimmer {
-    0% {
+    /*0% {
         filter: var(--line-shimmer-0);
         opacity: 0.8;
     }
@@ -242,7 +242,7 @@
     100% {
         filter: var(--line-shimmer-0);
         opacity: 0.8;
-    }
+    }*/
 }
 
 // ============================================
@@ -274,11 +274,11 @@
 
 // Fallback
 @keyframes numberGlow {
-    0%,
+    /*0%,
     100% {
         filter: var(--number-glow-normal);
     }
     50% {
         filter: var(--number-glow-intense);
-    }
+    }*/
 }

@@ -3,6 +3,15 @@ import { splitTextIntoChars } from "./textReveal.js";
 import { viewportController } from "./iframeAnimations.js";
 
 // ============================================
+// Détection mobile pour optimisations
+// ============================================
+const isMobile = () => {
+    return window.innerWidth < 768 ||
+           ('ontouchstart' in window) ||
+           (navigator.maxTouchPoints > 0);
+};
+
+// ============================================
 // Types d'animations disponibles
 // ============================================
 const ANIMATION_TYPES = {
@@ -408,6 +417,9 @@ class AnimationFactory {
      * Crée une animation de type textReveal (lettre par lettre)
      * Boucle automatiquement sur tous les éléments correspondant au sélecteur
      * Chaque élément est son propre trigger
+     *
+     * OPTIMISATION MOBILE: Sur mobile, anime le bloc entier au lieu de chaque caractère
+     * pour réduire drastiquement le nombre d'animations (~470 → ~10)
      */
     createTextRevealAnimation(config) {
         const { target, trigger, start, end, charOffset } = {
@@ -424,6 +436,22 @@ class AnimationFactory {
 
             if (!triggerEl || !element) return;
 
+            // OPTIMISATION MOBILE: Animation simple sur le bloc entier
+            if (isMobile()) {
+                gsap.set(element, { opacity: 0, y: 20 });
+
+                viewportController.add({
+                    trigger: triggerEl,
+                    targets: element,
+                    from: { opacity: 0, y: 20 },
+                    to: { opacity: 1, y: 0 },
+                    start,
+                    end
+                });
+                return;
+            }
+
+            // DESKTOP: Animation lettre par lettre
             const chars = splitTextIntoChars(element);
             if (chars.length === 0) return;
 
