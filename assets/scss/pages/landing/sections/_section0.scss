@@ -355,25 +355,30 @@
     // Réduire les animations sur mobile (< 768px)
     @media (max-width: 768px) {
         // Désactiver dotPulse sur mobile
-        .hero-illustration__dot.pulsing {
-            animation: none;
+        .hero-illustration__dot.pulsing,
+        .hero-illustration__dot.glow-layer {
+            animation: none !important;
         }
 
         // Désactiver lineShimmer sur mobile
-        [class^="hero-illustration__line"]
-            > path.hero-illustration__stroke.glowing {
-            animation: none;
+        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glowing,
+        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glow-layer {
+            animation: none !important;
+            filter: unset !important;
         }
 
         .hero-illustration__middle_outer path.hero-illustration__stroke.glowing,
-        .hero-illustration__middle_inner
-            path.hero-illustration__stroke.glowing {
-            animation: none;
+        .hero-illustration__middle_outer path.hero-illustration__stroke.glow-layer,
+        .hero-illustration__middle_inner path.hero-illustration__stroke.glowing,
+        .hero-illustration__middle_inner path.hero-illustration__stroke.glow-layer {
+            animation: none !important;
+            filter: unset !important;
         }
 
         // Désactiver numberGlow sur mobile
-        .hero-illustration__2026 path.glowing {
-            animation: none;
+        .hero-illustration__2026 path.glowing,
+        .hero-illustration__2026 path.glow-layer {
+            animation: none !important;
         }
     }
 
@@ -382,27 +387,32 @@
         svg.anim-rotate {
             .hero-illustration__middle_outer,
             .hero-illustration__middle_inner {
-                animation: none;
+                animation: none !important;
             }
         }
 
-        .hero-illustration__dot.pulsing {
-            animation: none;
+        .hero-illustration__dot.pulsing,
+        .hero-illustration__dot.glow-layer {
+            animation: none !important;
         }
 
-        [class^="hero-illustration__line"]
-            > path.hero-illustration__stroke.glowing {
-            animation: none;
+        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glowing,
+        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glow-layer {
+            animation: none !important;
+            filter: unset !important;
         }
 
         .hero-illustration__middle_outer path.hero-illustration__stroke.glowing,
-        .hero-illustration__middle_inner
-            path.hero-illustration__stroke.glowing {
-            animation: none;
+        .hero-illustration__middle_outer path.hero-illustration__stroke.glow-layer,
+        .hero-illustration__middle_inner path.hero-illustration__stroke.glowing,
+        .hero-illustration__middle_inner path.hero-illustration__stroke.glow-layer {
+            animation: none !important;
+            filter: unset !important;
         }
 
-        .hero-illustration__2026 path.glowing {
-            animation: none;
+        .hero-illustration__2026 path.glowing,
+        .hero-illustration__2026 path.glow-layer {
+            animation: none !important;
         }
 
         // Réduire les transitions d'apparition
