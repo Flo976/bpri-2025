@@ -303,14 +303,15 @@
             &.glowing {
                 // Animation gérée par glowLayerSystem.js (dual-layer)
                 animation: lineShimmer 3s ease-in-out infinite;
+            }
+        }
 
-                // Délais différents pour chaque ligne
-                @for $i from 1 through 20 {
-                    .hero-illustration__line#{if($i < 10, "0#{$i}", "#{$i}")}
-                        & {
-                        animation-delay: #{$i * 0.2}s;
-                        animation-duration: #{2.5 + random(15) * 0.1}s;
-                    }
+        // Délais et durées par ligne
+        @for $i from 1 through 20 {
+            &:nth-child(#{$i}) {
+                > path.hero-illustration__stroke.glowing {
+                    animation-delay: #{0.2s * $i};
+                    animation-duration: #{2.5s + random(15) * 0.1s};
                 }
             }
         }
@@ -355,25 +356,30 @@
     // Réduire les animations sur mobile (< 768px)
     @media (max-width: 768px) {
         // Désactiver dotPulse sur mobile
-        .hero-illustration__dot.pulsing {
-            animation: none;
+        .hero-illustration__dot.pulsing,
+        .hero-illustration__dot.glow-layer {
+            animation: none !important;
         }
 
         // Désactiver lineShimmer sur mobile
-        [class^="hero-illustration__line"]
-            > path.hero-illustration__stroke.glowing {
-            animation: none;
+        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glowing,
+        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glow-layer {
+            animation: none !important;
+            filter: unset !important;
         }
 
         .hero-illustration__middle_outer path.hero-illustration__stroke.glowing,
-        .hero-illustration__middle_inner
-            path.hero-illustration__stroke.glowing {
-            animation: none;
+        .hero-illustration__middle_outer path.hero-illustration__stroke.glow-layer,
+        .hero-illustration__middle_inner path.hero-illustration__stroke.glowing,
+        .hero-illustration__middle_inner path.hero-illustration__stroke.glow-layer {
+            animation: none !important;
+            filter: unset !important;
         }
 
         // Désactiver numberGlow sur mobile
-        .hero-illustration__2026 path.glowing {
-            animation: none;
+        .hero-illustration__2026 path.glowing,
+        .hero-illustration__2026 path.glow-layer {
+            animation: none !important;
         }
     }
 
@@ -382,27 +388,32 @@
         svg.anim-rotate {
             .hero-illustration__middle_outer,
             .hero-illustration__middle_inner {
-                animation: none;
+                animation: none !important;
             }
         }
 
-        .hero-illustration__dot.pulsing {
-            animation: none;
+        .hero-illustration__dot.pulsing,
+        .hero-illustration__dot.glow-layer {
+            animation: none !important;
         }
 
-        [class^="hero-illustration__line"]
-            > path.hero-illustration__stroke.glowing {
-            animation: none;
+        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glowing,
+        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glow-layer {
+            animation: none !important;
+            filter: unset !important;
         }
 
         .hero-illustration__middle_outer path.hero-illustration__stroke.glowing,
-        .hero-illustration__middle_inner
-            path.hero-illustration__stroke.glowing {
-            animation: none;
+        .hero-illustration__middle_outer path.hero-illustration__stroke.glow-layer,
+        .hero-illustration__middle_inner path.hero-illustration__stroke.glowing,
+        .hero-illustration__middle_inner path.hero-illustration__stroke.glow-layer {
+            animation: none !important;
+            filter: unset !important;
         }
 
-        .hero-illustration__2026 path.glowing {
-            animation: none;
+        .hero-illustration__2026 path.glowing,
+        .hero-illustration__2026 path.glow-layer {
+            animation: none !important;
         }
 
         // Réduire les transitions d'apparition

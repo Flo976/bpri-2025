@@ -147,15 +147,6 @@ function setupDualAnimation(original, clone, config) {
     original.style.filter = 'none';
     original.style.animation = `${config.animationBase} ${duration} ${timing} ${delay} infinite`;
 
-    // Faire apparaître le clone progressivement après un court délai
-    // (la transition CSS sur opacity gère l'animation d'apparition)
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            // Double rAF pour s'assurer que le style initial est appliqué
-            clone.style.opacity = '1';
-        });
-    });
-
     // Animation glow sur le clone (optionnel - décommenter pour animation pulsante)
     clone.style.animation = `${config.animationGlow} ${duration} ${timing} ${delay} infinite`;
 }

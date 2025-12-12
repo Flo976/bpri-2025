@@ -1,20 +1,15 @@
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { splitTextIntoChars } from "./textReveal.js";
 import { viewportController } from "./iframeAnimations.js";
 
-gsap.registerPlugin(ScrollTrigger);
-
 // ============================================
-// Détection du mode iframe
+// Détection mobile pour optimisations
 // ============================================
-const isInIframe = (() => {
-    try {
-        return window.self !== window.top;
-    } catch (e) {
-        return true;
-    }
-})();
+const isMobile = () => {
+    return window.innerWidth < 768 ||
+           ('ontouchstart' in window) ||
+           (navigator.maxTouchPoints > 0);
+};
 
 // ============================================
 // Types d'animations disponibles
@@ -69,12 +64,6 @@ const DEFAULT_CONFIGS = {
 class AnimationFactory {
     constructor(sectionSelector) {
         this.section = document.querySelector(sectionSelector);
-        this.triggers = [];
-        this.mode = isInIframe ? "iframe" : "normal";
-
-        if (this.section) {
-            console.log(`AnimationFactory: ${sectionSelector} - Mode ${this.mode}`);
-        }
     }
 
     /**
@@ -108,40 +97,19 @@ class AnimationFactory {
                     });
                 });
 
-                if (this.mode === "iframe") {
-                    strokes.forEach((stroke, index) => {
-                        if (!stroke.getTotalLength) return;
-                        const length = stroke.getTotalLength();
+                strokes.forEach((stroke, index) => {
+                    if (!stroke.getTotalLength) return;
+                    const length = stroke.getTotalLength();
 
-                        viewportController.add({
-                            trigger: triggerEl,
-                            targets: stroke,
-                            from: { strokeDashoffset: reverse ? -length : length, opacity: 0 },
-                            to: { strokeDashoffset: 0, opacity: 1 },
-                            start: start - (index * staggerOffset),
-                            end: end - (index * staggerOffset)
-                        });
+                    viewportController.add({
+                        trigger: triggerEl,
+                        targets: stroke,
+                        from: { strokeDashoffset: reverse ? -length : length, opacity: 0 },
+                        to: { strokeDashoffset: 0, opacity: 1 },
+                        start: start - (index * staggerOffset),
+                        end: end - (index * staggerOffset)
                     });
-                } else {
-                    const tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: triggerEl,
-                            start: `top ${start}%`,
-                            end: `top ${end}%`,
-                            scrub: 0.5
-                        }
-                    });
-
-                    tl.to(strokes, {
-                        strokeDashoffset: 0,
-                        opacity: 1,
-                        duration: 1,
-                        stagger: 0.2,
-                        ease: "none"
-                    });
-
-                    this.triggers.push(tl);
-                }
+                });
             });
             return;
         }
@@ -162,40 +130,19 @@ class AnimationFactory {
             });
         });
 
-        if (this.mode === "iframe") {
-            strokes.forEach((stroke, index) => {
-                if (!stroke.getTotalLength) return;
-                const length = stroke.getTotalLength();
+        strokes.forEach((stroke, index) => {
+            if (!stroke.getTotalLength) return;
+            const length = stroke.getTotalLength();
 
-                viewportController.add({
-                    trigger: triggerEl,
-                    targets: stroke,
-                    from: { strokeDashoffset: reverse ? -length : length, opacity: 0 },
-                    to: { strokeDashoffset: 0, opacity: 1 },
-                    start: start - (index * staggerOffset),
-                    end: end - (index * staggerOffset)
-                });
+            viewportController.add({
+                trigger: triggerEl,
+                targets: stroke,
+                from: { strokeDashoffset: reverse ? -length : length, opacity: 0 },
+                to: { strokeDashoffset: 0, opacity: 1 },
+                start: start - (index * staggerOffset),
+                end: end - (index * staggerOffset)
             });
-        } else {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: triggerEl,
-                    start: `top ${start}%`,
-                    end: `top ${end}%`,
-                    scrub: 0.5
-                }
-            });
-
-            tl.to(strokes, {
-                strokeDashoffset: 0,
-                opacity: 1,
-                duration: 1,
-                stagger: 0.2,
-                ease: "none"
-            });
-
-            this.triggers.push(tl);
-        }
+        });
     }
 
     /**
@@ -219,33 +166,14 @@ class AnimationFactory {
 
                 gsap.set(dot, { opacity: 0 });
 
-                if (this.mode === "iframe") {
-                    viewportController.add({
-                        trigger: triggerEl,
-                        targets: dot,
-                        from: { opacity: 0 },
-                        to: { opacity: 1 },
-                        start,
-                        end
-                    });
-                } else {
-                    const tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: triggerEl,
-                            start: `top ${start}%`,
-                            end: `top ${end}%`,
-                            scrub: 0.5
-                        }
-                    });
-
-                    tl.to(dot, {
-                        opacity: 1,
-                        duration: 0.5,
-                        ease: "none"
-                    });
-
-                    this.triggers.push(tl);
-                }
+                viewportController.add({
+                    trigger: triggerEl,
+                    targets: dot,
+                    from: { opacity: 0 },
+                    to: { opacity: 1 },
+                    start,
+                    end
+                });
             });
             return;
         }
@@ -258,33 +186,14 @@ class AnimationFactory {
         // Setup initial
         gsap.set(dot, { opacity: 0 });
 
-        if (this.mode === "iframe") {
-            viewportController.add({
-                trigger: triggerEl,
-                targets: dot,
-                from: { opacity: 0 },
-                to: { opacity: 1 },
-                start,
-                end
-            });
-        } else {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: triggerEl,
-                    start: `top ${start}%`,
-                    end: `top ${end}%`,
-                    scrub: 0.5
-                }
-            });
-
-            tl.to(dot, {
-                opacity: 1,
-                duration: 0.5,
-                ease: "none"
-            });
-
-            this.triggers.push(tl);
-        }
+        viewportController.add({
+            trigger: triggerEl,
+            targets: dot,
+            from: { opacity: 0 },
+            to: { opacity: 1 },
+            start,
+            end
+        });
     }
 
     /**
@@ -327,44 +236,21 @@ class AnimationFactory {
         const onEnterCallback = rotate && arcSvg ? () => arcSvg.classList.add("anim-rotate") : null;
         const onLeaveBackCallback = rotate && arcSvg ? () => arcSvg.classList.remove("anim-rotate") : null;
 
-        if (this.mode === "iframe") {
-            strokes.forEach((stroke, index) => {
-                if (!stroke.getTotalLength) return;
-                const length = stroke.getTotalLength();
+        strokes.forEach((stroke, index) => {
+            if (!stroke.getTotalLength) return;
+            const length = stroke.getTotalLength();
 
-                viewportController.add({
-                    trigger: triggerEl,
-                    targets: stroke,
-                    from: { strokeDashoffset: length, opacity: 0 },
-                    to: { strokeDashoffset: 0, opacity: 1 },
-                    start: start - (index * staggerOffset),
-                    end: end - (index * staggerOffset),
-                    onEnter: index === 0 ? onEnterCallback : null,
-                    onLeaveBack: index === 0 ? onLeaveBackCallback : null
-                });
+            viewportController.add({
+                trigger: triggerEl,
+                targets: stroke,
+                from: { strokeDashoffset: length, opacity: 0 },
+                to: { strokeDashoffset: 0, opacity: 1 },
+                start: start - (index * staggerOffset),
+                end: end - (index * staggerOffset),
+                onEnter: index === 0 ? onEnterCallback : null,
+                onLeaveBack: index === 0 ? onLeaveBackCallback : null
             });
-        } else {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: triggerEl,
-                    start: `top ${start}%`,
-                    end: `top ${end}%`,
-                    scrub: 0.5,
-                    onEnter: onEnterCallback,
-                    onLeaveBack: onLeaveBackCallback
-                }
-            });
-
-            tl.to(strokes, {
-                strokeDashoffset: 0,
-                opacity: 1,
-                duration: 1,
-                stagger: 0.1,
-                ease: "none"
-            });
-
-            this.triggers.push(tl);
-        }
+        });
     }
 
     /**
@@ -391,44 +277,21 @@ class AnimationFactory {
         const onEnterCallback = rotate && arcSvg ? () => arcSvg.classList.add("anim-rotate") : null;
         const onLeaveBackCallback = rotate && arcSvg ? () => arcSvg.classList.remove("anim-rotate") : null;
 
-        if (this.mode === "iframe") {
-            strokes.forEach((stroke, index) => {
-                if (!stroke.getTotalLength) return;
-                const length = stroke.getTotalLength();
+        strokes.forEach((stroke, index) => {
+            if (!stroke.getTotalLength) return;
+            const length = stroke.getTotalLength();
 
-                viewportController.add({
-                    trigger: triggerEl,
-                    targets: stroke,
-                    from: { strokeDashoffset: length, opacity: 0 },
-                    to: { strokeDashoffset: 0, opacity: 1 },
-                    start: start - (index * staggerOffset),
-                    end: end - (index * staggerOffset),
-                    onEnter: index === 0 ? onEnterCallback : null,
-                    onLeaveBack: index === 0 ? onLeaveBackCallback : null
-                });
+            viewportController.add({
+                trigger: triggerEl,
+                targets: stroke,
+                from: { strokeDashoffset: length, opacity: 0 },
+                to: { strokeDashoffset: 0, opacity: 1 },
+                start: start - (index * staggerOffset),
+                end: end - (index * staggerOffset),
+                onEnter: index === 0 ? onEnterCallback : null,
+                onLeaveBack: index === 0 ? onLeaveBackCallback : null
             });
-        } else {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: triggerEl,
-                    start: `top ${start}%`,
-                    end: `top ${end}%`,
-                    scrub: 0.5,
-                    onEnter: onEnterCallback,
-                    onLeaveBack: onLeaveBackCallback
-                }
-            });
-
-            tl.to(strokes, {
-                strokeDashoffset: 0,
-                opacity: 1,
-                duration: 1,
-                stagger: 0.1,
-                ease: "none"
-            });
-
-            this.triggers.push(tl);
-        }
+        });
     }
 
     /**
@@ -452,34 +315,14 @@ class AnimationFactory {
 
                 gsap.set(element, { opacity: 0, scale: fromScale });
 
-                if (this.mode === "iframe") {
-                    viewportController.add({
-                        trigger: triggerEl,
-                        targets: element,
-                        from: { opacity: 0, scale: fromScale },
-                        to: { opacity: 1, scale: 1 },
-                        start,
-                        end
-                    });
-                } else {
-                    const tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: triggerEl,
-                            start: `top ${start}%`,
-                            end: `top ${end}%`,
-                            scrub: 0.5
-                        }
-                    });
-
-                    tl.to(element, {
-                        opacity: 1,
-                        scale: 1,
-                        duration: 0.8,
-                        ease: "none"
-                    });
-
-                    this.triggers.push(tl);
-                }
+                viewportController.add({
+                    trigger: triggerEl,
+                    targets: element,
+                    from: { opacity: 0, scale: fromScale },
+                    to: { opacity: 1, scale: 1 },
+                    start,
+                    end
+                });
             });
             return;
         }
@@ -492,34 +335,14 @@ class AnimationFactory {
         // Setup initial
         gsap.set(element, { opacity: 0, scale: fromScale });
 
-        if (this.mode === "iframe") {
-            viewportController.add({
-                trigger: triggerEl,
-                targets: element,
-                from: { opacity: 0, scale: fromScale },
-                to: { opacity: 1, scale: 1 },
-                start,
-                end
-            });
-        } else {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: triggerEl,
-                    start: `top ${start}%`,
-                    end: `top ${end}%`,
-                    scrub: 0.5
-                }
-            });
-
-            tl.to(element, {
-                opacity: 1,
-                scale: 1,
-                duration: 0.8,
-                ease: "none"
-            });
-
-            this.triggers.push(tl);
-        }
+        viewportController.add({
+            trigger: triggerEl,
+            targets: element,
+            from: { opacity: 0, scale: fromScale },
+            to: { opacity: 1, scale: 1 },
+            start,
+            end
+        });
     }
 
     /**
@@ -539,42 +362,22 @@ class AnimationFactory {
         // Setup initial
         gsap.set(element, { opacity: 0, y: fromY });
 
-        if (this.mode === "iframe") {
-            viewportController.add({
-                trigger: triggerEl,
-                targets: element,
-                from: { opacity: 0, y: fromY },
-                to: { opacity: 1, y: 0 },
-                start,
-                end
-            });
-        } else {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: triggerEl,
-                    start: `top ${start}%`,
-                    end: `top ${end}%`,
-                    scrub: 0.5
-                }
-            });
-
-            tl.to(element, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "none"
-            });
-
-            this.triggers.push(tl);
-        }
+        viewportController.add({
+            trigger: triggerEl,
+            targets: element,
+            from: { opacity: 0, y: fromY },
+            to: { opacity: 1, y: 0 },
+            start,
+            end
+        });
     }
 
     /**
-     * Helper: Crée l'animation TEXT_REVEAL pour iframe
+     * Helper: Crée l'animation TEXT_REVEAL
      * Simule le stagger GSAP avec offset sur START et END pour créer l'effet vague
      * L'offset total est limité pour que tous les caractères restent dans le viewport
      */
-    _createIframeTextReveal(triggerEl, chars, { start, end, charOffset }) {
+    _createTextReveal(triggerEl, chars, { start, end, charOffset }) {
         const totalChars = chars.length;
         if (totalChars === 0) return;
 
@@ -614,6 +417,9 @@ class AnimationFactory {
      * Crée une animation de type textReveal (lettre par lettre)
      * Boucle automatiquement sur tous les éléments correspondant au sélecteur
      * Chaque élément est son propre trigger
+     *
+     * OPTIMISATION MOBILE: Sur mobile, anime le bloc entier au lieu de chaque caractère
+     * pour réduire drastiquement le nombre d'animations (~470 → ~10)
      */
     createTextRevealAnimation(config) {
         const { target, trigger, start, end, charOffset } = {
@@ -630,51 +436,26 @@ class AnimationFactory {
 
             if (!triggerEl || !element) return;
 
+            // OPTIMISATION MOBILE: Animation simple sur le bloc entier
+            if (isMobile()) {
+                gsap.set(element, { opacity: 0, y: 20 });
+
+                viewportController.add({
+                    trigger: triggerEl,
+                    targets: element,
+                    from: { opacity: 0, y: 20 },
+                    to: { opacity: 1, y: 0 },
+                    start,
+                    end
+                });
+                return;
+            }
+
+            // DESKTOP: Animation lettre par lettre
             const chars = splitTextIntoChars(element);
             if (chars.length === 0) return;
 
-            if (this.mode === "iframe") {
-                this._createIframeTextReveal(triggerEl, chars, { start, end, charOffset });
-            } else {
-                // Flag pour tracker si le nettoyage a été fait
-                let cleaned = false;
-
-                const cleanupStyles = () => {
-                    if (cleaned) return;
-                    cleaned = true;
-                    chars.forEach(char => {
-                        // Supprimer willChange pour éviter les problèmes de rendu
-                        char.style.willChange = "auto";
-                        // Forcer transform à none pour éviter les valeurs résiduelles
-                        char.style.transform = "none";
-                        char.style.opacity = "1";
-                    });
-                };
-
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: triggerEl,
-                        start: `top ${start}%`,
-                        end: `top ${end}%`,
-                        scrub: 0.3,
-                        // Nettoyer quand on sort de la zone (animation terminée)
-                        onLeave: cleanupStyles,
-                        // Réinitialiser le flag si on revient en arrière
-                        onEnterBack: () => { cleaned = false; }
-                    }
-                });
-
-                tl.to(chars, {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    stagger: 0.02,
-                    ease: "none",
-                    force3D: false // Éviter les matrix3d pour un rendu plus propre
-                });
-
-                this.triggers.push(tl);
-            }
+            this._createTextReveal(triggerEl, chars, { start, end, charOffset });
         });
     }
 
@@ -709,7 +490,7 @@ class AnimationFactory {
             }
         });
 
-        return this.mode === "iframe" ? viewportController : this.triggers;
+        return viewportController;
     }
 }
 
