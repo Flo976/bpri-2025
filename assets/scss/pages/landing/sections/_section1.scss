@@ -126,6 +126,16 @@
                 // 0,0,50px
             )
         );
+        @include propriete_x(
+            padding,
+            0 40px,
+            (
+                "1118px": 0 3.578vw,
+                "991px": 0 4.036vw,
+                "768px": 0 0,
+                "480px": 0 0,
+            )
+        );
         /*@include propriete_x(
             padding,
             0 30px,
@@ -247,5 +257,4 @@
         opacity: 0;
         transform: translate3d(0, 20px, 0);
     }
-
 }

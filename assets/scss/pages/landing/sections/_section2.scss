@@ -125,6 +125,9 @@
     .media_card {
         position: relative;
         width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         @include propriete_x(
             max-width,
             222px,
@@ -158,6 +161,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        width: 100%;
         @include propriete_x(
             margin,
             0 0 45px,
@@ -166,6 +170,16 @@
                 "991px": 0 0 4.541vw,
                 "768px": 0 0 5.859vw,
                 "480px": 0 0 9.375vw,
+            )
+        );
+        @include propriete_x(
+            min-width,
+            348px,
+            (
+                "1118px": 31.127vw,
+                "991px": 35.116vw,
+                "768px": 45.313vw,
+                "480px": 90vw,
             )
         );
 
@@ -238,16 +252,6 @@
                     "768px": 2.604vw,
                     "480px": 5.208vw,
                     // 25px
-                )
-            );
-            @include propriete_x(
-                min-width,
-                348px,
-                (
-                    "1118px": 31.127vw,
-                    "991px": 35.116vw,
-                    "768px": 45.313vw,
-                    "480px": 90vw,
                 )
             );
         }

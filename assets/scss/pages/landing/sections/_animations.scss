@@ -178,11 +178,11 @@
     0%,
     100% {
         opacity: 1;
-        filter: var(--dot-shadow-normal);
+        // filter: var(--dot-shadow-normal);
     }
     50% {
         opacity: 0.8;
-        filter: var(--dot-shadow-glow);
+        // filter: var(--dot-shadow-glow);
     }
 }
 
@@ -195,12 +195,12 @@
 @keyframes lineShimmerBase {
     0%,
     100% {
-        opacity: 0.8;
+        opacity: 1;
     }
     25%,
     50%,
     75% {
-        opacity: 1;
+        opacity: 0.8;
     }
 }
 

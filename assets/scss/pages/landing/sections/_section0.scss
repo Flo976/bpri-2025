@@ -31,12 +31,16 @@
 
         .logo_wrapper {
             opacity: 0;
-            transition: 3s ease opacity;
+            filter: blur(0.05rem);
+            transform: scale(1);
+            transition: all 2s ease;
         }
 
         &.displayin {
             .logo_wrapper {
                 opacity: 1;
+                filter: blur(0);
+                transform: scale(1);
             }
         }
     }
@@ -81,7 +85,9 @@
         .subcaption,
         .caption {
             opacity: 0;
-            transition: 2s ease opacity;
+            filter: blur(0.05rem);
+            transform: scale(1);
+            transition: all 2s ease;
         }
 
         &.displayin {
@@ -90,6 +96,8 @@
             .subcaption,
             .caption {
                 opacity: 1;
+                filter: blur(0);
+                transform: scale(1);
             }
         }
     }
@@ -196,8 +204,9 @@
         contain: layout paint style;
         @include propriete_x(
             max-width,
-            905px,
+            100%,
             (
+                "1600px": 905px,
                 "1118px": 80.948vw,
                 "991px": 91.322vw,
                 "768px": 100vw,
@@ -362,16 +371,20 @@
         }
 
         // Désactiver lineShimmer sur mobile
-        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glowing,
-        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glow-layer {
+        [class^="hero-illustration__line"]
+            > path.hero-illustration__stroke.glowing,
+        [class^="hero-illustration__line"]
+            > path.hero-illustration__stroke.glow-layer {
             animation: none !important;
             filter: unset !important;
         }
 
         .hero-illustration__middle_outer path.hero-illustration__stroke.glowing,
-        .hero-illustration__middle_outer path.hero-illustration__stroke.glow-layer,
+        .hero-illustration__middle_outer
+            path.hero-illustration__stroke.glow-layer,
         .hero-illustration__middle_inner path.hero-illustration__stroke.glowing,
-        .hero-illustration__middle_inner path.hero-illustration__stroke.glow-layer {
+        .hero-illustration__middle_inner
+            path.hero-illustration__stroke.glow-layer {
             animation: none !important;
             filter: unset !important;
         }
@@ -397,16 +410,20 @@
             animation: none !important;
         }
 
-        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glowing,
-        [class^="hero-illustration__line"] > path.hero-illustration__stroke.glow-layer {
+        [class^="hero-illustration__line"]
+            > path.hero-illustration__stroke.glowing,
+        [class^="hero-illustration__line"]
+            > path.hero-illustration__stroke.glow-layer {
             animation: none !important;
             filter: unset !important;
         }
 
         .hero-illustration__middle_outer path.hero-illustration__stroke.glowing,
-        .hero-illustration__middle_outer path.hero-illustration__stroke.glow-layer,
+        .hero-illustration__middle_outer
+            path.hero-illustration__stroke.glow-layer,
         .hero-illustration__middle_inner path.hero-illustration__stroke.glowing,
-        .hero-illustration__middle_inner path.hero-illustration__stroke.glow-layer {
+        .hero-illustration__middle_inner
+            path.hero-illustration__stroke.glow-layer {
             animation: none !important;
             filter: unset !important;
         }

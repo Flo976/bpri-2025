@@ -105,23 +105,23 @@ export function initSection0Animation() {
     tl.to(sections, {
         opacity: 1,
         duration: 0.5
-    }, 1);
+    }, 0);
 
     // 2. Logo + Caption fade-in (CSS transition via classe displayin)
     tl.call(() => {
         contentLogo.classList.add("displayin");
         contentCaption.classList.add("displayin");
-    }, null, 2);
+    }, null, 1);
 
     // 3. Illustration fade-in (CSS) - après le titre
     tl.call(() => {
         contentIllustration.classList.add("displayin");
-    }, null, 3);
+    }, null, 2);
 
     // 3b. Rotations (CSS) - après que l'illustration soit visible (3s + 1s transition)
     tl.call(() => {
         illustration.classList.add("anim-rotate");
-    }, null, 3.5);
+    }, null, 2);
 
     // 4. Cercles du middle - stroke drawing (après illustration visible à 4s)
     // 4a. Middle inner: sens anti-horaire (dessine en premier)
@@ -136,7 +136,7 @@ export function initSection0Animation() {
         },
         opacity: 1,
         ease: "linear"
-    }, 4);
+    }, 2.5);
 
     // 4b. Middle outer: sens horaire (dessine après)
     tl.to(middleOuterStrokes, {
@@ -150,12 +150,12 @@ export function initSection0Animation() {
         },
         opacity: 1,
         ease: "linear"
-    }, 4);
+    }, 2.5);
 
     // 5. Lignes extérieures - drawing avec ordre aléatoire
     //const shuffledLines = [...linesData].sort(() => Math.random() - 0.5);
     const shuffledLines = [...linesData];
-    const linesStartTime = 4.5; // Après les cercles du middle
+    const linesStartTime = 3; // Après les cercles du middle
 
     shuffledLines.forEach((data, i) => {
         const { linePath, dots } = data;
