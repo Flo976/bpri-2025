@@ -38,6 +38,26 @@ html {
                 z-index: initial;
             }
         }
+
+        figure.texture {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-repeat: repeat;
+            mix-blend-mode: multiply;
+            @include propriete_x(
+                background-size,
+                423px auto,
+                (
+                    "1118px": null,
+                    "991px": null,
+                    "768px": null,
+                    "480px": null,
+                )
+            );
+        }
     }
 }
 
@@ -110,7 +130,8 @@ body {
                 "1118px": 0 2.683vw,
                 "991px": 0 3.027vw,
                 "768px": 0 3.906vw,
-                "480px": 0 4.167vw, // 20px
+                "480px": 0 4.167vw,
+                // 20px
             )
         );
     }
