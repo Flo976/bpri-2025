@@ -14,7 +14,7 @@
 
 // Configuration des éléments à dupliquer (Section 0 uniquement)
 const GLOW_CONFIG = {
-    /*dots: {
+    dots: {
         selector: '.hero-illustration__dot',
         filterVar: '--dot-shadow-glow',
         animationBase: 'dotPulseBase',
@@ -25,13 +25,13 @@ const GLOW_CONFIG = {
         filterVar: '--line-shimmer-50',
         animationBase: 'lineShimmerBase',
         animationGlow: 'lineShimmerGlow'
-    },*/
-    /*numbers: {
+    },
+    numbers: {
         selector: '.hero-illustration__2026 path',
         filterVar: '--number-glow-intense',
         animationBase: 'numberGlowBase',
         animationGlow: 'numberGlowGlow'
-    }*/
+    }
 };
 
 // Stockage des clones créés
